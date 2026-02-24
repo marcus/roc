@@ -1,6 +1,6 @@
 # Icon Creation Guide
 
-This guide specifies how to create new SVG icons for the `@marcus/icons` library. Follow these rules exactly to maintain visual consistency across all styles and ensure the build pipeline works correctly.
+This guide specifies how to create new SVG icons for the `@marcus/roc` library. Follow these rules exactly to maintain visual consistency across all styles and ensure the build pipeline works correctly.
 
 ---
 
@@ -207,8 +207,8 @@ Redesign the icon with angular geometry:
 | React components | PascalCase | `ArrowLeft` |
 | Svelte components | PascalCase | `ArrowLeft.svelte` |
 | Sprite symbol IDs | `{name}-{style}` | `arrow-left-outline` |
-| Import paths (React) | `@marcus/icons/react/{style}` | `import { ArrowLeft } from '@marcus/icons/react/outline'` |
-| Import paths (Svelte) | `@marcus/icons/svelte/{style}` | `import ArrowLeft from '@marcus/icons/svelte/outline/ArrowLeft.svelte'` |
+| Import paths (React) | `@marcus/roc/react/{style}` | `import { ArrowLeft } from '@marcus/roc/react/outline'` |
+| Import paths (Svelte) | `@marcus/roc/svelte/{style}` | `import ArrowLeft from '@marcus/roc/svelte/outline/ArrowLeft.svelte'` |
 
 ---
 
@@ -221,6 +221,7 @@ Redesign the icon with angular geometry:
 | users | Two-person team silhouette -- contacts/team |
 | bell | Notification bell with clapper |
 | settings | Sun/gear shape with radiating lines and center circle |
+| roc | Mythical giant bird in flight -- project namesake |
 
 Each icon exists in all 4 styles: `outline`, `solid`, `duotone`, `sharp`.
 

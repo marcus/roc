@@ -342,7 +342,7 @@ function stageDemo(manifest) {
 
   // Pretty labels for icon names
   const ICON_LABELS = {
-    home: 'Home', chart: 'Analytics', users: 'Team', bell: 'Alerts', settings: 'Settings',
+    home: 'Home', chart: 'Analytics', users: 'Team', bell: 'Alerts', settings: 'Settings', roc: 'Roc',
   };
 
   const html = `<!DOCTYPE html>
@@ -350,7 +350,7 @@ function stageDemo(manifest) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Icon System — Dashboard</title>
+<title>Roc — Dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -550,7 +550,7 @@ function stageDemo(manifest) {
   /* ── Icon grid ──────────────────────────── */
   .icon-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(${iconNames.length}, 1fr);
   }
   .icon-column {
     display: flex;
@@ -717,7 +717,7 @@ function stageDemo(manifest) {
 
 <!-- header -->
 <header class="page-header">
-  <h1>Icon System</h1>
+  <h1>Roc</h1>
   <div class="header-controls">
     <div class="size-selector">
       <label>Size</label>

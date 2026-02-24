@@ -143,14 +143,14 @@ Initialize git repo, initial commit.
 
 ```js
 // React — by style
-import { Home, Chart } from '@marcus/icons/react/outline';
+import { Home, Chart } from '@marcus/roc/react/outline';
 <Home size={20} className="text-gray-500" />
 
 // React — all icons with style suffix
-import { HomeOutline, HomeSolid } from '@marcus/icons/react';
+import { HomeOutline, HomeSolid } from '@marcus/roc/react';
 
 // Svelte
-import Home from '@marcus/icons/svelte/outline/Home.svelte';
+import Home from '@marcus/roc/svelte/outline/Home.svelte';
 <Home size={24} class="icon" />
 
 // Tailwind / HTML — sprite

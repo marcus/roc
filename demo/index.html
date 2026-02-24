@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Icon System — Dashboard</title>
+<title>Roc — Dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -203,7 +203,7 @@
   /* ── Icon grid ──────────────────────────── */
   .icon-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
   .icon-column {
     display: flex;
@@ -368,9 +368,9 @@
 </head>
 <body>
 
-<!-- ═══ Header ═══ -->
+<!-- header -->
 <header class="page-header">
-  <h1>Icon System</h1>
+  <h1>Roc</h1>
   <div class="header-controls">
     <div class="size-selector">
       <label>Size</label>
@@ -394,15 +394,15 @@
   </div>
 </header>
 
-<!-- ═══ Content ═══ -->
+<!-- content -->
 <main class="page-content" id="content"></main>
 
 <div class="toast" id="toast">SVG copied</div>
 
-<!-- ═══ Footer ═══ -->
+<!-- footer -->
 <footer class="page-footer">
   <div class="footer-stats">
-    <span class="footer-stat"><span class="footer-dot"></span> 5 icons</span>
+    <span class="footer-stat"><span class="footer-dot"></span> 24 icons</span>
     <span class="footer-stat">4 styles</span>
     <span class="footer-stat">5 sizes</span>
   </div>
@@ -410,11 +410,79 @@
 </footer>
 
 <script>
-// ─── Handcrafted SVG paths (all drawn in a 24x24 viewBox, scalable) ───────────
+// ─── Icon data (optimized SVG inner content) ─────────────────────────
+const ICONS = {
+  "outline": {
+    "bell": "<path stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M9.5 19a2.5 2.5 0 0 0 5 0\"/>",
+    "chart": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" stroke=\"currentColor\" stroke-width=\"1.5\" rx=\"1\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M7 17v-4m5 4V9m5 8V7\"/>",
+    "home": "<path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M3.5 10.25v9.25a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.25h4.5a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77\"/>",
+    "roc": "<path stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M20 10c-2-3-6-5.5-10-6-3-.5-5.5 0-6.5 1.5.5 1 2 1.5 4 2C6 10 5 13 5 16c0 2.5 1.5 3 3 1.5 2.5-2.5 6.5-4 9.5-4.5 2-.5 3-1.5 2.5-3Z\"/><circle cx=\"13.5\" cy=\"6.5\" r=\".75\" stroke=\"currentColor\" stroke-width=\"1.5\"/>",
+    "settings": "<circle cx=\"12\" cy=\"12\" r=\"3\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41\"/>",
+    "users": "<circle cx=\"9\" cy=\"7.5\" r=\"3.5\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M2.5 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1M16 7.13a3.5 3.5 0 0 1 0 6.5m3.5 6.87v-1a5 5 0 0 0-3-4.58\"/>"
+  },
+  "solid": {
+    "bell": "<path fill=\"currentColor\" d=\"M5 10a7 7 0 0 1 14 0v2.5c0 1.3.4 2.2 1.2 3 .3.3.1.8-.3.8H4.1c-.4 0-.6-.5-.3-.8.8-.8 1.2-1.7 1.2-3z\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M9.5 19a2.5 2.5 0 0 0 5 0\"/>",
+    "chart": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M4 2.5A1.5 1.5 0 0 0 2.5 4v16A1.5 1.5 0 0 0 4 21.5h16a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 20 2.5zM6.25 13a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0zm5-4a.75.75 0 0 1 1.5 0v8a.75.75 0 0 1-1.5 0zm5-2.25a.75.75 0 0 1 1.5 0V17a.75.75 0 0 1-1.5 0z\" clip-rule=\"evenodd\"/>",
+    "home": "<path fill=\"currentColor\" d=\"M12.39 2.6a.6.6 0 0 0-.78 0L3.36 9.48a1.5 1.5 0 0 0-.53 1.12v8.9a1.5 1.5 0 0 0 1.5 1.5H9.5v-6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6h5.17a1.5 1.5 0 0 0 1.5-1.5v-8.9a1.5 1.5 0 0 0-.53-1.14z\"/>",
+    "roc": "<path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M10 3.25c4.5.5 8.5 3.75 10.75 7 .5 1.25 0 2.75-1.5 3.25C16 14.25 12 15.75 9 18c-2 1.75-3.5 1-3.5-1.5 0-3.5 1-7 3-10-2 0-4-.5-5.5-1.5.5-1.5 3-2.25 7-1.75m3.5 2.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5\" clip-rule=\"evenodd\"/>",
+    "settings": "<circle cx=\"12\" cy=\"12\" r=\"3.5\" fill=\"currentColor\"/><rect width=\"2\" height=\"3.5\" x=\"11\" y=\"1.5\" fill=\"currentColor\" rx=\"1\"/><rect width=\"2\" height=\"3.5\" x=\"11\" y=\"19\" fill=\"currentColor\" rx=\"1\"/><rect width=\"3.5\" height=\"2\" x=\"1.5\" y=\"11\" fill=\"currentColor\" rx=\"1\"/><rect width=\"3.5\" height=\"2\" x=\"19\" y=\"11\" fill=\"currentColor\" rx=\"1\"/><rect width=\"2\" height=\"3.5\" x=\"4.6\" y=\"3.87\" fill=\"currentColor\" rx=\"1\" transform=\"rotate(-45 4.6 3.87)\"/><rect width=\"2\" height=\"3.5\" x=\"16.49\" y=\"15.76\" fill=\"currentColor\" rx=\"1\" transform=\"rotate(-45 16.49 15.76)\"/><rect width=\"2\" height=\"3.5\" x=\"3.87\" y=\"17.93\" fill=\"currentColor\" rx=\"1\" transform=\"rotate(-135 3.87 17.93)\"/><rect width=\"2\" height=\"3.5\" x=\"15.76\" y=\"6.04\" fill=\"currentColor\" rx=\"1\" transform=\"rotate(-135 15.76 6.04)\"/>",
+    "users": "<circle cx=\"9\" cy=\"7.5\" r=\"4\" fill=\"currentColor\"/><path fill=\"currentColor\" d=\"M2 20.5a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v.5H2z\"/><path fill=\"currentColor\" d=\"M16.28 6.38a3.5 3.5 0 0 1-.06 6.87 6.97 6.97 0 0 1 4.28 6.25h.5V19a6 6 0 0 0-3.5-5.46 4 4 0 0 0-1.22-7.16\" opacity=\".7\"/>"
+  },
+  "duotone": {
+    "bell": "<path fill=\"var(--color-duotone-fill)\" d=\"M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z\"/><path stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M9.5 19a2.5 2.5 0 0 0 5 0\"/>",
+    "chart": "<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" fill=\"var(--color-duotone-fill)\" rx=\"1\"/><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" stroke=\"currentColor\" stroke-width=\"1.5\" rx=\"1\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M7 17v-4m5 4V9m5 8V7\"/>",
+    "home": "<path fill=\"var(--color-duotone-fill)\" d=\"M3.5 10.25v9.25a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M3.5 10.25v9.25a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.25h4.5a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77\"/>",
+    "roc": "<path fill=\"var(--color-duotone-fill)\" d=\"M20 10c-2-3-6-5.5-10-6-3-.5-5.5 0-6.5 1.5.5 1 2 1.5 4 2C6 10 5 13 5 16c0 2.5 1.5 3 3 1.5 2.5-2.5 6.5-4 9.5-4.5 2-.5 3-1.5 2.5-3\"/><path stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M20 10c-2-3-6-5.5-10-6-3-.5-5.5 0-6.5 1.5.5 1 2 1.5 4 2C6 10 5 13 5 16c0 2.5 1.5 3 3 1.5 2.5-2.5 6.5-4 9.5-4.5 2-.5 3-1.5 2.5-3Z\"/><circle cx=\"13.5\" cy=\"6.5\" r=\".75\" stroke=\"currentColor\" stroke-width=\"1.5\"/>",
+    "settings": "<circle cx=\"12\" cy=\"12\" r=\"3\" fill=\"var(--color-duotone-fill)\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41\"/>",
+    "users": "<circle cx=\"9\" cy=\"7.5\" r=\"3.5\" fill=\"var(--color-duotone-fill)\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path fill=\"var(--color-duotone-fill)\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M2.5 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1\"/><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"1.5\" d=\"M16 7.13a3.5 3.5 0 0 1 0 6.5m3.5 6.87v-1a5 5 0 0 0-3-4.58\" opacity=\".5\"/>"
+  },
+  "sharp": {
+    "bell": "<path stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"1.5\" d=\"M5 10c0-3.87 3.13-7 7-7s7 3.13 7 7v6H5z\"/><path stroke=\"currentColor\" stroke-width=\"1.5\" d=\"M3 16h18M9 19h6\"/>",
+    "chart": "<path stroke=\"currentColor\" stroke-width=\"1.5\" d=\"M3 3h18v18H3zM7 17v-4m5 4V8m5 9V6\"/>",
+    "home": "<path stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"1.5\" d=\"M3 10.5V21h6.5v-6h5v6H21V10.5L12 3z\"/>",
+    "roc": "<path stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"1.5\" d=\"m20 10-3-4-7-2-4-.5-2.5 2L6 7l2 .5L5.5 11 5 16l.5 2.5L8 17l4-2.5 5.5-1.5 2.5-1z\"/><path stroke=\"currentColor\" stroke-width=\"1.5\" d=\"M12.75 5.75h1.5v1.5h-1.5z\"/>",
+    "settings": "<path stroke=\"currentColor\" stroke-width=\"1.5\" d=\"M8.5 8.5h7v7h-7zM12 2v4m0 12v4M2 12h4m12 0h4M5.64 5.64l2.83 2.83m7.07 7.07 2.83 2.83m-12.73-.01 2.83-2.83m7.07-7.07 2.83-2.83\"/>",
+    "users": "<path stroke=\"currentColor\" stroke-width=\"1.5\" d=\"M5.5 4h7v7h-7z\"/><path stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"1.5\" d=\"M2.5 21v-3.5L5 14h8l2.5 3.5V21M16 5h4v5h-1.5M17 14l2 3.5V21\"/>"
+  }
+};
 
-function svgWrap(size, content) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;
-}
+const STROKED_STYLES = new Set(["outline","duotone","sharp"]);
+
+const STYLE_META = {
+  "outline": {
+    "label": "Outline",
+    "tag": "Stroke",
+    "desc": "Clean single-weight strokes — default for navigation and toolbars"
+  },
+  "solid": {
+    "label": "Solid",
+    "tag": "Filled",
+    "desc": "Filled shapes with negative-space details — best for active/selected states"
+  },
+  "duotone": {
+    "label": "Duotone",
+    "tag": "2-Tone",
+    "desc": "Accent fill layer + foreground stroke — ideal for feature highlights and onboarding"
+  },
+  "sharp": {
+    "label": "Sharp",
+    "tag": "Geometric",
+    "desc": "Angular cuts, squared joins, no curves — engineered density for compact UI"
+  }
+};
+
+const ICON_LABELS = {
+  "home": "Home",
+  "chart": "Analytics",
+  "users": "Team",
+  "bell": "Alerts",
+  "settings": "Settings",
+  "roc": "Roc"
+};
+
+const STYLE_ORDER = ["outline","solid","duotone","sharp"];
+const ICON_NAMES = ["bell","chart","home","roc","settings","users"];
+const SIZES = [16, 20, 24, 32, 48];
 
 // Stroke widths that look optically correct at each size
 function sw(size) {
@@ -423,115 +491,13 @@ function sw(size) {
   return 1.5;
 }
 
-const STYLE_DEFS = {
-  outline: {
-    label: 'Outline',
-    tag: 'Stroke',
-    desc: 'Clean single-weight strokes — default for navigation and toolbars',
-    icons: {
-      home(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M3.5 10.25V19.5a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V20.5h4.5a1 1 0 0 0 1-1V10.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77Z" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
-      },
-      chart(s) {
-        const w = sw(s);
-        return svgWrap(s, `<rect x="3" y="3" width="18" height="18" rx="1" stroke="currentColor" stroke-width="${w}"/><path d="M7 17V13M12 17V9M17 17V7" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      },
-      users(s) {
-        const w = sw(s);
-        return svgWrap(s, `<circle cx="9" cy="7.5" r="3.5" stroke="currentColor" stroke-width="${w}"/><path d="M2.5 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/><path d="M16 7.13a3.5 3.5 0 0 1 0 6.5M19.5 20.5v-1a5 5 0 0 0-3-4.58" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      },
-      bell(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M5.5 10A6.5 6.5 0 0 1 12 3.5v0A6.5 6.5 0 0 1 18.5 10v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5V10Z" stroke="currentColor" stroke-width="${w}" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      },
-      settings(s) {
-        const w = sw(s);
-        return svgWrap(s, `<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="${w}"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      }
-    }
-  },
-  solid: {
-    label: 'Solid',
-    tag: 'Filled',
-    desc: 'Filled shapes with negative-space details — best for active/selected states',
-    icons: {
-      home(s) {
-        return svgWrap(s, `<path d="M12.39 2.6a.6.6 0 0 0-.78 0L3.36 9.48A1.5 1.5 0 0 0 2.83 10.6V19.5A1.5 1.5 0 0 0 4.33 21H9.5v-6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6h5.17a1.5 1.5 0 0 0 1.5-1.5V10.6a1.5 1.5 0 0 0-.53-1.14L12.39 2.6Z" fill="currentColor"/>`);
-      },
-      chart(s) {
-        return svgWrap(s, `<path fill-rule="evenodd" clip-rule="evenodd" d="M4 2.5A1.5 1.5 0 0 0 2.5 4v16A1.5 1.5 0 0 0 4 21.5h16a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 20 2.5H4ZM6.25 13a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0v-4Zm5-4a.75.75 0 0 1 1.5 0v8a.75.75 0 0 1-1.5 0V9Zm5-2.25a.75.75 0 0 1 1.5 0V17a.75.75 0 0 1-1.5 0V6.75Z" fill="currentColor"/>`);
-      },
-      users(s) {
-        return svgWrap(s, `<circle cx="9" cy="7.5" r="4" fill="currentColor"/><path d="M2 20.5a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v.5H2v-.5Z" fill="currentColor"/><path d="M16.28 6.38a3.5 3.5 0 0 1-.06 6.87 6.97 6.97 0 0 1 4.28 6.25H21v-.5a6 6 0 0 0-3.5-5.46 4 4 0 0 0-1.22-7.16Z" fill="currentColor" opacity="0.7"/>`);
-      },
-      bell(s) {
-        return svgWrap(s, `<path d="M5 10a7 7 0 0 1 14 0v2.5c0 1.3.4 2.2 1.2 3 .3.3.1.8-.3.8H4.1c-.4 0-.6-.5-.3-.8.8-.8 1.2-1.7 1.2-3V10Z" fill="currentColor"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`);
-      },
-      settings(s) {
-        return svgWrap(s, `<circle cx="12" cy="12" r="3.5" fill="currentColor"/><rect x="11" y="1.5" width="2" height="3.5" rx="1" fill="currentColor"/><rect x="11" y="19" width="2" height="3.5" rx="1" fill="currentColor"/><rect x="1.5" y="11" width="3.5" height="2" rx="1" fill="currentColor"/><rect x="19" y="11" width="3.5" height="2" rx="1" fill="currentColor"/><rect x="4.6" y="3.87" width="2" height="3.5" rx="1" transform="rotate(-45 4.6 3.87)" fill="currentColor"/><rect x="16.49" y="15.76" width="2" height="3.5" rx="1" transform="rotate(-45 16.49 15.76)" fill="currentColor"/><rect x="3.87" y="17.93" width="2" height="3.5" rx="1" transform="rotate(-135 3.87 17.93)" fill="currentColor"/><rect x="15.76" y="6.04" width="2" height="3.5" rx="1" transform="rotate(-135 15.76 6.04)" fill="currentColor"/>`);
-      }
-    }
-  },
-  duotone: {
-    label: 'Duotone',
-    tag: '2-Tone',
-    desc: 'Accent fill layer + foreground stroke — ideal for feature highlights and onboarding',
-    icons: {
-      home(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M3.5 10.25V19.5a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1V10.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77Z" fill="var(--color-duotone-fill)"/><path d="M3.5 10.25V19.5a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V20.5h4.5a1 1 0 0 0 1-1V10.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77Z" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
-      },
-      chart(s) {
-        const w = sw(s);
-        return svgWrap(s, `<rect x="3" y="3" width="18" height="18" rx="1" fill="var(--color-duotone-fill)"/><rect x="3" y="3" width="18" height="18" rx="1" stroke="currentColor" stroke-width="${w}"/><path d="M7 17V13M12 17V9M17 17V7" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      },
-      users(s) {
-        const w = sw(s);
-        return svgWrap(s, `<circle cx="9" cy="7.5" r="3.5" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="${w}"/><path d="M2.5 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/><path d="M16 7.13a3.5 3.5 0 0 1 0 6.5M19.5 20.5v-1a5 5 0 0 0-3-4.58" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" opacity="0.5"/>`);
-      },
-      bell(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M5.5 10A6.5 6.5 0 0 1 12 3.5v0A6.5 6.5 0 0 1 18.5 10v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5V10Z" fill="var(--color-duotone-fill)"/><path d="M5.5 10A6.5 6.5 0 0 1 12 3.5v0A6.5 6.5 0 0 1 18.5 10v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5V10Z" stroke="currentColor" stroke-width="${w}" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      },
-      settings(s) {
-        const w = sw(s);
-        return svgWrap(s, `<circle cx="12" cy="12" r="3" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="${w}"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`);
-      }
-    }
-  },
-  sharp: {
-    label: 'Sharp',
-    tag: 'Geometric',
-    desc: 'Angular cuts, squared joins, no curves — engineered density for compact UI',
-    icons: {
-      home(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M3 10.5V21h6.5v-6h5v6H21V10.5L12 3 3 10.5Z" stroke="currentColor" stroke-width="${w}" stroke-linejoin="miter" stroke-miterlimit="10"/>`);
-      },
-      chart(s) {
-        const w = sw(s);
-        return svgWrap(s, `<rect x="3" y="3" width="18" height="18" stroke="currentColor" stroke-width="${w}"/><path d="M7 17V13M12 17V8M17 17V6" stroke="currentColor" stroke-width="${w}"/>`);
-      },
-      users(s) {
-        const w = sw(s);
-        return svgWrap(s, `<rect x="5.5" y="4" width="7" height="7" stroke="currentColor" stroke-width="${w}"/><path d="M2.5 21v-3.5L5 14h8l2.5 3.5V21" stroke="currentColor" stroke-width="${w}" stroke-linejoin="miter" stroke-miterlimit="10"/><path d="M16 5h4v5h-1.5M17 14l2 3.5V21" stroke="currentColor" stroke-width="${w}" stroke-linejoin="miter" stroke-miterlimit="10"/>`);
-      },
-      bell(s) {
-        const w = sw(s);
-        return svgWrap(s, `<path d="M5 10c0-3.87 3.13-7 7-7s7 3.13 7 7v6H5v-6Z" stroke="currentColor" stroke-width="${w}" stroke-linejoin="miter" stroke-miterlimit="10"/><path d="M3 16h18M9 19h6" stroke="currentColor" stroke-width="${w}"/>`);
-      },
-      settings(s) {
-        const w = sw(s);
-        return svgWrap(s, `<rect x="8.5" y="8.5" width="7" height="7" stroke="currentColor" stroke-width="${w}"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5.64 5.64l2.83 2.83M15.54 15.54l2.83 2.83M5.64 18.36l2.83-2.83M15.54 8.46l2.83-2.83" stroke="currentColor" stroke-width="${w}"/>`);
-      }
-    }
+function svgWrap(size, innerSvg, style) {
+  let content = innerSvg;
+  if (STROKED_STYLES.has(style)) {
+    content = content.replace(/stroke-width="[^"]*"/g, 'stroke-width="' + sw(size) + '"');
   }
-};
-
-const SIZES = [16, 20, 24, 32, 48];
-const ICON_KEYS = ['home', 'chart', 'users', 'bell', 'settings'];
-const ICON_LABELS = { home: 'Home', chart: 'Analytics', users: 'Team', bell: 'Alerts', settings: 'Settings' };
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' + content + '</svg>';
+}
 
 let currentView = '24';
 
@@ -542,30 +508,37 @@ function render() {
 
   let html = '';
 
-  for (const [styleKey, style] of Object.entries(STYLE_DEFS)) {
-    html += `<section class="style-section">`;
-    html += `<div class="style-header">`;
-    html += `<span class="style-label">${style.label}</span>`;
-    html += `<span class="style-tag">${style.tag}</span>`;
-    html += `<span class="style-desc">${style.desc}</span>`;
-    html += `</div>`;
-    html += `<div class="icon-grid${isSingle ? ' single-size' : ''}">`;
+  for (const styleKey of STYLE_ORDER) {
+    const icons = ICONS[styleKey];
+    if (!icons) continue;
+    const meta = STYLE_META[styleKey] || { label: styleKey, tag: '', desc: '' };
 
-    for (const iconKey of ICON_KEYS) {
-      html += `<div class="icon-column">`;
-      html += `<div class="icon-name-row">${ICON_LABELS[iconKey]}</div>`;
-      html += `<div class="icon-sizes">`;
+    html += '<section class="style-section">';
+    html += '<div class="style-header">';
+    html += '<span class="style-label">' + meta.label + '</span>';
+    html += '<span class="style-tag">' + meta.tag + '</span>';
+    html += '<span class="style-desc">' + meta.desc + '</span>';
+    html += '</div>';
+    html += '<div class="icon-grid' + (isSingle ? ' single-size' : '') + '">';
+
+    for (const iconName of ICON_NAMES) {
+      const innerSvg = icons[iconName];
+      if (!innerSvg) continue;
+      const label = ICON_LABELS[iconName] || iconName;
+      html += '<div class="icon-column">';
+      html += '<div class="icon-name-row">' + label + '</div>';
+      html += '<div class="icon-sizes">';
       for (const sz of sizes) {
         const isActive = isSingle ? ' active-size' : '';
-        html += `<div class="icon-size-item${isActive}">`;
-        html += `<div class="icon-wrap">${style.icons[iconKey](sz)}</div>`;
-        html += `<span class="size-label">${sz}</span>`;
-        html += `</div>`;
+        html += '<div class="icon-size-item' + isActive + '">';
+        html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+        html += '<span class="size-label">' + sz + '</span>';
+        html += '</div>';
       }
-      html += `</div></div>`;
+      html += '</div></div>';
     }
 
-    html += `</div></section>`;
+    html += '</div></section>';
   }
 
   content.innerHTML = html;
@@ -573,7 +546,7 @@ function render() {
 
 function setView(v) {
   currentView = v;
-  document.querySelectorAll('.size-btn').forEach(b => {
+  document.querySelectorAll('.size-btn').forEach(function(b) {
     b.classList.toggle('active', b.dataset.view === v);
   });
   render();
@@ -586,9 +559,9 @@ function setTheme(t) {
 }
 
 // Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', function(e) {
   if (e.key === 't' || e.key === 'T') {
-    const current = document.documentElement.getAttribute('data-theme');
+    var current = document.documentElement.getAttribute('data-theme');
     setTheme(current === 'dark' ? 'light' : 'dark');
   }
   if (e.key === '1') setView('16');
@@ -600,18 +573,18 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Copy SVG on click
-document.addEventListener('click', (e) => {
-  const wrap = e.target.closest('.icon-wrap');
+document.addEventListener('click', function(e) {
+  var wrap = e.target.closest('.icon-wrap');
   if (!wrap) return;
-  const svg = wrap.querySelector('svg');
+  var svg = wrap.querySelector('svg');
   if (!svg) return;
-  const svgString = svg.outerHTML;
-  navigator.clipboard.writeText(svgString).then(() => {
-    const toast = document.getElementById('toast');
+  var svgString = svg.outerHTML;
+  navigator.clipboard.writeText(svgString).then(function() {
+    var toast = document.getElementById('toast');
     toast.textContent = 'SVG copied to clipboard';
     toast.classList.add('visible');
     clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(() => toast.classList.remove('visible'), 1500);
+    toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
   });
 });
 
