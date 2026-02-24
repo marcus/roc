@@ -1,2 +1,4 @@
 .todos
 .sidecar
+node_modules/
+dist/

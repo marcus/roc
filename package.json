@@ -1,0 +1,26 @@
+{
+  "name": "@marcus/icons",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./react/*": "./dist/react/*",
+    "./svelte/*": "./dist/svelte/*",
+    "./svg/*": "./dist/svg/*",
+    "./sprite": "./dist/sprite.svg",
+    "./metadata": "./dist/metadata.json"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "build:svg": "node build.mjs --svg",
+    "build:react": "node build.mjs --react",
+    "build:svelte": "node build.mjs --svelte",
+    "build:sprite": "node build.mjs --sprite",
+    "build:demo": "node build.mjs --demo",
+    "dev": "node build.mjs --watch",
+    "preview": "open demo/index.html"
+  },
+  "devDependencies": {
+    "svgo": "^3.0.0"
+  }
+}
