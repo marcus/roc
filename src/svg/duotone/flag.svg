@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M5 3h13.5a1 1 0 0 1 .74 1.67L15.5 9l3.74 4.33A1 1 0 0 1 18.5 15H5V3Z" fill="var(--color-duotone-fill)"/>
+  <path d="M5 22V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M5 3h13.5a1 1 0 0 1 .74 1.67L15.5 9l3.74 4.33A1 1 0 0 1 18.5 15H5V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

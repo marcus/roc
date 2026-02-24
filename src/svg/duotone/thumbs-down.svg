@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M7 13l3.5 8.5a1 1 0 0 0 1.84 0L13 19a3 3 0 0 0-.18-2.32L11.5 14H19a2 2 0 0 0 1.96-2.4l-1.25-6A2 2 0 0 0 17.75 4H7v9Z" fill="var(--color-duotone-fill)"/>
+  <path d="M7 2v11l3.5 8.5a1 1 0 0 0 1.84 0L13 19a3 3 0 0 0-.18-2.32L11.5 14H19a2 2 0 0 0 1.96-2.4l-1.25-6A2 2 0 0 0 17.75 4H7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M7 13H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

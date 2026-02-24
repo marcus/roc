@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M10.68 13.31a15.05 15.05 0 0 0 3.02 3.31l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.58.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1 17 17 0 0 1-9.17-2.93L10.68 13.31Z" fill="var(--color-duotone-fill)"/>
+  <path d="M8.59 4.58A16.94 16.94 0 0 0 4 3a1 1 0 0 0-1 1 17 17 0 0 0 2.93 9.17L8.59 4.58Z" fill="var(--color-duotone-fill)"/>
+  <path d="M10.68 13.31a15.05 15.05 0 0 0 3.02 3.31l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.58.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1 17 17 0 0 1-9.17-2.93" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8.59 4.58A16.94 16.94 0 0 0 4 3a1 1 0 0 0-1 1 17 17 0 0 0 2.93 9.17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M2 2l20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

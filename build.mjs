@@ -75,12 +75,16 @@ function stageSvg() {
   };
 
   for (const { style, name, raw } of icons) {
-    const { data: optimizedSvg } = optimize(raw, svgoConfig);
-    const innerSvg = getSvgInner(optimizedSvg);
-    const outDir   = path.join(DIST_DIR, 'svg', style);
-    ensureDir(outDir);
-    fs.writeFileSync(path.join(outDir, `${name}.svg`), optimizedSvg);
-    manifest.push({ style, name, optimizedSvg, innerSvg });
+    try {
+      const { data: optimizedSvg } = optimize(raw, svgoConfig);
+      const innerSvg = getSvgInner(optimizedSvg);
+      const outDir   = path.join(DIST_DIR, 'svg', style);
+      ensureDir(outDir);
+      fs.writeFileSync(path.join(outDir, `${name}.svg`), optimizedSvg);
+      manifest.push({ style, name, optimizedSvg, innerSvg });
+    } catch (err) {
+      console.warn(`  ⚠ skipping ${style}/${name}.svg: ${err.reason || err.message}`);
+    }
   }
 
   console.log(`  ✓ ${manifest.length} SVGs optimized → ${DIST_DIR}/svg/`);
@@ -380,12 +384,31 @@ function stageDemo(manifest, ontology) {
     };
   }
 
+  const rocInnerSvg = iconsObj.duotone?.roc || iconsObj.outline?.roc || '';
+  const searchInnerSvg = iconsObj.outline?.search || '';
+  const moonInnerSvg = iconsObj.outline?.moon || '';
+  const sunInnerSvg = iconsObj.outline?.sun || '';
+
   const html = `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roc — Dashboard</title>
+<title>Roc — Icon Library</title>
+
+<link rel="canonical" href="https://haplab.com/roc/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://haplab.com/roc/" />
+<meta property="og:title" content="Roc — ${iconNames.length} icons, 4 styles" />
+<meta property="og:description" content="Hand-crafted SVG icons in outline, solid, duotone, and sharp variants. Built for React and Svelte." />
+<meta property="og:image" content="https://haplab.com/roc/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://haplab.com/roc/og-image.png" />
+<meta name="twitter:image:alt" content="Roc icon library — ${iconNames.length} icons shown in outline, solid, duotone, and sharp styles on a dark background" />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -437,9 +460,9 @@ function stageDemo(manifest, ontology) {
     --color-border-default: #222226;
     --color-border-subtle: #1a1a1e;
 
-    --color-accent-default: #5e6ad2;
-    --color-accent-hover: #6e7ae2;
-    --color-accent-subtle: rgba(94, 106, 210, 0.12);
+    --color-accent-default: #e8b931;
+    --color-accent-hover: #f0c84a;
+    --color-accent-subtle: rgba(232, 185, 49, 0.10);
 
     --color-success: #4ade80;
     --color-warning: #e5a63e;
@@ -449,7 +472,7 @@ function stageDemo(manifest, ontology) {
     --color-duotone-fill: rgba(94, 106, 210, 0.15);
     --color-icon-primary: #ededef;
     --color-icon-secondary: #8b8b90;
-    --color-icon-accent: #5e6ad2;
+    --color-icon-accent: #e8b931;
   }
 
   /* Light theme */
@@ -468,9 +491,9 @@ function stageDemo(manifest, ontology) {
     --color-border-default: #e2e2e6;
     --color-border-subtle: #ececef;
 
-    --color-accent-default: #5e6ad2;
-    --color-accent-hover: #4e5ac2;
-    --color-accent-subtle: rgba(94, 106, 210, 0.08);
+    --color-accent-default: #b8941a;
+    --color-accent-hover: #9a7c14;
+    --color-accent-subtle: rgba(184, 148, 26, 0.08);
 
     --color-success: #22a355;
     --color-warning: #c4880c;
@@ -480,7 +503,7 @@ function stageDemo(manifest, ontology) {
     --color-duotone-fill: rgba(94, 106, 210, 0.10);
     --color-icon-primary: #1a1a1e;
     --color-icon-secondary: #6b6b73;
-    --color-icon-accent: #5e6ad2;
+    --color-icon-accent: #b8941a;
   }
 
   html { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -501,10 +524,48 @@ function stageDemo(manifest, ontology) {
     border-bottom: 1px solid var(--color-border-strong);
     background: var(--color-bg-secondary);
   }
-  .page-header h1 {
+  .page-header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .logo-mark {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .logo-mark::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: var(--radius-full);
+    background: radial-gradient(circle, var(--color-accent-subtle) 0%, transparent 70%);
+    opacity: 0.8;
+  }
+  .logo-mark svg {
+    position: relative;
+    color: var(--color-accent-default);
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .logo-text h1 {
     font-size: var(--text-lg);
-    font-weight: var(--font-semibold);
-    letter-spacing: -0.02em;
+    font-weight: var(--font-bold);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+  .logo-subtitle {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    font-weight: var(--font-medium);
+    line-height: 1.2;
   }
   .header-controls {
     display: flex;
@@ -516,29 +577,24 @@ function stageDemo(manifest, ontology) {
   .theme-toggle {
     display: flex;
     align-items: center;
-    background: var(--color-bg-tertiary);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-full);
-    padding: 2px;
-    cursor: pointer;
-    gap: 0;
+    gap: 2px;
   }
   .theme-toggle button {
     all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
+    width: 28px;
     height: 28px;
-    border-radius: var(--radius-full);
     cursor: pointer;
     transition: all var(--duration-fast);
     color: var(--color-text-tertiary);
+    border: 1px solid transparent;
   }
+  .theme-toggle button:hover { color: var(--color-text-primary); }
   .theme-toggle button.active {
-    background: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    color: var(--color-accent-default);
+    border-color: var(--color-accent-default);
   }
   .theme-toggle button svg { width: 16px; height: 16px; }
 
@@ -571,9 +627,8 @@ function stageDemo(manifest, ontology) {
     font-size: var(--text-xs);
     font-weight: var(--font-medium);
     color: var(--color-text-tertiary);
-    background: var(--color-bg-tertiary);
+    background: transparent;
     padding: 1px var(--space-2);
-    border-radius: var(--radius-sm);
     border: 1px solid var(--color-border-default);
   }
   .style-desc {
@@ -585,42 +640,51 @@ function stageDemo(manifest, ontology) {
   /* ── Icon grid ──────────────────────────── */
   .icon-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+    padding: var(--space-4) var(--space-6);
   }
-  .icon-column {
+
+  .icon-cell {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--color-border-subtle);
+    align-items: center;
+    padding: var(--space-4) var(--space-2) var(--space-3);
+    cursor: pointer;
+    transition: background var(--duration-fast);
+    position: relative;
   }
-  .icon-column:last-child { border-right: none; }
-
-  .icon-name-row {
-    padding: var(--space-2) var(--space-4);
-    text-align: center;
+  .icon-cell:hover { background: var(--color-bg-hover); }
+  .icon-cell .icon-name {
     font-size: var(--text-xs);
-    font-weight: var(--font-medium);
     color: var(--color-text-tertiary);
-    border-bottom: 1px solid var(--color-border-subtle);
-    background: var(--color-bg-secondary);
+    font-weight: var(--font-medium);
+    margin-top: var(--space-2);
+    text-align: center;
+    line-height: 1.3;
+    word-break: break-word;
   }
 
-  .icon-sizes {
+  .copy-btn {
+    all: unset;
+    position: absolute;
+    top: 4px;
+    right: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-6);
-    padding: var(--space-6) var(--space-4);
-  }
-
-  .icon-size-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-  }
-  .icon-size-item .size-label {
-    font-size: 10px;
+    width: 22px;
+    height: 22px;
     color: var(--color-text-tertiary);
-    font-variant-numeric: tabular-nums;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-default);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--duration-fast);
+  }
+  .icon-cell:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
   }
 
   .icon-wrap {
@@ -628,16 +692,8 @@ function stageDemo(manifest, ontology) {
     align-items: center;
     justify-content: center;
     color: var(--color-icon-primary);
-    transition: color var(--duration-fast);
-    cursor: pointer;
-    border-radius: var(--radius-sm);
     padding: var(--space-2);
   }
-  .icon-wrap:hover {
-    color: var(--color-icon-accent);
-    background: var(--color-accent-subtle);
-  }
-  .icon-wrap:active { transform: scale(0.92); }
   .icon-wrap svg {
     display: block;
     flex-shrink: 0;
@@ -684,16 +740,16 @@ function stageDemo(manifest, ontology) {
     padding: var(--space-1) var(--space-2);
     font-size: var(--text-xs);
     font-weight: var(--font-medium);
-    border-radius: var(--radius-sm);
     cursor: pointer;
     color: var(--color-text-tertiary);
     transition: all var(--duration-fast);
     font-variant-numeric: tabular-nums;
+    border: 1px solid transparent;
   }
-  .size-btn:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .size-btn:hover { color: var(--color-text-primary); }
   .size-btn.active {
-    background: var(--color-accent-subtle);
     color: var(--color-accent-default);
+    border-color: var(--color-accent-default);
   }
 
   /* ── View toggle ───────────────────────── */
@@ -713,15 +769,15 @@ function stageDemo(manifest, ontology) {
     padding: var(--space-1) var(--space-2);
     font-size: var(--text-xs);
     font-weight: var(--font-medium);
-    border-radius: var(--radius-sm);
     cursor: pointer;
     color: var(--color-text-tertiary);
     transition: all var(--duration-fast);
+    border: 1px solid transparent;
   }
-  .view-btn:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .view-btn:hover { color: var(--color-text-primary); }
   .view-btn.active {
-    background: var(--color-accent-subtle);
     color: var(--color-accent-default);
+    border-color: var(--color-accent-default);
   }
 
   /* ── Category view ─────────────────────── */
@@ -748,6 +804,22 @@ function stageDemo(manifest, ontology) {
     padding: var(--space-3) var(--space-6);
     border-bottom: 1px solid var(--color-border-subtle);
     gap: var(--space-4);
+    cursor: pointer;
+    transition: background var(--duration-fast);
+  }
+  .cat-icon-row:hover { background: var(--color-bg-hover); }
+
+  .count-bar {
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-6);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-primary);
+  }
+  .icon-count {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    font-variant-numeric: tabular-nums;
   }
   .cat-icon-name {
     min-width: 100px;
@@ -795,7 +867,6 @@ function stageDemo(manifest, ontology) {
     color: var(--color-text-primary);
     background: var(--color-bg-tertiary);
     border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-sm);
     transition: border-color var(--duration-fast);
   }
   .search-input::placeholder { color: var(--color-text-tertiary); }
@@ -815,15 +886,15 @@ function stageDemo(manifest, ontology) {
     padding: var(--space-1) var(--space-2);
     font-size: var(--text-xs);
     font-weight: var(--font-medium);
-    border-radius: var(--radius-sm);
     cursor: pointer;
     color: var(--color-text-tertiary);
     transition: all var(--duration-fast);
+    border: 1px solid transparent;
   }
-  .cat-btn:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .cat-btn:hover { color: var(--color-text-primary); }
   .cat-btn.active {
-    background: var(--color-accent-subtle);
     color: var(--color-accent-default);
+    border-color: var(--color-accent-default);
   }
 
   /* ── Empty state ───────────────────────── */
@@ -836,76 +907,103 @@ function stageDemo(manifest, ontology) {
     font-size: var(--text-sm);
   }
 
-  /* ── Detail panel ──────────────────────── */
+  /* ── Detail side panel ────────────────── */
   .detail-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
     z-index: 200;
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal) ease;
   }
-  .detail-backdrop.visible { display: block; }
+  .detail-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .detail-panel {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-md);
-    padding: var(--space-6);
-    z-index: 201;
-    display: none;
-    min-width: 480px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 480px;
     max-width: 90vw;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    background: var(--color-bg-secondary);
+    border-left: 1px solid var(--color-border-strong);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -8px 0 24px rgba(0,0,0,0.15);
   }
-  .detail-panel.visible { display: block; }
-  .detail-header {
+  .detail-panel.open {
+    transform: translateX(0);
+  }
+  .detail-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border-strong);
+    flex-shrink: 0;
+  }
+  .detail-panel-header-left {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: var(--space-4);
+    gap: var(--space-2);
+    min-width: 0;
   }
   .detail-title {
-    font-size: var(--text-xl);
-    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    white-space: nowrap;
   }
   .detail-filename {
     font-size: var(--text-xs);
     color: var(--color-text-tertiary);
     font-family: monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .detail-close {
     all: unset;
     cursor: pointer;
     color: var(--color-text-tertiary);
-    font-size: var(--text-lg);
-    padding: var(--space-1);
-    border-radius: var(--radius-sm);
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    transition: all var(--duration-fast);
   }
   .detail-close:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .detail-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-5);
+  }
   .detail-desc {
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
     margin-bottom: var(--space-4);
+    line-height: 1.5;
   }
   .detail-meta {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    flex-wrap: wrap;
     margin-bottom: var(--space-5);
   }
   .detail-category {
     font-size: var(--text-xs);
     font-weight: var(--font-medium);
     color: var(--color-accent-default);
-    background: var(--color-accent-subtle);
     padding: 2px var(--space-2);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-accent-default);
   }
   .detail-tags {
     display: flex;
@@ -915,25 +1013,32 @@ function stageDemo(manifest, ontology) {
   .detail-tag {
     font-size: var(--text-xs);
     color: var(--color-text-tertiary);
-    background: var(--color-bg-tertiary);
     padding: 1px var(--space-2);
-    border-radius: var(--radius-sm);
     border: 1px solid var(--color-border-default);
+  }
+  .detail-section-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-3);
   }
   .detail-variants {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    border: 1px solid var(--color-border-default);
+    background: var(--color-border-default);
   }
   .detail-variant {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-4);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-sm);
+    padding: var(--space-5) var(--space-4);
     background: var(--color-bg-primary);
+    position: relative;
   }
   .detail-variant-label {
     font-size: var(--text-xs);
@@ -942,26 +1047,44 @@ function stageDemo(manifest, ontology) {
   }
   .detail-copy-btn {
     all: unset;
-    font-size: 10px;
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     color: var(--color-text-tertiary);
     cursor: pointer;
-    padding: 1px var(--space-2);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border-default);
+    opacity: 0;
     transition: all var(--duration-fast);
   }
+  .detail-variant:hover .detail-copy-btn { opacity: 1; }
   .detail-copy-btn:hover {
     color: var(--color-text-primary);
     background: var(--color-bg-tertiary);
   }
-
-  /* ── Compact single-size view ───────────── */
-  .icon-grid.single-size .icon-sizes {
-    padding: var(--space-5) var(--space-4);
+  .detail-sizes {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border-default);
+    background: var(--color-bg-primary);
   }
-  .icon-grid.single-size .icon-sizes .icon-size-item { display: none; }
-  .icon-grid.single-size .icon-sizes .icon-size-item.active-size { display: flex; }
-  .icon-grid.single-size .icon-sizes .icon-size-item.active-size .size-label { display: none; }
+  .detail-size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-icon-primary);
+  }
+  .detail-size-label {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
 
   /* ── Keyboard hint ──────────────────────── */
   .kbd {
@@ -976,7 +1099,6 @@ function stageDemo(manifest, ontology) {
     color: var(--color-text-tertiary);
     background: var(--color-bg-tertiary);
     border: 1px solid var(--color-border-default);
-    border-radius: 4px;
     font-family: 'Inter', sans-serif;
   }
 
@@ -1010,10 +1132,18 @@ function stageDemo(manifest, ontology) {
 
 <!-- header -->
 <header class="page-header">
-  <h1>Roc</h1>
+  <div class="page-header-left">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${rocInnerSvg}</svg>
+    </div>
+    <div class="logo-text">
+      <h1>Roc</h1>
+      <span class="logo-subtitle">Open-source icon toolkit</span>
+    </div>
+  </div>
   <div class="header-controls">
     <div class="search-bar">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${searchInnerSvg}</svg>
       <input class="search-input" id="search" type="text" placeholder="Search icons..." autocomplete="off">
     </div>
     <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
@@ -1035,10 +1165,10 @@ function stageDemo(manifest, ontology) {
     <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
     <div class="theme-toggle">
       <button id="btn-dark" class="active" onclick="setTheme('dark')" aria-label="Dark mode">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.5 8.5a5.5 5.5 0 0 1-7-7A5.5 5.5 0 1 0 13.5 8.5Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">${moonInnerSvg}</svg>
       </button>
       <button id="btn-light" onclick="setTheme('light')" aria-label="Light mode">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1M8 13.5v1M1.5 8h1M13.5 8h1M3.4 3.4l.7.7M11.9 11.9l.7.7M3.4 12.6l.7-.7M11.9 4.1l.7-.7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">${sunInnerSvg}</svg>
       </button>
     </div>
     <span class="kbd" title="Toggle theme">T</span>
@@ -1049,6 +1179,11 @@ function stageDemo(manifest, ontology) {
 <div class="category-bar" id="category-bar">
   <button class="cat-btn active" data-cat="" onclick="setCat('')">All</button>
   ${(ontology.categories || []).map(c => `<button class="cat-btn" data-cat="${c}" onclick="setCat('${c}')">${c}</button>`).join('\n  ')}
+</div>
+
+<!-- count bar -->
+<div class="count-bar" id="count-bar">
+  <span class="icon-count" id="icon-count"></span>
 </div>
 
 <!-- content -->
@@ -1152,8 +1287,8 @@ function render() {
       for (var i = 0; i < catIcons.length; i++) {
         var iconName = catIcons[i];
         var label = ICON_META[iconName].label;
-        html += '<div class="cat-icon-row">';
-        html += '<span class="cat-icon-name" data-icon-name="' + iconName + '">' + label + '</span>';
+        html += '<div class="cat-icon-row" data-icon-name="' + iconName + '">';
+        html += '<span class="cat-icon-name">' + label + '</span>';
         html += '<div class="cat-icon-variants">';
         for (var si = 0; si < STYLE_ORDER.length; si++) {
           var styleKey = STYLE_ORDER[si];
@@ -1170,7 +1305,8 @@ function render() {
       html += '</section>';
     }
   } else {
-    // Existing "by style" rendering
+    // "By style" rendering — vertical wrapping grid
+    var sz = isSingle ? parseInt(currentView) : 24;
     for (var si = 0; si < STYLE_ORDER.length; si++) {
       var styleKey = STYLE_ORDER[si];
       var icons = ICONS[styleKey];
@@ -1183,25 +1319,20 @@ function render() {
       html += '<span class="style-tag">' + meta.tag + '</span>';
       html += '<span class="style-desc">' + meta.desc + '</span>';
       html += '</div>';
-      html += '<div class="icon-grid' + (isSingle ? ' single-size' : '') + '" style="grid-template-columns:repeat(' + filteredNames.length + ',1fr)">';
+      html += '<div class="icon-grid">';
 
       for (var i = 0; i < filteredNames.length; i++) {
         var iconName = filteredNames[i];
         var innerSvg = icons[iconName];
         if (!innerSvg) continue;
         var label = ICON_META[iconName].label;
-        html += '<div class="icon-column">';
-        html += '<div class="icon-name-row" data-icon-name="' + iconName + '">' + label + '</div>';
-        html += '<div class="icon-sizes">';
-        for (var j = 0; j < sizes.length; j++) {
-          var sz = sizes[j];
-          var isActive = isSingle ? ' active-size' : '';
-          html += '<div class="icon-size-item' + isActive + '">';
-          html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
-          html += '<span class="size-label">' + sz + '</span>';
-          html += '</div>';
-        }
-        html += '</div></div>';
+        html += '<div class="icon-cell" data-icon-name="' + iconName + '">';
+        html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+        html += '<span class="icon-name">' + label + '</span>';
+        html += '<button class="copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '" title="Copy SVG">';
+        html += '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+        html += '</button>';
+        html += '</div>';
       }
       html += '</div></section>';
     }
@@ -1213,8 +1344,10 @@ function render() {
 
 function updateFooter(shown) {
   var el = document.getElementById('footer-count');
-  if (!el) return;
-  el.textContent = shown < ICON_NAMES.length ? shown + ' of ' + ICON_NAMES.length + ' icons' : ICON_NAMES.length + ' icons';
+  var countEl = document.getElementById('icon-count');
+  var text = shown < ICON_NAMES.length ? shown + ' of ' + ICON_NAMES.length + ' icons' : ICON_NAMES.length + ' icons';
+  if (el) el.textContent = text;
+  if (countEl) countEl.textContent = text;
 }
 
 function setView(v) {
@@ -1262,12 +1395,16 @@ function openDetail(iconName) {
   var m = ICON_META[iconName];
   var isSingle = currentView !== 'all';
   var sz = isSingle ? parseInt(currentView) : 24;
+  var copySvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
 
-  var html = '<div class="detail-header">';
-  html += '<div><span class="detail-title">' + m.label + '</span> ';
-  html += '<span class="detail-filename">' + iconName + '.svg</span></div>';
-  html += '<button class="detail-close" id="detail-close-btn">&times;</button>';
+  var html = '<div class="detail-panel-header">';
+  html += '<div class="detail-panel-header-left">';
+  html += '<span class="detail-title">' + m.label + '</span>';
+  html += '<span class="detail-filename">' + iconName + '.svg</span>';
   html += '</div>';
+  html += '<button class="detail-close" id="detail-close-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
+  html += '</div>';
+  html += '<div class="detail-panel-body">';
   html += '<div class="detail-desc">' + m.description + '</div>';
   html += '<div class="detail-meta">';
   html += '<span class="detail-category">' + m.category + '</span>';
@@ -1276,27 +1413,45 @@ function openDetail(iconName) {
     html += '<span class="detail-tag">' + m.tags[i] + '</span>';
   }
   html += '</div></div>';
+  html += '<div class="detail-section-label">Variants</div>';
   html += '<div class="detail-variants">';
   for (var si = 0; si < STYLE_ORDER.length; si++) {
     var styleKey = STYLE_ORDER[si];
     var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
     if (!innerSvg) continue;
     html += '<div class="detail-variant">';
-    html += '<div class="icon-wrap" data-style="' + styleKey + '" data-icon="' + iconName + '">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+    html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
     html += '<span class="detail-variant-label">' + STYLE_META[styleKey].label + '</span>';
-    html += '<button class="detail-copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '">Copy SVG</button>';
+    html += '<button class="detail-copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '">' + copySvg + '</button>';
     html += '</div>';
   }
   html += '</div>';
+  // Size variations
+  html += '<div class="detail-section-label" style="margin-top:var(--space-5)">Sizes</div>';
+  html += '<div class="detail-sizes">';
+  var sizeList = [16, 20, 24, 32, 48];
+  var previewStyle = 'outline';
+  var previewSvg = ICONS[previewStyle] && ICONS[previewStyle][iconName];
+  if (previewSvg) {
+    for (var si2 = 0; si2 < sizeList.length; si2++) {
+      var s = sizeList[si2];
+      html += '<div class="detail-size-item">';
+      html += svgWrap(s, previewSvg, previewStyle);
+      html += '<span class="detail-size-label">' + s + '</span>';
+      html += '</div>';
+    }
+  }
+  html += '</div>';
+  html += '</div>';
 
   document.getElementById('detail-panel').innerHTML = html;
-  document.getElementById('detail-panel').classList.add('visible');
-  document.getElementById('detail-backdrop').classList.add('visible');
+  document.getElementById('detail-panel').classList.add('open');
+  document.getElementById('detail-backdrop').classList.add('open');
 }
 
 function closeDetail() {
-  document.getElementById('detail-panel').classList.remove('visible');
-  document.getElementById('detail-backdrop').classList.remove('visible');
+  document.getElementById('detail-panel').classList.remove('open');
+  document.getElementById('detail-backdrop').classList.remove('open');
 }
 
 function copyVariant(iconName, styleKey, sz) {
@@ -1318,7 +1473,7 @@ document.addEventListener('keydown', function(e) {
 
   if (e.key === 'Escape') {
     var panel = document.getElementById('detail-panel');
-    if (panel && panel.classList.contains('visible')) {
+    if (panel && panel.classList.contains('open')) {
       closeDetail();
       return;
     }
@@ -1355,12 +1510,20 @@ document.addEventListener('keydown', function(e) {
   if (e.key === '0') setView('all');
 });
 
-// Click handler — detail panel + copy
+// Click handler — detail panel, copy buttons
 document.addEventListener('click', function(e) {
   // Detail panel copy button
   var copyBtn = e.target.closest('.detail-copy-btn');
   if (copyBtn) {
     copyVariant(copyBtn.dataset.icon, copyBtn.dataset.style, parseInt(copyBtn.dataset.sz));
+    return;
+  }
+
+  // Grid copy button (hover overlay)
+  var gridCopyBtn = e.target.closest('.copy-btn');
+  if (gridCopyBtn) {
+    e.stopPropagation();
+    copyVariant(gridCopyBtn.dataset.icon, gridCopyBtn.dataset.style, parseInt(gridCopyBtn.dataset.sz));
     return;
   }
 
@@ -1370,30 +1533,16 @@ document.addEventListener('click', function(e) {
     return;
   }
 
-  // Open detail on icon name click
-  var nameEl = e.target.closest('[data-icon-name]');
-  if (nameEl) {
-    openDetail(nameEl.dataset.iconName);
+  // Open detail on icon cell or row click
+  var cell = e.target.closest('[data-icon-name]');
+  if (cell && !cell.closest('.detail-panel')) {
+    openDetail(cell.dataset.iconName);
     return;
-  }
-
-  // Copy SVG on icon click (keep existing behavior for quick copy)
-  var wrap = e.target.closest('.icon-wrap');
-  if (wrap) {
-    var svg = wrap.querySelector('svg');
-    if (!svg) return;
-    navigator.clipboard.writeText(svg.outerHTML).then(function() {
-      var toast = document.getElementById('toast');
-      toast.textContent = 'SVG copied to clipboard';
-      toast.classList.add('visible');
-      clearTimeout(toast._timeout);
-      toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
-    });
   }
 });
 
-// Initialize — default to "all sizes" view
-setView('all');
+// Initialize
+setView('24');
 
 document.getElementById('search').addEventListener('input', function(e) {
   searchQuery = e.target.value;

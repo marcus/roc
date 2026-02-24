@@ -6,7 +6,11 @@
     "People",
     "System",
     "Brand",
-    "Actions"
+    "Actions",
+    "Files",
+    "Media",
+    "Weather",
+    "Transport"
   ],
   "icons": {
     "home": {
@@ -62,6 +66,636 @@
       "description": "Leftward pointing arrow for navigation and back actions",
       "category": "Actions",
       "tags": ["left", "direction", "navigate", "move", "back", "previous"]
+    },
+    "arrow-right": {
+      "label": "Arrow Right",
+      "description": "Rightward pointing arrow for navigation and forward actions",
+      "category": "Actions",
+      "tags": ["right", "direction", "navigate", "move", "forward", "next"]
+    },
+    "arrow-up-right": {
+      "label": "Arrow Up Right",
+      "description": "Diagonal arrow pointing up-right for external links and outbound actions",
+      "category": "Actions",
+      "tags": ["diagonal", "external", "link", "outbound", "open", "redirect"]
+    },
+    "arrow-down-left": {
+      "label": "Arrow Down Left",
+      "description": "Diagonal arrow pointing down-left for inbound and import actions",
+      "category": "Actions",
+      "tags": ["diagonal", "inbound", "import", "receive", "download", "return"]
+    },
+    "chevron-up": {
+      "label": "Chevron Up",
+      "description": "Single upward chevron for expand, collapse, and scroll-to-top actions",
+      "category": "Navigation",
+      "tags": ["caret", "up", "expand", "collapse", "accordion", "dropdown", "arrow"]
+    },
+    "chevron-down": {
+      "label": "Chevron Down",
+      "description": "Single downward chevron for dropdowns, expand, and scroll-down actions",
+      "category": "Navigation",
+      "tags": ["caret", "down", "expand", "collapse", "accordion", "dropdown", "select", "arrow"]
+    },
+    "chevron-left": {
+      "label": "Chevron Left",
+      "description": "Single leftward chevron for back navigation and pagination",
+      "category": "Navigation",
+      "tags": ["caret", "left", "back", "previous", "pagination", "breadcrumb", "arrow"]
+    },
+    "chevron-right": {
+      "label": "Chevron Right",
+      "description": "Single rightward chevron for navigation and expand actions",
+      "category": "Navigation",
+      "tags": ["caret", "right", "next", "forward", "expand", "collapse", "breadcrumb", "arrow"]
+    },
+    "chevrons-up": {
+      "label": "Chevrons Up",
+      "description": "Double upward chevrons for scroll-to-top and priority-up actions",
+      "category": "Navigation",
+      "tags": ["double", "up", "scroll", "top", "expand", "collapse", "priority", "jump"]
+    },
+    "chevrons-down": {
+      "label": "Chevrons Down",
+      "description": "Double downward chevrons for scroll-to-bottom and expand-more actions",
+      "category": "Navigation",
+      "tags": ["double", "down", "scroll", "bottom", "expand", "more", "priority", "jump"]
+    },
+    "file": {
+      "label": "File",
+      "description": "Basic document with folded corner for file and document references",
+      "category": "Files",
+      "tags": ["document", "page", "paper", "blank", "new", "create"]
+    },
+    "file-text": {
+      "label": "File Text",
+      "description": "Document with text lines for text files and readable content",
+      "category": "Files",
+      "tags": ["document", "text", "page", "paper", "content", "article", "readme", "note"]
+    },
+    "file-plus": {
+      "label": "File Plus",
+      "description": "Document with plus symbol for adding or creating new files",
+      "category": "Files",
+      "tags": ["document", "add", "new", "create", "upload", "plus", "import"]
+    },
+    "file-minus": {
+      "label": "File Minus",
+      "description": "Document with minus symbol for removing or deleting files",
+      "category": "Files",
+      "tags": ["document", "remove", "delete", "subtract", "minus", "reduce"]
+    },
+    "file-check": {
+      "label": "File Check",
+      "description": "Document with checkmark for verified, approved, or completed files",
+      "category": "Files",
+      "tags": ["document", "check", "verified", "approved", "complete", "done", "success", "valid"]
+    },
+    "file-x": {
+      "label": "File X",
+      "description": "Document with X symbol for rejected, cancelled, or error files",
+      "category": "Files",
+      "tags": ["document", "close", "cancel", "reject", "error", "failed", "invalid", "delete"]
+    },
+    "folder": {
+      "label": "Folder",
+      "description": "Closed folder with tab for file organization and directories",
+      "category": "Files",
+      "tags": ["directory", "folder", "storage", "organize", "files", "collection"]
+    },
+    "folder-open": {
+      "label": "Folder Open",
+      "description": "Open folder with tab showing depth for active or expanded directories",
+      "category": "Files",
+      "tags": ["directory", "folder", "open", "expanded", "active", "browse", "explore"]
+    },
+    "folder-plus": {
+      "label": "Folder Plus",
+      "description": "Folder with plus symbol for creating new folders or adding to directories",
+      "category": "Files",
+      "tags": ["directory", "folder", "add", "new", "create", "plus", "mkdir"]
+    },
+    "document": {
+      "label": "Document",
+      "description": "Document page with text lines for written content and articles",
+      "category": "Files",
+      "tags": ["page", "paper", "text", "article", "content", "letter", "report", "writing"]
+    },
+    "clipboard": {
+      "label": "Clipboard",
+      "description": "Clipboard with clip and paper for tasks, checklists, and copied content",
+      "category": "Files",
+      "tags": ["clip", "board", "paste", "copy", "task", "checklist", "form", "survey"]
+    },
+    "notebook": {
+      "label": "Notebook",
+      "description": "Spiral-bound notebook with lines for notes and journals",
+      "category": "Files",
+      "tags": ["spiral", "notes", "journal", "diary", "pad", "writing", "ruled", "lined"]
+    },
+    "bold": {
+      "label": "Bold",
+      "description": "Bold text formatting letter B with serifs for rich text editing",
+      "category": "Actions",
+      "tags": ["text", "format", "bold", "font", "weight", "strong", "typography", "editor"]
+    },
+    "italic": {
+      "label": "Italic",
+      "description": "Italic text formatting slanted letter I for rich text editing",
+      "category": "Actions",
+      "tags": ["text", "format", "italic", "slant", "emphasis", "typography", "editor"]
+    },
+    "underline": {
+      "label": "Underline",
+      "description": "Underline text formatting letter U with line beneath for rich text editing",
+      "category": "Actions",
+      "tags": ["text", "format", "underline", "decoration", "typography", "editor"]
+    },
+    "pencil": {
+      "label": "Pencil",
+      "description": "Angled pencil for editing, writing, and composing actions",
+      "category": "Actions",
+      "tags": ["edit", "write", "compose", "draw", "modify", "update", "draft"]
+    },
+    "eraser": {
+      "label": "Eraser",
+      "description": "Rectangular eraser tool for delete and clear actions",
+      "category": "Actions",
+      "tags": ["erase", "delete", "remove", "clear", "undo", "clean", "wipe", "rubber"]
+    },
+    "pen-tool": {
+      "label": "Pen Tool",
+      "description": "Bezier pen tool with nib and node for vector drawing and design",
+      "category": "Actions",
+      "tags": ["bezier", "vector", "design", "path", "anchor", "curve", "draw", "nib", "illustrator"]
+    },
+    "align-left": {
+      "label": "Align Left",
+      "description": "Horizontal text lines aligned to the left edge for text alignment formatting",
+      "category": "Actions",
+      "tags": ["text", "format", "align", "left", "paragraph", "justify", "typography", "editor"]
+    },
+    "align-center": {
+      "label": "Align Center",
+      "description": "Horizontal text lines centered for text alignment formatting",
+      "category": "Actions",
+      "tags": ["text", "format", "align", "center", "middle", "paragraph", "justify", "typography", "editor"]
+    },
+    "align-right": {
+      "label": "Align Right",
+      "description": "Horizontal text lines aligned to the right edge for text alignment formatting",
+      "category": "Actions",
+      "tags": ["text", "format", "align", "right", "paragraph", "justify", "typography", "editor"]
+    },
+    "list": {
+      "label": "List",
+      "description": "Unordered list with bullet dots and horizontal lines for content organization",
+      "category": "Actions",
+      "tags": ["bullet", "unordered", "items", "menu", "options", "content", "text"]
+    },
+    "list-ordered": {
+      "label": "List Ordered",
+      "description": "Numbered list with sequential digits and horizontal lines for ordered content",
+      "category": "Actions",
+      "tags": ["numbered", "ordered", "sequence", "steps", "ranking", "priority", "content", "text"]
+    },
+    "list-checks": {
+      "label": "List Checks",
+      "description": "Checklist with checkboxes and horizontal lines for task tracking",
+      "category": "Actions",
+      "tags": ["checklist", "checkbox", "todo", "tasks", "complete", "done", "verify", "tracking"]
+    },
+    "search": {
+      "label": "Search",
+      "description": "Magnifying glass for search, find, and lookup actions",
+      "category": "Actions",
+      "tags": ["find", "lookup", "magnify", "magnifying glass", "query", "filter", "discover"]
+    },
+    "zoom-in": {
+      "label": "Zoom In",
+      "description": "Magnifying glass with plus symbol for zooming in and enlarging",
+      "category": "Actions",
+      "tags": ["magnify", "enlarge", "zoom", "plus", "increase", "scale", "expand", "closer"]
+    },
+    "zoom-out": {
+      "label": "Zoom Out",
+      "description": "Magnifying glass with minus symbol for zooming out and reducing",
+      "category": "Actions",
+      "tags": ["magnify", "reduce", "zoom", "minus", "decrease", "scale", "shrink", "smaller"]
+    },
+    "user": {
+      "label": "User",
+      "description": "Single person silhouette for user profiles and accounts",
+      "category": "People",
+      "tags": ["person", "profile", "account", "avatar", "member", "individual"]
+    },
+    "user-plus": {
+      "label": "User Plus",
+      "description": "Person with plus symbol for adding users, invitations, and sign-up",
+      "category": "People",
+      "tags": ["person", "add", "invite", "sign-up", "register", "new", "create", "plus"]
+    },
+    "user-minus": {
+      "label": "User Minus",
+      "description": "Person with minus symbol for removing users and revoking access",
+      "category": "People",
+      "tags": ["person", "remove", "delete", "revoke", "block", "ban", "minus"]
+    },
+    "mail": {
+      "label": "Mail",
+      "description": "Envelope icon for email, messages, and correspondence",
+      "category": "Communication",
+      "tags": ["email", "envelope", "message", "letter", "correspondence", "compose"]
+    },
+    "inbox": {
+      "label": "Inbox",
+      "description": "Inbox tray for received messages and incoming items",
+      "category": "Communication",
+      "tags": ["tray", "received", "incoming", "messages", "queue", "mailbox"]
+    },
+    "send": {
+      "label": "Send",
+      "description": "Paper plane for sending messages and submitting content",
+      "category": "Communication",
+      "tags": ["paper plane", "submit", "message", "dispatch", "deliver", "share"]
+    },
+    "user-check": {
+      "label": "User Check",
+      "description": "Person with checkmark for verified, approved, or confirmed users",
+      "category": "People",
+      "tags": ["person", "verify", "approve", "confirm", "accept", "valid", "check"]
+    },
+    "user-x": {
+      "label": "User X",
+      "description": "Person with X symbol for rejected, denied, or blocked users",
+      "category": "People",
+      "tags": ["person", "reject", "deny", "block", "cancel", "close", "remove"]
+    },
+    "user-circle": {
+      "label": "User Circle",
+      "description": "Person silhouette inside a circle for avatars and profile pictures",
+      "category": "People",
+      "tags": ["person", "avatar", "profile", "account", "picture", "photo", "circle"]
+    },
+    "message-circle": {
+      "label": "Message Circle",
+      "description": "Round speech bubble for messages and comments",
+      "category": "Communication",
+      "tags": ["speech", "bubble", "comment", "message", "reply", "conversation", "round"]
+    },
+    "message-square": {
+      "label": "Message Square",
+      "description": "Rectangular speech bubble for messages and text communication",
+      "category": "Communication",
+      "tags": ["speech", "bubble", "comment", "message", "reply", "text", "rectangle", "square"]
+    },
+    "chat": {
+      "label": "Chat",
+      "description": "Two overlapping speech bubbles for conversations and messaging",
+      "category": "Communication",
+      "tags": ["conversation", "dialogue", "discuss", "talk", "messaging", "bubbles", "communication"]
+    },
+    "phone": {
+      "label": "Phone",
+      "description": "Classic telephone handset for calls and contact actions",
+      "category": "Communication",
+      "tags": ["telephone", "call", "handset", "contact", "dial", "receiver"]
+    },
+    "phone-call": {
+      "label": "Phone Call",
+      "description": "Telephone handset with signal waves for active or incoming calls",
+      "category": "Communication",
+      "tags": ["telephone", "call", "ringing", "incoming", "signal", "active", "waves", "dial"]
+    },
+    "phone-off": {
+      "label": "Phone Off",
+      "description": "Telephone handset with diagonal strike-through for missed calls or do-not-disturb",
+      "category": "Communication",
+      "tags": ["telephone", "disabled", "muted", "missed", "do not disturb", "silent", "blocked", "off"]
+    },
+    "play": {
+      "label": "Play",
+      "description": "Right-pointing triangle for play, start, and resume media actions",
+      "category": "Media",
+      "tags": ["play", "start", "resume", "media", "video", "audio", "triangle", "begin"]
+    },
+    "pause": {
+      "label": "Pause",
+      "description": "Two vertical parallel bars for pausing media playback",
+      "category": "Media",
+      "tags": ["pause", "hold", "wait", "media", "video", "audio", "bars", "suspend"]
+    },
+    "stop": {
+      "label": "Stop",
+      "description": "Square shape for stopping media playback",
+      "category": "Media",
+      "tags": ["stop", "end", "halt", "media", "video", "audio", "square", "terminate"]
+    },
+    "skip-forward": {
+      "label": "Skip Forward",
+      "description": "Two right-pointing triangles with vertical bar for skipping to next track",
+      "category": "Media",
+      "tags": ["skip", "next", "forward", "track", "media", "video", "audio", "advance"]
+    },
+    "skip-back": {
+      "label": "Skip Back",
+      "description": "Two left-pointing triangles with vertical bar for skipping to previous track",
+      "category": "Media",
+      "tags": ["skip", "previous", "back", "track", "media", "video", "audio", "rewind"]
+    },
+    "rewind": {
+      "label": "Rewind",
+      "description": "Two left-pointing triangles for fast-backward media playback",
+      "category": "Media",
+      "tags": ["rewind", "fast-backward", "backward", "media", "video", "audio", "reverse", "seek"]
+    },
+    "volume": {
+      "label": "Volume",
+      "description": "Speaker with one sound wave arc for medium volume level",
+      "category": "Media",
+      "tags": ["speaker", "sound", "audio", "volume", "medium", "wave"]
+    },
+    "volume-high": {
+      "label": "Volume High",
+      "description": "Speaker with two sound wave arcs for full volume level",
+      "category": "Media",
+      "tags": ["speaker", "sound", "audio", "volume", "loud", "full", "high", "max"]
+    },
+    "volume-off": {
+      "label": "Volume Off",
+      "description": "Speaker with X for muted or silenced audio",
+      "category": "Media",
+      "tags": ["speaker", "mute", "muted", "silent", "off", "audio", "sound", "disabled"]
+    },
+    "sun": {
+      "label": "Sun",
+      "description": "Sun with radiating rays for light mode, brightness, and daytime",
+      "category": "Weather",
+      "tags": ["light", "brightness", "day", "theme", "mode", "sunny", "weather", "rays"]
+    },
+    "moon": {
+      "label": "Moon",
+      "description": "Crescent moon for dark mode, night, and sleep states",
+      "category": "Weather",
+      "tags": ["dark", "night", "theme", "mode", "crescent", "sleep", "weather"]
+    },
+    "cloud": {
+      "label": "Cloud",
+      "description": "Fluffy cloud shape for weather, cloud computing, and storage",
+      "category": "Weather",
+      "tags": ["cloud", "weather", "sky", "overcast", "storage", "computing", "upload", "forecast"]
+    },
+    "music": {
+      "label": "Music",
+      "description": "Single eighth note for music, audio, and song content",
+      "category": "Media",
+      "tags": ["note", "eighth", "song", "audio", "sound", "melody", "tune", "track"]
+    },
+    "headphones": {
+      "label": "Headphones",
+      "description": "Over-ear headphones with band and ear cups for listening and audio",
+      "category": "Media",
+      "tags": ["headset", "earphones", "listen", "audio", "sound", "music", "ear", "cups"]
+    },
+    "microphone": {
+      "label": "Microphone",
+      "description": "Upright microphone on a stand for recording and voice input",
+      "category": "Media",
+      "tags": ["mic", "record", "voice", "speak", "audio", "input", "podcast", "broadcast"]
+    },
+    "camera": {
+      "label": "Camera",
+      "description": "Photo camera with lens circle and viewfinder bump for photography actions",
+      "category": "Media",
+      "tags": ["photo", "photography", "picture", "capture", "snapshot", "lens", "shutter"]
+    },
+    "video": {
+      "label": "Video",
+      "description": "Video camera with rectangular body and triangular lens for recording and streaming",
+      "category": "Media",
+      "tags": ["camcorder", "record", "film", "movie", "stream", "recording", "clip"]
+    },
+    "image": {
+      "label": "Image",
+      "description": "Photo frame with mountain landscape and sun for images and galleries",
+      "category": "Media",
+      "tags": ["photo", "picture", "landscape", "gallery", "mountain", "sun", "thumbnail", "media"]
+    },
+    "images": {
+      "label": "Images",
+      "description": "Stacked overlapping image frames for photo galleries and collections",
+      "category": "Media",
+      "tags": ["photos", "gallery", "collection", "stack", "pictures", "album", "multiple", "media"]
+    },
+    "film": {
+      "label": "Film",
+      "description": "Film strip with sprocket holes for video, cinema, and movie content",
+      "category": "Media",
+      "tags": ["filmstrip", "movie", "cinema", "reel", "strip", "sprocket", "video", "footage"]
+    },
+    "aperture": {
+      "label": "Aperture",
+      "description": "Camera aperture iris with blade lines for photography and lens settings",
+      "category": "Media",
+      "tags": ["iris", "lens", "camera", "shutter", "photography", "f-stop", "diaphragm", "exposure"]
+    },
+    "thumbs-up": {
+      "label": "Thumbs Up",
+      "description": "Hand with thumb pointing upward for approval, like, and positive feedback",
+      "category": "Actions",
+      "tags": ["like", "approve", "positive", "agree", "good", "yes", "upvote", "feedback"]
+    },
+    "thumbs-down": {
+      "label": "Thumbs Down",
+      "description": "Hand with thumb pointing downward for disapproval, dislike, and negative feedback",
+      "category": "Actions",
+      "tags": ["dislike", "disapprove", "negative", "disagree", "bad", "no", "downvote", "feedback"]
+    },
+    "flag": {
+      "label": "Flag",
+      "description": "Flag on a vertical pole for flagging, reporting, and marking content",
+      "category": "Actions",
+      "tags": ["flag", "report", "mark", "bookmark", "pin", "important", "alert", "milestone"]
+    },
+    "heart": {
+      "label": "Heart",
+      "description": "Classic two-lobed heart shape for likes, favorites, and love actions",
+      "category": "Actions",
+      "tags": ["love", "like", "favorite", "wish", "romance", "health", "care", "passion"]
+    },
+    "star": {
+      "label": "Star",
+      "description": "Five-pointed star for ratings, favorites, and featured content",
+      "category": "Actions",
+      "tags": ["rating", "favorite", "featured", "important", "review", "rank", "award", "quality"]
+    },
+    "bookmark": {
+      "label": "Bookmark",
+      "description": "Bookmark ribbon with V-notch for saving and bookmarking content",
+      "category": "Actions",
+      "tags": ["save", "bookmark", "ribbon", "flag", "mark", "read later", "collection", "pin"]
+    },
+    "cloud-rain": {
+      "label": "Cloud Rain",
+      "description": "Cloud with rain drops falling beneath for rainy weather and precipitation",
+      "category": "Weather",
+      "tags": ["rain", "cloud", "weather", "storm", "precipitation", "drizzle", "wet", "forecast"]
+    },
+    "cloud-snow": {
+      "label": "Cloud Snow",
+      "description": "Cloud with snowflakes falling beneath for snowy weather and winter conditions",
+      "category": "Weather",
+      "tags": ["snow", "cloud", "weather", "winter", "snowflake", "cold", "frost", "blizzard", "forecast"]
+    },
+    "lightning": {
+      "label": "Lightning",
+      "description": "Zigzag lightning bolt for storms, electricity, and power",
+      "category": "Weather",
+      "tags": ["bolt", "thunder", "storm", "electricity", "power", "energy", "flash", "weather", "zap"]
+    },
+    "wind": {
+      "label": "Wind",
+      "description": "Curved horizontal lines suggesting airflow and breeze",
+      "category": "Weather",
+      "tags": ["breeze", "air", "blow", "gust", "weather", "flow", "windy", "forecast"]
+    },
+    "thermometer": {
+      "label": "Thermometer",
+      "description": "Vertical thermometer tube with bulb for temperature measurement",
+      "category": "Weather",
+      "tags": ["temperature", "heat", "cold", "degrees", "celsius", "fahrenheit", "weather", "climate", "forecast"]
+    },
+    "droplet": {
+      "label": "Droplet",
+      "description": "Water droplet teardrop shape for humidity, rain, and liquid",
+      "category": "Weather",
+      "tags": ["water", "rain", "liquid", "humidity", "tear", "drop", "moisture", "weather", "hydration"]
+    },
+    "clock": {
+      "label": "Clock",
+      "description": "Clock face with hour and minute hands for time display and scheduling",
+      "category": "System",
+      "tags": ["time", "hour", "minute", "watch", "schedule", "deadline", "duration"]
+    },
+    "timer": {
+      "label": "Timer",
+      "description": "Countdown timer with top button and single hand for timed actions",
+      "category": "System",
+      "tags": ["countdown", "stopwatch", "time", "elapsed", "duration", "interval", "timeout"]
+    },
+    "calendar": {
+      "label": "Calendar",
+      "description": "Calendar page with binding rings and date grid for scheduling and events",
+      "category": "System",
+      "tags": ["date", "schedule", "event", "month", "day", "appointment", "planner", "agenda"]
+    },
+    "compass": {
+      "label": "Compass",
+      "description": "Compass with directional needle for orientation and navigation",
+      "category": "Navigation",
+      "tags": ["direction", "orientation", "north", "needle", "navigate", "explore", "wayfinding"]
+    },
+    "map": {
+      "label": "Map",
+      "description": "Folded map with fold lines and pin marker for geography and directions",
+      "category": "Navigation",
+      "tags": ["geography", "directions", "folded", "territory", "atlas", "route", "travel", "pin"]
+    },
+    "map-pin": {
+      "label": "Map Pin",
+      "description": "Inverted teardrop location pin with dot for marking places on a map",
+      "category": "Navigation",
+      "tags": ["location", "place", "marker", "pin", "drop", "point", "gps", "address"]
+    },
+    "hourglass": {
+      "label": "Hourglass",
+      "description": "Hourglass with sand for time passing, waiting, and loading states",
+      "category": "System",
+      "tags": ["time", "wait", "loading", "sand", "timer", "pending", "patience", "countdown"]
+    },
+    "alarm": {
+      "label": "Alarm",
+      "description": "Alarm clock with bell domes for alarms, reminders, and wake-up actions",
+      "category": "System",
+      "tags": ["clock", "alarm", "wake", "reminder", "morning", "ring", "alert", "schedule"]
+    },
+    "stopwatch": {
+      "label": "Stopwatch",
+      "description": "Stopwatch with stem button and sweep hand for timing and performance tracking",
+      "category": "System",
+      "tags": ["timer", "timing", "lap", "speed", "performance", "race", "elapsed", "measure"]
+    },
+    "car": {
+      "label": "Car",
+      "description": "Side-view sedan silhouette with windows and wheels for vehicle and driving actions",
+      "category": "Transport",
+      "tags": ["vehicle", "sedan", "automobile", "drive", "travel", "road", "commute", "parking"]
+    },
+    "truck": {
+      "label": "Truck",
+      "description": "Delivery box truck with cab and cargo area for shipping and logistics",
+      "category": "Transport",
+      "tags": ["delivery", "shipping", "cargo", "freight", "logistics", "transport", "hauling", "van"]
+    },
+    "bus": {
+      "label": "Bus",
+      "description": "Rectangular bus body with windows and wheels for public transit and group travel",
+      "category": "Transport",
+      "tags": ["transit", "public transport", "coach", "commute", "passenger", "shuttle", "ride", "travel"]
+    },
+    "navigation": {
+      "label": "Navigation",
+      "description": "Diamond-shaped arrow pointing up like a compass cursor for direction and navigation",
+      "category": "Navigation",
+      "tags": ["arrow", "cursor", "compass", "direction", "pointer", "gps", "heading", "wayfinding"]
+    },
+    "globe": {
+      "label": "Globe",
+      "description": "Globe with latitude and longitude lines for world, international, and web",
+      "category": "Navigation",
+      "tags": ["earth", "world", "international", "web", "internet", "planet", "language", "global"]
+    },
+    "route": {
+      "label": "Route",
+      "description": "Winding S-curve path with dots at start and end for routes and directions",
+      "category": "Navigation",
+      "tags": ["path", "directions", "way", "journey", "trip", "road", "travel", "waypoint"]
+    },
+    "train": {
+      "label": "Train",
+      "description": "Front-view train locomotive with windshield and wheels on track for rail travel",
+      "category": "Transport",
+      "tags": ["locomotive", "rail", "railway", "subway", "metro", "transit", "commute", "travel"]
+    },
+    "plane": {
+      "label": "Plane",
+      "description": "Top-down airplane silhouette with wings and tail for flights and air travel",
+      "category": "Transport",
+      "tags": ["airplane", "flight", "aviation", "air travel", "airport", "jet", "fly", "travel"]
+    },
+    "ship": {
+      "label": "Ship",
+      "description": "Boat hull on water with cabin and smokestack for maritime and sea travel",
+      "category": "Transport",
+      "tags": ["boat", "vessel", "maritime", "sea", "ocean", "cruise", "ferry", "sailing", "travel"]
+    },
+    "bicycle": {
+      "label": "Bicycle",
+      "description": "Two-wheeled bicycle with frame, handlebars, and seat for cycling and eco transport",
+      "category": "Transport",
+      "tags": ["bike", "cycle", "pedal", "ride", "cycling", "eco", "exercise", "two-wheeler"]
+    },
+    "rocket": {
+      "label": "Rocket",
+      "description": "Rocket ship with pointed nose, fins, and thrust flame for launch and space actions",
+      "category": "Transport",
+      "tags": ["launch", "space", "ship", "spacecraft", "boost", "startup", "takeoff", "missile"]
+    },
+    "helicopter": {
+      "label": "Helicopter",
+      "description": "Helicopter with rotor blades and tail for aviation and aerial transport",
+      "category": "Transport",
+      "tags": ["chopper", "rotor", "aviation", "flight", "aerial", "aircraft", "heli", "copter"]
     }
   }
 }

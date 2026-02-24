@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Roc OG Image</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0a0a0b;
+    color: #ededef;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* Subtle grid texture */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(94, 106, 210, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(94, 106, 210, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 60% at 70% 50%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 50%, black 20%, transparent 70%);
+  }
+
+  /* Accent glow behind the roc */
+  .glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: 60px;
+    top: 115px;
+    background: radial-gradient(circle, rgba(94, 106, 210, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    padding: 72px 80px;
+    gap: 72px;
+  }
+
+  /* Left: Roc bird + branding */
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 420px;
+  }
+
+  .roc-icon {
+    width: 80px;
+    height: 80px;
+    color: #5e6ad2;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8b8b90;
+    line-height: 1.5;
+  }
+
+  .stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #5c5c63;
+  }
+  .stat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+  }
+  .stat-accent {
+    color: #5e6ad2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Right: icon showcase grid */
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-showcase {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid #222226;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .showcase-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 12px 16px;
+    background: #0a0a0b;
+    color: #ededef;
+  }
+  .showcase-cell svg { flex-shrink: 0; }
+  .showcase-cell .cell-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #5c5c63;
+    text-align: center;
+  }
+
+  /* Accent row to show duotone/solid variety */
+  .showcase-cell.accent { color: #5e6ad2; }
+  .showcase-cell.muted { color: #8b8b90; }
+
+  /* Style labels row */
+  .style-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 2px;
+  }
+  .style-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #5c5c63;
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  /* Bottom border accent */
+  .bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #5e6ad2, #6e7ae2 30%, transparent 70%);
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow"></div>
+
+<div class="content">
+  <div class="left">
+    <svg class="roc-icon" viewBox="0 0 24 24" fill="none">
+      <path d="M20 10C18 7 14 4.5 10 4C7 3.5 4.5 4 3.5 5.5C4 6.5 5.5 7 7.5 7.5C6 10 5 13 5 16C5 18.5 6.5 19 8 17.5C10.5 15 14.5 13.5 17.5 13C19.5 12.5 20.5 11.5 20 10Z" fill="rgba(94, 106, 210, 0.15)" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="13.5" cy="6.5" r="0.75" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <div class="title">Roc Icons</div>
+    <div class="subtitle">Hand-crafted SVG icons in four styles. Built for React and Svelte.</div>
+    <div class="stats">
+      <span class="stat"><span class="stat-dot"></span> <span class="stat-accent">54</span> icons</span>
+      <span class="stat"><span class="stat-accent">4</span> styles</span>
+      <span class="stat"><span class="stat-accent">5</span> sizes</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div>
+      <div class="style-labels">
+        <span class="style-label">Outline</span>
+        <span class="style-label">Solid</span>
+        <span class="style-label">Duotone</span>
+        <span class="style-label">Sharp</span>
+      </div>
+      <div class="icon-showcase">
+        <!-- Row 1: Home -->
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3.5 10.25v9.25a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.25h4.5a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cell-label">Home</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12.39 2.6a.6.6 0 0 0-.78 0L3.36 9.48a1.5 1.5 0 0 0-.53 1.12v8.9a1.5 1.5 0 0 0 1.5 1.5H9.5v-6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6h5.17a1.5 1.5 0 0 0 1.5-1.5v-8.9a1.5 1.5 0 0 0-.53-1.14z" fill="currentColor"/></svg>
+          <span class="cell-label">Home</span>
+        </div>
+        <div class="showcase-cell accent">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3.5 10.25v9.25a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77" fill="rgba(94,106,210,0.15)"/><path d="M3.5 10.25v9.25a1 1 0 0 0 1 1H9v-5.25a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.25h4.5a1 1 0 0 0 1-1v-9.25a1 1 0 0 0-.36-.77L12.39 3.1a.6.6 0 0 0-.78 0L3.86 9.48a1 1 0 0 0-.36.77" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cell-label">Home</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 10.5V21h6.5v-6h5v6H21V10.5L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/></svg>
+          <span class="cell-label">Home</span>
+        </div>
+
+        <!-- Row 2: Bell -->
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Bell</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 10a7 7 0 0 1 14 0v2.5c0 1.3.4 2.2 1.2 3 .3.3.1.8-.3.8H4.1c-.4 0-.6-.5-.3-.8.8-.8 1.2-1.7 1.2-3z" fill="currentColor"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Bell</span>
+        </div>
+        <div class="showcase-cell accent">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z" fill="rgba(94,106,210,0.15)"/><path d="M5.5 10A6.5 6.5 0 0 1 12 3.5a6.5 6.5 0 0 1 6.5 6.5v2.5c0 1.5.5 2.5 1.5 3.5H4c1-1 1.5-2 1.5-3.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Bell</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 10c0-3.87 3.13-7 7-7s7 3.13 7 7v6H5z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/><path d="M3 16h18M9 19h6" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="cell-label">Bell</span>
+        </div>
+
+        <!-- Row 3: Chart -->
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7 17v-4m5 4V9m5 8V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Chart</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 2.5A1.5 1.5 0 0 0 2.5 4v16A1.5 1.5 0 0 0 4 21.5h16a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 20 2.5zM6.25 13a.75.75 0 0 1 1.5 0v4a.75.75 0 0 1-1.5 0zm5-4a.75.75 0 0 1 1.5 0v8a.75.75 0 0 1-1.5 0zm5-2.25a.75.75 0 0 1 1.5 0V17a.75.75 0 0 1-1.5 0z" fill="currentColor"/></svg>
+          <span class="cell-label">Chart</span>
+        </div>
+        <div class="showcase-cell accent">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="1" fill="rgba(94,106,210,0.15)"/><rect x="3" y="3" width="18" height="18" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7 17v-4m5 4V9m5 8V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Chart</span>
+        </div>
+        <div class="showcase-cell">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3zM7 17v-4m5 4V8m5 9V6" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="cell-label">Chart</span>
+        </div>
+
+        <!-- Row 4: Settings -->
+        <div class="showcase-cell muted">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Settings</span>
+        </div>
+        <div class="showcase-cell muted">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><rect width="2" height="3.5" x="11" y="1.5" fill="currentColor" rx="1"/><rect width="2" height="3.5" x="11" y="19" fill="currentColor" rx="1"/><rect width="3.5" height="2" x="1.5" y="11" fill="currentColor" rx="1"/><rect width="3.5" height="2" x="19" y="11" fill="currentColor" rx="1"/><rect width="2" height="3.5" x="4.6" y="3.87" fill="currentColor" rx="1" transform="rotate(-45 4.6 3.87)"/><rect width="2" height="3.5" x="16.49" y="15.76" fill="currentColor" rx="1" transform="rotate(-45 16.49 15.76)"/><rect width="2" height="3.5" x="3.87" y="17.93" fill="currentColor" rx="1" transform="rotate(-135 3.87 17.93)"/><rect width="2" height="3.5" x="15.76" y="6.04" fill="currentColor" rx="1" transform="rotate(-135 15.76 6.04)"/></svg>
+          <span class="cell-label">Settings</span>
+        </div>
+        <div class="showcase-cell muted">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="rgba(94,106,210,0.15)" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="cell-label">Settings</span>
+        </div>
+        <div class="showcase-cell muted">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M8.5 8.5h7v7h-7zM12 2v4m0 12v4M2 12h4m12 0h4M5.64 5.64l2.83 2.83m7.07 7.07 2.83 2.83m-12.73-.01 2.83-2.83m7.07-7.07 2.83-2.83" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span class="cell-label">Settings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-line"></div>
+
+</body>
+</html>

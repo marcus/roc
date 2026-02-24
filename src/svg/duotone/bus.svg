@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M4 5.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2V17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5.5Z" fill="var(--color-duotone-fill)"/>
+  <path d="M4 5.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2V17a1 1 0 0 1-1 1h-1.05a2.5 2.5 0 0 1-4.9 0h-2.1a2.5 2.5 0 0 1-4.9 0H5a1 1 0 0 1-1-1V5.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M4 14h16" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M4 8h16" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8.5 8v6M15.5 8v6" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="8" cy="18" r="1.25" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="16" cy="18" r="1.25" stroke="currentColor" stroke-width="1.5"/>
+</svg>
