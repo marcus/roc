@@ -10,7 +10,11 @@
     "Files",
     "Media",
     "Weather",
-    "Transport"
+    "Transport",
+    "Commerce",
+    "Development",
+    "Devices",
+    "Objects"
   ],
   "icons": {
     "home": {
@@ -696,6 +700,492 @@
       "description": "Helicopter with rotor blades and tail for aviation and aerial transport",
       "category": "Transport",
       "tags": ["chopper", "rotor", "aviation", "flight", "aerial", "aircraft", "heli", "copter"]
+    },
+    "shopping-cart": {
+      "label": "Shopping Cart",
+      "description": "Shopping cart with wheels and handle for e-commerce and retail actions",
+      "category": "Commerce",
+      "tags": ["cart", "shop", "buy", "purchase", "retail", "ecommerce", "checkout", "basket"]
+    },
+    "shopping-bag": {
+      "label": "Shopping Bag",
+      "description": "Shopping bag with handles for purchases and retail",
+      "category": "Commerce",
+      "tags": ["bag", "shop", "buy", "purchase", "retail", "ecommerce", "store", "tote"]
+    },
+    "credit-card": {
+      "label": "Credit Card",
+      "description": "Credit or debit card with stripe and chip for payments and billing",
+      "category": "Commerce",
+      "tags": ["payment", "card", "debit", "billing", "bank", "finance", "transaction", "money"]
+    },
+    "receipt": {
+      "label": "Receipt",
+      "description": "Tall receipt with zigzag bottom edge and text lines for bills and transactions",
+      "category": "Commerce",
+      "tags": ["bill", "invoice", "transaction", "purchase", "paper", "total", "checkout", "payment"]
+    },
+    "wallet": {
+      "label": "Wallet",
+      "description": "Folded billfold wallet with card slot for payments and personal finance",
+      "category": "Commerce",
+      "tags": ["billfold", "money", "cash", "payment", "finance", "pocket", "purse", "funds"]
+    },
+    "coins": {
+      "label": "Coins",
+      "description": "Two overlapping coins for currency, money, and financial transactions",
+      "category": "Commerce",
+      "tags": ["money", "currency", "cash", "change", "finance", "token", "penny", "stack"]
+    },
+    "tag": {
+      "label": "Tag",
+      "description": "Price or label tag with hole for pricing, labels, and categorization",
+      "category": "Commerce",
+      "tags": ["price", "label", "sale", "discount", "category", "mark", "ticket", "offer"]
+    },
+    "percent": {
+      "label": "Percent",
+      "description": "Percent symbol with two circles and diagonal line for discounts and rates",
+      "category": "Commerce",
+      "tags": ["discount", "rate", "percentage", "sale", "off", "ratio", "interest", "savings"]
+    },
+    "gift": {
+      "label": "Gift",
+      "description": "Gift box with ribbon and bow for presents, rewards, and promotions",
+      "category": "Commerce",
+      "tags": ["present", "box", "ribbon", "reward", "surprise", "promotion", "wrap", "birthday"]
+    },
+    "lock": {
+      "label": "Lock",
+      "description": "Closed padlock with shackle for security, authentication, and restricted access",
+      "category": "System",
+      "tags": ["padlock", "security", "locked", "password", "private", "restricted", "authentication", "encrypt"]
+    },
+    "unlock": {
+      "label": "Unlock",
+      "description": "Open padlock with lifted shackle for unlocked, accessible, and public states",
+      "category": "System",
+      "tags": ["padlock", "open", "unlocked", "accessible", "public", "decrypt", "unsecure", "free"]
+    },
+    "shield": {
+      "label": "Shield",
+      "description": "Shield shape for protection, security, and trust indicators",
+      "category": "System",
+      "tags": ["protection", "security", "defense", "guard", "safe", "trust", "armor", "verified"]
+    },
+    "key": {
+      "label": "Key",
+      "description": "Key with circular bow and toothed shaft for authentication and access",
+      "category": "System",
+      "tags": ["password", "access", "authentication", "unlock", "login", "credential", "security", "encrypt"]
+    },
+    "fingerprint": {
+      "label": "Fingerprint",
+      "description": "Fingerprint pattern with concentric curved lines for biometric identification",
+      "category": "System",
+      "tags": ["biometric", "identity", "scan", "touch", "authentication", "sensor", "verify", "unique"]
+    },
+    "eye": {
+      "label": "Eye",
+      "description": "Almond-shaped eye with iris for visibility, viewing, and show/hide actions",
+      "category": "System",
+      "tags": ["visible", "view", "show", "watch", "see", "visibility", "preview", "reveal"]
+    },
+    "eye-off": {
+      "label": "Eye Off",
+      "description": "Almond-shaped eye with diagonal slash for hidden, invisible, and password hide actions",
+      "category": "System",
+      "tags": ["hidden", "invisible", "hide", "blind", "private", "password", "conceal", "off"]
+    },
+    "shield-check": {
+      "label": "Shield Check",
+      "description": "Shield with checkmark inside for verified security, protection confirmed, and trust",
+      "category": "System",
+      "tags": ["security", "verified", "protected", "safe", "check", "trust", "approved", "guard"]
+    },
+    "scan": {
+      "label": "Scan",
+      "description": "Four corner brackets forming a scanning frame for QR codes, barcodes, and capture",
+      "category": "System",
+      "tags": ["qr", "barcode", "capture", "scanner", "frame", "viewfinder", "camera", "detect"]
+    },
+    "code": {
+      "label": "Code",
+      "description": "Angle brackets with forward slash for code, markup, and programming",
+      "category": "Development",
+      "tags": ["brackets", "markup", "html", "programming", "developer", "source", "syntax", "tags"]
+    },
+    "terminal": {
+      "label": "Terminal",
+      "description": "Console window with prompt character for command-line and shell interfaces",
+      "category": "Development",
+      "tags": ["console", "command line", "shell", "cli", "prompt", "bash", "cmd", "developer"]
+    },
+    "bug": {
+      "label": "Bug",
+      "description": "Insect with legs and antennae for software bugs, debugging, and issue tracking",
+      "category": "Development",
+      "tags": ["insect", "debug", "error", "issue", "defect", "fix", "testing", "qa"]
+    },
+    "git-branch": {
+      "label": "Git Branch",
+      "description": "Vertical line with forking branch and node circles for version control branching",
+      "category": "Development",
+      "tags": ["git", "branch", "fork", "version control", "vcs", "repository", "diverge", "feature"]
+    },
+    "git-commit": {
+      "label": "Git Commit",
+      "description": "Horizontal line with circle node in the center for version control commits",
+      "category": "Development",
+      "tags": ["git", "commit", "node", "version control", "vcs", "snapshot", "save", "checkpoint"]
+    },
+    "git-merge": {
+      "label": "Git Merge",
+      "description": "Two converging lines with node circles for version control merge operations",
+      "category": "Development",
+      "tags": ["git", "merge", "converge", "version control", "vcs", "combine", "join", "pull request"]
+    },
+    "cpu": {
+      "label": "CPU",
+      "description": "Processor chip with pins on all four sides and inner die for computing and hardware",
+      "category": "Devices",
+      "tags": ["processor", "chip", "hardware", "computing", "microchip", "silicon", "core", "server"]
+    },
+    "hard-drive": {
+      "label": "Hard Drive",
+      "description": "Hard disk drive with divider and indicator dot for storage and data",
+      "category": "Devices",
+      "tags": ["storage", "disk", "hdd", "ssd", "data", "drive", "save", "backup"]
+    },
+    "memory": {
+      "label": "Memory",
+      "description": "RAM memory stick with pins for system memory and performance",
+      "category": "Devices",
+      "tags": ["ram", "memory stick", "dimm", "hardware", "performance", "upgrade", "module", "ddr"]
+    },
+    "git-pull-request": {
+      "label": "Git Pull Request",
+      "description": "Branch with arrow and merge circles for pull request and code review workflows",
+      "category": "Development",
+      "tags": ["git", "pull request", "pr", "review", "merge", "version control", "vcs", "branch", "contribute"]
+    },
+    "database": {
+      "label": "Database",
+      "description": "Stacked cylinders for databases, data storage, and persistent data layers",
+      "category": "Development",
+      "tags": ["database", "db", "storage", "sql", "data", "cylinder", "schema", "table", "backend"]
+    },
+    "server": {
+      "label": "Server",
+      "description": "Stacked rack units with indicator dots for servers and infrastructure",
+      "category": "Development",
+      "tags": ["server", "rack", "hosting", "infrastructure", "backend", "api", "compute", "deploy", "machine"]
+    },
+    "upload": {
+      "label": "Upload",
+      "description": "Upward arrow with horizontal base line for uploading files and content",
+      "category": "Actions",
+      "tags": ["upload", "up", "arrow", "send", "transfer", "file", "export", "publish"]
+    },
+    "download": {
+      "label": "Download",
+      "description": "Downward arrow with horizontal base line for downloading files and content",
+      "category": "Actions",
+      "tags": ["download", "down", "arrow", "receive", "transfer", "file", "import", "save"]
+    },
+    "share": {
+      "label": "Share",
+      "description": "Connected nodes branching outward for sharing and distributing content",
+      "category": "Actions",
+      "tags": ["share", "network", "distribute", "connect", "social", "forward", "spread", "link"]
+    },
+    "cloud-upload": {
+      "label": "Cloud Upload",
+      "description": "Cloud with upward arrow for uploading files to cloud storage",
+      "category": "System",
+      "tags": ["cloud", "upload", "storage", "backup", "sync", "transfer", "send", "save"]
+    },
+    "cloud-download": {
+      "label": "Cloud Download",
+      "description": "Cloud with downward arrow for downloading files from cloud storage",
+      "category": "System",
+      "tags": ["cloud", "download", "storage", "retrieve", "sync", "transfer", "receive", "fetch"]
+    },
+    "cloud-off": {
+      "label": "Cloud Off",
+      "description": "Cloud with diagonal strike-through for offline or disconnected state",
+      "category": "System",
+      "tags": ["cloud", "offline", "disconnected", "disabled", "no connection", "unavailable", "sync off"]
+    },
+    "maximize": {
+      "label": "Maximize",
+      "description": "Outward-pointing arrows at corners for fullscreen and expand actions",
+      "category": "Actions",
+      "tags": ["expand", "fullscreen", "enlarge", "resize", "grow", "window", "scale", "maximize"]
+    },
+    "minimize": {
+      "label": "Minimize",
+      "description": "Horizontal line for minimize, collapse, and reduce actions",
+      "category": "Actions",
+      "tags": ["collapse", "reduce", "shrink", "minus", "dash", "window", "hide", "minimize"]
+    },
+    "x": {
+      "label": "Close",
+      "description": "Two diagonal crossing lines for close, dismiss, and cancel actions",
+      "category": "Actions",
+      "tags": ["close", "dismiss", "cancel", "delete", "remove", "cross", "exit", "clear"]
+    },
+    "link": {
+      "label": "Link",
+      "description": "Two interlocking chain links at an angle for URLs, hyperlinks, and connections",
+      "category": "Actions",
+      "tags": ["chain", "url", "hyperlink", "connection", "attach", "anchor", "href", "web"]
+    },
+    "external-link": {
+      "label": "External Link",
+      "description": "Square with arrow pointing to top-right for opening links in new windows or external navigation",
+      "category": "Actions",
+      "tags": ["open", "new window", "new tab", "external", "redirect", "outbound", "launch", "url"]
+    },
+    "unlink": {
+      "label": "Unlink",
+      "description": "Broken chain link halves with break indicators for disconnecting and removing links",
+      "category": "Actions",
+      "tags": ["chain", "broken", "disconnect", "detach", "remove link", "unchain", "separate", "break"]
+    },
+    "columns": {
+      "label": "Columns",
+      "description": "Two vertical columns side by side for column-based layouts and split views",
+      "category": "System",
+      "tags": ["layout", "vertical", "split", "side by side", "grid", "panel", "view", "arrange"]
+    },
+    "rows": {
+      "label": "Rows",
+      "description": "Two horizontal rows stacked for row-based layouts and stacked views",
+      "category": "System",
+      "tags": ["layout", "horizontal", "stack", "stacked", "grid", "panel", "view", "arrange"]
+    },
+    "table": {
+      "label": "Table",
+      "description": "Data table with grid lines forming rows and columns for structured data display",
+      "category": "System",
+      "tags": ["grid", "data", "spreadsheet", "database", "matrix", "cells", "rows", "columns"]
+    },
+    "sidebar": {
+      "label": "Sidebar",
+      "description": "Rectangle split vertically with narrow left panel for sidebar navigation layouts",
+      "category": "System",
+      "tags": ["panel", "navigation", "drawer", "menu", "aside", "split", "layout", "pane"]
+    },
+    "layout": {
+      "label": "Layout",
+      "description": "Dashboard layout with rectangle divided into unequal panels for page structure",
+      "category": "System",
+      "tags": ["dashboard", "template", "grid", "panels", "structure", "page", "columns", "rows"]
+    },
+    "grid": {
+      "label": "Grid",
+      "description": "Three-by-three grid of equal squares for grid views and gallery layouts",
+      "category": "System",
+      "tags": ["squares", "tiles", "gallery", "matrix", "mosaic", "table", "cells", "view"]
+    },
+    "plus": {
+      "label": "Plus",
+      "description": "Plus sign for add and create actions",
+      "category": "Actions",
+      "tags": ["add", "create", "new", "increase", "expand", "positive", "cross"]
+    },
+    "minus": {
+      "label": "Minus",
+      "description": "Minus sign for remove and subtract actions",
+      "category": "Actions",
+      "tags": ["remove", "subtract", "decrease", "reduce", "delete", "negative"]
+    },
+    "check": {
+      "label": "Check",
+      "description": "Checkmark for confirmation, completion, and success states",
+      "category": "Actions",
+      "tags": ["tick", "done", "complete", "confirm", "approve", "success", "verified"]
+    },
+    "x-circle": {
+      "label": "X Circle",
+      "description": "X mark inside a circle for close, cancel, and error actions",
+      "category": "Actions",
+      "tags": ["close", "cancel", "error", "dismiss", "remove", "delete", "circle", "cross", "reject"]
+    },
+    "check-circle": {
+      "label": "Check Circle",
+      "description": "Checkmark inside a circle for success, confirmation, and completion actions",
+      "category": "Actions",
+      "tags": ["check", "success", "confirm", "complete", "done", "approve", "circle", "verify", "valid"]
+    },
+    "plus-circle": {
+      "label": "Plus Circle",
+      "description": "Plus symbol inside a circle for add, create, and new item actions",
+      "category": "Actions",
+      "tags": ["add", "create", "new", "plus", "circle", "insert", "expand", "increase", "positive"]
+    },
+    "refresh": {
+      "label": "Refresh",
+      "description": "Circular arrows for refresh, reload, and sync actions",
+      "category": "Actions",
+      "tags": ["reload", "sync", "update", "renew", "restart", "circular", "arrows"]
+    },
+    "rotate": {
+      "label": "Rotate",
+      "description": "Circular arrow for rotation, orientation, and undo actions",
+      "category": "Actions",
+      "tags": ["rotation", "turn", "spin", "orientation", "undo", "circular", "arrow", "revert"]
+    },
+    "repeat": {
+      "label": "Repeat",
+      "description": "Two arrows forming a loop for repeat, cycle, and playback loop actions",
+      "category": "Actions",
+      "tags": ["loop", "cycle", "replay", "recycle", "again", "arrows", "continuous", "playback"]
+    },
+    "copy": {
+      "label": "Copy",
+      "description": "Two overlapping rectangles for copying content to clipboard",
+      "category": "Actions",
+      "tags": ["duplicate", "clipboard", "clone", "replicate", "two", "rectangles", "copy"]
+    },
+    "cut": {
+      "label": "Cut",
+      "description": "Scissors with crossing blades and finger holes for cutting content",
+      "category": "Actions",
+      "tags": ["scissors", "snip", "trim", "clip", "remove", "move", "blade"]
+    },
+    "paste": {
+      "label": "Paste",
+      "description": "Clipboard with paper being placed for pasting copied content",
+      "category": "Actions",
+      "tags": ["clipboard", "insert", "place", "content", "board", "document", "paste"]
+    },
+    "undo": {
+      "label": "Undo",
+      "description": "Curved arrow pointing left for undoing the previous action",
+      "category": "Actions",
+      "tags": ["back", "revert", "reverse", "cancel", "arrow", "left", "previous", "ctrl-z"]
+    },
+    "redo": {
+      "label": "Redo",
+      "description": "Curved arrow pointing right for redoing a previously undone action",
+      "category": "Actions",
+      "tags": ["forward", "repeat", "restore", "arrow", "right", "next", "ctrl-y"]
+    },
+    "history": {
+      "label": "History",
+      "description": "Clock face with counter-clockwise arrow for browsing past actions or events",
+      "category": "Actions",
+      "tags": ["clock", "time", "past", "log", "timeline", "recent", "activity", "changelog"]
+    },
+    "power": {
+      "label": "Power",
+      "description": "Power button symbol with circle and vertical line break for on/off toggle",
+      "category": "Devices",
+      "tags": ["on", "off", "toggle", "shutdown", "standby", "switch", "button", "energy"]
+    },
+    "battery": {
+      "label": "Battery",
+      "description": "Battery with charge level indicator for power and energy status",
+      "category": "Devices",
+      "tags": ["charge", "energy", "power", "level", "capacity", "cell", "status"]
+    },
+    "battery-charging": {
+      "label": "Battery Charging",
+      "description": "Battery with lightning bolt indicating active charging state",
+      "category": "Devices",
+      "tags": ["charge", "charging", "energy", "power", "lightning", "bolt", "electric", "plugged"]
+    },
+    "monitor": {
+      "label": "Monitor",
+      "description": "Desktop monitor display on a stand for screens and workstations",
+      "category": "Devices",
+      "tags": ["desktop", "display", "screen", "computer", "workstation", "tv", "television", "lcd"]
+    },
+    "smartphone": {
+      "label": "Smartphone",
+      "description": "Smartphone with notch indicator for mobile devices and apps",
+      "category": "Devices",
+      "tags": ["phone", "mobile", "cell", "device", "app", "ios", "android", "handheld"]
+    },
+    "tablet": {
+      "label": "Tablet",
+      "description": "Tablet device with home indicator for tablets and touch interfaces",
+      "category": "Devices",
+      "tags": ["ipad", "device", "touch", "screen", "portable", "slate", "reader", "pad"]
+    },
+    "wifi": {
+      "label": "WiFi",
+      "description": "Wireless signal with concentric arcs radiating from a center point",
+      "category": "Devices",
+      "tags": ["wireless", "internet", "network", "connection", "signal", "radio", "hotspot"]
+    },
+    "bluetooth": {
+      "label": "Bluetooth",
+      "description": "Bluetooth rune symbol for short-range wireless connectivity",
+      "category": "Devices",
+      "tags": ["wireless", "pairing", "connection", "device", "rune", "transfer", "sync"]
+    },
+    "signal": {
+      "label": "Signal",
+      "description": "Ascending signal strength bars for connectivity and reception status",
+      "category": "Devices",
+      "tags": ["bars", "strength", "reception", "cellular", "mobile", "connectivity", "network", "coverage"]
+    },
+    "keyboard": {
+      "label": "Keyboard",
+      "description": "Computer keyboard with key grid and spacebar for input and typing",
+      "category": "Devices",
+      "tags": ["type", "input", "keys", "hardware", "peripheral", "computer", "typing"]
+    },
+    "mouse": {
+      "label": "Mouse",
+      "description": "Computer mouse with scroll wheel and click buttons for pointing and input",
+      "category": "Devices",
+      "tags": ["click", "pointer", "cursor", "hardware", "peripheral", "computer", "scroll"]
+    },
+    "printer": {
+      "label": "Printer",
+      "description": "Desktop printer with paper tray and output slot for printing documents",
+      "category": "Devices",
+      "tags": ["print", "paper", "document", "hardware", "peripheral", "output", "office"]
+    },
+    "usb": {
+      "label": "USB",
+      "description": "USB connector plug with internal contacts for data and power connections",
+      "category": "Devices",
+      "tags": ["connector", "plug", "port", "cable", "data", "transfer", "charging", "peripheral"]
+    },
+    "speaker": {
+      "label": "Speaker",
+      "description": "Speaker cone with sound waves for audio output and volume",
+      "category": "Devices",
+      "tags": ["audio", "sound", "volume", "music", "output", "loud", "cone", "media"]
+    },
+    "webcam": {
+      "label": "Webcam",
+      "description": "Webcam with circular lens on a stand for video capture",
+      "category": "Devices",
+      "tags": ["camera", "video", "lens", "conference", "streaming", "recording", "call", "meeting"]
+    },
+    "circle": {
+      "label": "Circle",
+      "description": "Simple circle shape for generic use and decoration",
+      "category": "Objects",
+      "tags": ["round", "shape", "dot", "ring", "geometric", "basic"]
+    },
+    "square": {
+      "label": "Square",
+      "description": "Simple square shape with rounded corners",
+      "category": "Objects",
+      "tags": ["rectangle", "shape", "box", "block", "geometric", "basic"]
+    },
+    "triangle": {
+      "label": "Triangle",
+      "description": "Equilateral triangle pointing upward",
+      "category": "Objects",
+      "tags": ["shape", "arrow", "geometric", "basic", "polygon", "point"]
     }
   }
 }
