@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <ellipse cx="7.5" cy="6.5" rx="2" ry="2.5" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="12" cy="5" rx="1.75" ry="2.25" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="16.5" cy="6.5" rx="2" ry="2.5" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="19" cy="11.5" rx="1.5" ry="2" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="5" cy="11.5" rx="1.5" ry="2" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8 14.5C7 16 6.75 17.5 7.5 19c.75 1.25 2 1.75 3.25 1.5.75-.25 1-1 1.25-1.5.25-.5.75-.75 1.25-.5.5.25.75.75 1 1.25.5.75 1.25 1.25 2.25 1 1.25-.5 2-1.5 2.25-3C19 15.5 17.5 14 16 14.5c-1 .25-2.25.25-3.25.25S10 14.75 9 14.5C8.5 14.25 8.25 14.25 8 14.5Z" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

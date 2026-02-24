@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <ellipse cx="12" cy="7" rx="2.25" ry="3.25" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="16.76" cy="10.45" rx="2.25" ry="3.25" transform="rotate(72 16.76 10.45)" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="14.94" cy="16.05" rx="2.25" ry="3.25" transform="rotate(144 14.94 16.05)" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="9.06" cy="16.05" rx="2.25" ry="3.25" transform="rotate(216 9.06 16.05)" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="7.24" cy="10.45" rx="2.25" ry="3.25" transform="rotate(288 7.24 10.45)" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="12" cy="7" rx="2.25" ry="3.25" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="16.76" cy="10.45" rx="2.25" ry="3.25" transform="rotate(72 16.76 10.45)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="14.94" cy="16.05" rx="2.25" ry="3.25" transform="rotate(144 14.94 16.05)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="9.06" cy="16.05" rx="2.25" ry="3.25" transform="rotate(216 9.06 16.05)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="7.24" cy="10.45" rx="2.25" ry="3.25" transform="rotate(288 7.24 10.45)" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="12" cy="12" r="2.5" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+</svg>

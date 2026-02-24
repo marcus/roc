@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="5" fill="var(--color-duotone-fill)"/>
+  <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M8.46 15.54a5 5 0 0 1 0-7.07" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M5.64 18.36a9 9 0 0 1 0-12.73" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M18.36 5.64a9 9 0 0 1 0 12.73" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

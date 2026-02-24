@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M20.88 2.91a.75.75 0 0 0-1.04-.22l-5.5 3.66a.75.75 0 0 0 .82 1.26l5.5-3.66a.75.75 0 0 0 .22-1.04Z" fill="currentColor"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.21 5.92a1.5 1.5 0 0 0-2.08.44l-7.2 4.72a1.5 1.5 0 0 0-.44 2.08l1.7 2.6a1.5 1.5 0 0 0 2.08.44l7.2-4.72a1.5 1.5 0 0 0 .44-2.08l-1.7-2.6ZM11 10a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" fill="currentColor"/>
+  <path d="M10.41 15.17a.75.75 0 0 0-1.38-.02l-2.75 6.5a.75.75 0 0 0 1.38.59l2.75-6.5v-.57Z" fill="currentColor"/>
+  <path d="M11.59 15.17a.75.75 0 0 1 1.38-.02l2.75 6.5a.75.75 0 0 1-1.38.59l-2.75-6.5v-.57Z" fill="currentColor"/>
+  <path d="M10.25 14.75a.75.75 0 0 1 1.5 0V21a.75.75 0 0 1-1.5 0v-6.25Z" fill="currentColor"/>
+</svg>

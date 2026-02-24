@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <ellipse cx="12" cy="12" rx="9" ry="7.5" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="12" cy="12" rx="9" ry="7.5" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="12" cy="12" rx="6.25" ry="5.25" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="12" cy="12" rx="3.75" ry="3" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="12" cy="12" rx="1.5" ry="1.25" stroke="currentColor" stroke-width="1.5"/>
+</svg>

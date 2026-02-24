@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M9.41 8.5l-.82 7h5.77l.82-7H9.41Z" fill="var(--color-duotone-fill)"/>
+  <path d="M10 3.5L8 20.5M16 3.5l-2 17M4 8.5h17M3 15.5h17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

@@ -598,6 +598,20 @@ function stageDemo(manifest, ontology) {
   }
   .theme-toggle button svg { width: 16px; height: 16px; }
 
+  .github-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-tertiary);
+    transition: color var(--duration-fast);
+    flex-shrink: 0;
+  }
+  .github-link:hover { color: var(--color-text-primary); }
+  .github-link svg { width: 18px; height: 18px; }
+
   /* ── Main content ───────────────────────── */
   .page-content {
     display: flex;
@@ -1279,6 +1293,10 @@ function stageDemo(manifest, ontology) {
       </button>
     </div>
     <span class="kbd header-kbd" title="Toggle theme">T</span>
+    <div class="header-divider" aria-hidden="true"></div>
+    <a href="https://github.com/marcus/roc" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub" title="View on GitHub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5C6.75 2.5 2.5 6.75 2.5 12c0 4.2 2.72 7.75 6.5 9 .47.09.65-.2.65-.46 0-.23-.01-.98-.01-1.78-2.65.58-3.2-1.13-3.2-1.13-.43-1.1-1.06-1.39-1.06-1.39-.87-.59.07-.58.07-.58.96.07 1.46.98 1.46.98.85 1.46 2.23 1.04 2.78.79.09-.62.33-1.04.6-1.28-2.12-.24-4.35-1.06-4.35-4.72 0-1.04.37-1.9.98-2.56-.1-.24-.43-1.21.09-2.53 0 0 .8-.26 2.63.98a9.14 9.14 0 0 1 4.8 0c1.83-1.24 2.63-.98 2.63-.98.52 1.32.19 2.29.1 2.53.61.67.98 1.52.98 2.56 0 3.67-2.24 4.48-4.37 4.71.34.3.65.88.65 1.77 0 1.28-.01 2.31-.01 2.63 0 .26.17.56.66.46 3.78-1.26 6.5-4.81 6.5-9 0-5.25-4.25-9.5-9.5-9.5Z"/></svg>
+    </a>
   </div>
 </header>
 

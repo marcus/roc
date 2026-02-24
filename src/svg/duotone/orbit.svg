@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="3" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+  <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-30 12 12)" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="19.5" cy="7.67" r="1.75" fill="var(--color-duotone-fill)" stroke="currentColor" stroke-width="1.5"/>
+</svg>

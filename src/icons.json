@@ -14,7 +14,8 @@
     "Commerce",
     "Development",
     "Devices",
-    "Objects"
+    "Objects",
+    "Food"
   ],
   "icons": {
     "home": {
@@ -1186,6 +1187,870 @@
       "description": "Equilateral triangle pointing upward",
       "category": "Objects",
       "tags": ["shape", "arrow", "geometric", "basic", "polygon", "point"]
+    },
+    "hexagon": {
+      "label": "Hexagon",
+      "description": "Regular six-sided polygon",
+      "category": "Objects",
+      "tags": ["shape", "geometric", "polygon", "six", "honeycomb", "basic"]
+    },
+    "octagon": {
+      "label": "Octagon",
+      "description": "Regular eight-sided polygon, like a stop sign",
+      "category": "Objects",
+      "tags": ["shape", "geometric", "polygon", "eight", "stop", "sign", "basic"]
+    },
+    "diamond": {
+      "label": "Diamond",
+      "description": "Diamond shape, a square rotated 45 degrees",
+      "category": "Objects",
+      "tags": ["shape", "geometric", "rhombus", "rotated", "square", "basic"]
+    },
+    "info": {
+      "label": "Info",
+      "description": "Circle with lowercase i for informational messages and help tooltips",
+      "category": "System",
+      "tags": ["information", "help", "details", "about", "hint", "tooltip", "circle"]
+    },
+    "alert-triangle": {
+      "label": "Alert Triangle",
+      "description": "Warning triangle with exclamation mark for caution and warning states",
+      "category": "System",
+      "tags": ["warning", "caution", "danger", "exclamation", "triangle", "attention", "hazard"]
+    },
+    "alert-circle": {
+      "label": "Alert Circle",
+      "description": "Circle with exclamation mark for error and alert states",
+      "category": "System",
+      "tags": ["error", "alert", "danger", "exclamation", "circle", "attention", "critical", "warning"]
+    },
+    "help-circle": {
+      "label": "Help Circle",
+      "description": "Question mark inside a circle for help, support, and FAQ actions",
+      "category": "System",
+      "tags": ["question", "help", "support", "faq", "info", "assistance", "circle", "ask"]
+    },
+    "ban": {
+      "label": "Ban",
+      "description": "Circle with diagonal line through it for prohibit, block, and restrict actions",
+      "category": "System",
+      "tags": ["prohibit", "block", "restrict", "forbidden", "no", "stop", "cancel", "disabled"]
+    },
+    "slash": {
+      "label": "Slash",
+      "description": "Forward diagonal slash line for separator, division, and or actions",
+      "category": "System",
+      "tags": ["forward slash", "divide", "separator", "or", "diagonal", "line", "split"]
+    },
+    "menu": {
+      "label": "Menu",
+      "description": "Hamburger menu with three horizontal lines for navigation and sidebar toggle",
+      "category": "System",
+      "tags": ["hamburger", "navigation", "sidebar", "drawer", "toggle", "lines", "bars"]
+    },
+    "more-horizontal": {
+      "label": "More Horizontal",
+      "description": "Three horizontal dots for additional options and overflow actions",
+      "category": "System",
+      "tags": ["ellipsis", "dots", "options", "overflow", "actions", "kebab", "horizontal"]
+    },
+    "more-vertical": {
+      "label": "More Vertical",
+      "description": "Three vertical dots for additional options and context menus",
+      "category": "System",
+      "tags": ["ellipsis", "dots", "options", "overflow", "actions", "kebab", "vertical", "context menu"]
+    },
+    "filter": {
+      "label": "Filter",
+      "description": "Funnel shape for filtering, narrowing, and refining data sets",
+      "category": "System",
+      "tags": ["funnel", "filter", "refine", "narrow", "sieve", "sort", "data", "query"]
+    },
+    "sort": {
+      "label": "Sort",
+      "description": "Up and down arrows for sorting and reordering list items",
+      "category": "System",
+      "tags": ["order", "ascending", "descending", "arrange", "reorder", "alphabetical", "arrows"]
+    },
+    "sliders": {
+      "label": "Sliders",
+      "description": "Horizontal sliders with adjustment knobs for controls and preferences",
+      "category": "System",
+      "tags": ["controls", "adjustments", "preferences", "settings", "equalizer", "mixer", "range", "knobs"]
+    },
+    "toggle-left": {
+      "label": "Toggle Off",
+      "description": "Toggle switch in OFF position with knob on the left",
+      "category": "System",
+      "tags": ["toggle", "switch", "off", "disable", "inactive", "control", "boolean"]
+    },
+    "toggle-right": {
+      "label": "Toggle On",
+      "description": "Toggle switch in ON position with knob on the right",
+      "category": "System",
+      "tags": ["toggle", "switch", "on", "enable", "active", "control", "boolean"]
+    },
+    "switch": {
+      "label": "Switch",
+      "description": "Vertical lever switch on a base plate for power and control actions",
+      "category": "System",
+      "tags": ["lever", "power", "breaker", "control", "on-off", "electrical", "mechanical"]
+    },
+    "bed": {
+      "label": "Bed",
+      "description": "Side view bed with headboard, mattress, and legs for sleeping and accommodation",
+      "category": "Objects",
+      "tags": ["sleep", "bedroom", "furniture", "rest", "hotel", "accommodation", "mattress", "headboard"]
+    },
+    "lamp": {
+      "label": "Lamp",
+      "description": "Desk or table lamp with shade, stem, and base for lighting",
+      "category": "Objects",
+      "tags": ["light", "desk lamp", "table lamp", "lighting", "shade", "furniture", "reading", "illuminate"]
+    },
+    "sofa": {
+      "label": "Sofa",
+      "description": "Front view sofa with cushions and armrests for seating and living room",
+      "category": "Objects",
+      "tags": ["couch", "seating", "furniture", "living room", "cushion", "armchair", "lounge", "comfort"]
+    },
+    "coffee": {
+      "label": "Coffee",
+      "description": "Coffee mug with handle and rising steam wisps",
+      "category": "Objects",
+      "tags": ["mug", "cup", "drink", "beverage", "hot", "tea", "cafe", "steam", "morning"]
+    },
+    "pizza": {
+      "label": "Pizza",
+      "description": "Triangular pizza slice with round toppings",
+      "category": "Objects",
+      "tags": ["slice", "food", "fast food", "Italian", "topping", "meal", "snack", "pepperoni"]
+    },
+    "utensils": {
+      "label": "Utensils",
+      "description": "Fork and knife for dining and food service",
+      "category": "Objects",
+      "tags": ["fork", "knife", "dining", "restaurant", "eat", "cutlery", "silverware", "food", "meal"]
+    },
+    "wine": {
+      "label": "Wine",
+      "description": "Wine glass with bowl, stem, and base for beverages and dining",
+      "category": "Objects",
+      "tags": ["glass", "drink", "beverage", "alcohol", "goblet", "dining", "celebrate", "toast"]
+    },
+    "cake": {
+      "label": "Cake",
+      "description": "Birthday cake with layered body and candles for celebrations and events",
+      "category": "Objects",
+      "tags": ["birthday", "celebration", "party", "dessert", "candle", "bake", "sweet", "event"]
+    },
+    "apple": {
+      "label": "Apple",
+      "description": "Apple fruit with stem and leaf for food, health, and education",
+      "category": "Objects",
+      "tags": ["fruit", "food", "health", "nutrition", "education", "teacher", "organic", "nature"]
+    },
+    "mountain": {
+      "label": "Mountain",
+      "description": "Mountain peaks with snow line for nature, outdoors, and adventure",
+      "category": "Objects",
+      "tags": ["peak", "summit", "nature", "outdoors", "adventure", "hiking", "terrain", "landscape"]
+    },
+    "waves": {
+      "label": "Waves",
+      "description": "Ocean waves for water, sea, and aquatic themes",
+      "category": "Objects",
+      "tags": ["ocean", "water", "sea", "surf", "tide", "aquatic", "beach", "marine"]
+    },
+    "flame": {
+      "label": "Flame",
+      "description": "Fire flame for heat, energy, trending, and hot topics",
+      "category": "Objects",
+      "tags": ["fire", "hot", "burn", "heat", "energy", "trending", "popular", "blaze"]
+    },
+    "tree": {
+      "label": "Tree",
+      "description": "Tree with trunk and round canopy for nature, parks, and environment",
+      "category": "Objects",
+      "tags": ["nature", "plant", "forest", "wood", "park", "environment", "garden", "oak"]
+    },
+    "leaf": {
+      "label": "Leaf",
+      "description": "Single leaf with stem and veins for nature, eco, and organic themes",
+      "category": "Objects",
+      "tags": ["nature", "plant", "eco", "organic", "green", "foliage", "botanical", "spring"]
+    },
+    "flower": {
+      "label": "Flower",
+      "description": "Flower with center and petals for nature, beauty, and decoration",
+      "category": "Objects",
+      "tags": ["nature", "plant", "bloom", "petal", "garden", "floral", "blossom", "spring"]
+    },
+    "bird": {
+      "label": "Bird",
+      "description": "Small side-view bird with wing and tail feathers",
+      "category": "Objects",
+      "tags": ["animal", "sparrow", "songbird", "nature", "wildlife", "fly", "wing", "feather"]
+    },
+    "fish": {
+      "label": "Fish",
+      "description": "Side-view fish with tail fin and eye for aquatic and nature themes",
+      "category": "Objects",
+      "tags": ["animal", "aquatic", "ocean", "sea", "water", "marine", "swim", "fin"]
+    },
+    "paw": {
+      "label": "Paw",
+      "description": "Paw print with four toe pads and one heel pad for pets and animals",
+      "category": "Objects",
+      "tags": ["animal", "pet", "dog", "cat", "print", "track", "footprint", "veterinary"]
+    },
+    "stethoscope": {
+      "label": "Stethoscope",
+      "description": "Y-shaped medical stethoscope with earpieces and chest piece",
+      "category": "Objects",
+      "tags": ["medical", "doctor", "health", "healthcare", "diagnosis", "hospital", "clinical", "checkup"]
+    },
+    "pill": {
+      "label": "Pill",
+      "description": "Oblong capsule with divider line for medication and pharmacy",
+      "category": "Objects",
+      "tags": ["medicine", "medication", "capsule", "drug", "pharmacy", "prescription", "tablet", "health"]
+    },
+    "syringe": {
+      "label": "Syringe",
+      "description": "Medical syringe with barrel, plunger, and needle tip",
+      "category": "Objects",
+      "tags": ["injection", "needle", "vaccine", "medical", "shot", "immunization", "health", "hospital"]
+    },
+    "trophy": {
+      "label": "Trophy",
+      "description": "Trophy cup with handles and base pedestal for awards and achievements",
+      "category": "Objects",
+      "tags": ["award", "cup", "winner", "prize", "achievement", "competition", "champion", "first place"]
+    },
+    "medal": {
+      "label": "Medal",
+      "description": "Circle medal hanging from a ribbon for honors and recognition",
+      "category": "Objects",
+      "tags": ["ribbon", "award", "honor", "achievement", "badge", "recognition", "prize", "first place"]
+    },
+    "target": {
+      "label": "Target",
+      "description": "Concentric circles with center dot for goals and focus",
+      "category": "Objects",
+      "tags": ["bullseye", "aim", "goal", "focus", "objective", "accuracy", "precision", "crosshair"]
+    },
+    "heart-pulse": {
+      "label": "Heart Pulse",
+      "description": "Heart shape with ECG pulse line through the center for health monitoring",
+      "category": "Objects",
+      "tags": ["health", "heartbeat", "ecg", "cardiac", "vital signs", "monitor", "medical", "pulse"]
+    },
+    "bandage": {
+      "label": "Bandage",
+      "description": "Adhesive bandage strip with cross pattern for first aid and wound care",
+      "category": "Objects",
+      "tags": ["band-aid", "plaster", "first aid", "wound", "medical", "heal", "injury", "patch"]
+    },
+    "thermometer-medical": {
+      "label": "Medical Thermometer",
+      "description": "Medical thermometer with mercury level and plus symbol for temperature measurement",
+      "category": "Objects",
+      "tags": ["temperature", "fever", "medical", "health", "celsius", "fahrenheit", "diagnosis", "clinical"]
+    },
+    "graduation-cap": {
+      "label": "Graduation Cap",
+      "description": "Academic mortarboard cap with tassel for education and graduation",
+      "category": "Objects",
+      "tags": ["education", "academic", "diploma", "university", "school", "degree"]
+    },
+    "book": {
+      "label": "Book",
+      "description": "Closed book with spine for reading, reference, and documentation",
+      "category": "Objects",
+      "tags": ["reading", "library", "literature", "textbook", "reference", "knowledge"]
+    },
+    "book-open": {
+      "label": "Open Book",
+      "description": "Open book with spread pages for reading and learning",
+      "category": "Objects",
+      "tags": ["reading", "study", "pages", "learning", "education", "literature"]
+    },
+    "dumbbell": {
+      "label": "Dumbbell",
+      "description": "Dumbbell weight with plates on each end for fitness and exercise",
+      "category": "Objects",
+      "tags": ["weight", "gym", "fitness", "exercise", "strength", "workout"]
+    },
+    "running": {
+      "label": "Running",
+      "description": "Person in running pose for fitness, athletics, and cardio activities",
+      "category": "People",
+      "tags": ["run", "jog", "sprint", "cardio", "athlete", "exercise"]
+    },
+    "bike": {
+      "label": "Bike",
+      "description": "Motorcycle with two wheels and frame for transport and riding",
+      "category": "Transport",
+      "tags": ["motorcycle", "motorbike", "ride", "vehicle", "transport", "chopper"]
+    },
+    "library": {
+      "label": "Library",
+      "description": "Classical building with columns and pediment for libraries and institutions",
+      "category": "Objects",
+      "tags": ["building", "columns", "institution", "books", "reading", "knowledge"]
+    },
+    "pencil-ruler": {
+      "label": "Pencil Ruler",
+      "description": "Pencil and ruler tools for design, drafting, and creative work",
+      "category": "Development",
+      "tags": ["design", "draft", "tools", "measure", "edit", "create"]
+    },
+    "school": {
+      "label": "School",
+      "description": "School building with central tower and flag for education",
+      "category": "Objects",
+      "tags": ["education", "building", "learn", "classroom", "teaching", "academy"]
+    },
+    "flask": {
+      "label": "Flask",
+      "description": "Erlenmeyer flask for science, chemistry, and laboratory work",
+      "category": "Objects",
+      "tags": ["science", "chemistry", "laboratory", "experiment", "beaker", "research"]
+    },
+    "atom": {
+      "label": "Atom",
+      "description": "Atom with orbital rings and nucleus for science and physics",
+      "category": "Objects",
+      "tags": ["science", "physics", "molecule", "nuclear", "electron", "chemistry"]
+    },
+    "microscope": {
+      "label": "Microscope",
+      "description": "Laboratory microscope for science and research",
+      "category": "Objects",
+      "tags": ["science", "laboratory", "research", "biology", "examine", "lens"]
+    },
+    "calculator": {
+      "label": "Calculator",
+      "description": "Calculator with display and button grid for math operations",
+      "category": "Objects",
+      "tags": ["math", "compute", "arithmetic", "numbers", "calculate", "accounting"]
+    },
+    "sigma": {
+      "label": "Sigma",
+      "description": "Greek sigma letter for summation and mathematics",
+      "category": "Development",
+      "tags": ["summation", "sum", "math", "greek", "formula", "total"]
+    },
+    "pi": {
+      "label": "Pi",
+      "description": "Greek pi letter for the mathematical constant",
+      "category": "Development",
+      "tags": ["math", "constant", "greek", "geometry", "circle", "ratio"]
+    },
+    "building": {
+      "label": "Building",
+      "description": "Multi-story office building with windows and entrance",
+      "category": "Objects",
+      "tags": ["office", "commercial", "tower", "skyscraper", "property", "real estate"]
+    },
+    "warehouse": {
+      "label": "Warehouse",
+      "description": "Storage warehouse with pitched roof and loading door",
+      "category": "Commerce",
+      "tags": ["storage", "inventory", "depot", "logistics", "supply", "distribution"]
+    },
+    "store": {
+      "label": "Store",
+      "description": "Retail storefront with awning and entrance door",
+      "category": "Commerce",
+      "tags": ["shop", "retail", "storefront", "market", "business", "commerce"]
+    },
+    "scissors": {
+      "label": "Scissors",
+      "description": "Open scissors with circular handles and crossing blades",
+      "category": "Objects",
+      "tags": ["cut", "trim", "snip", "craft", "shears", "clip"]
+    },
+    "paintbrush": {
+      "label": "Paintbrush",
+      "description": "Angled paintbrush with handle and bristle tip",
+      "category": "Objects",
+      "tags": ["paint", "brush", "art", "draw", "color", "design"]
+    },
+    "ruler": {
+      "label": "Ruler",
+      "description": "Horizontal ruler with measurement tick marks",
+      "category": "Objects",
+      "tags": ["measure", "length", "scale", "dimension", "size", "tool"]
+    },
+    "wrench": {
+      "label": "Wrench",
+      "description": "Adjustable wrench for repair and maintenance actions",
+      "category": "Objects",
+      "tags": ["tool", "repair", "fix", "maintenance", "spanner", "mechanic"]
+    },
+    "hammer": {
+      "label": "Hammer",
+      "description": "Hammer with rectangular head for building and construction",
+      "category": "Objects",
+      "tags": ["tool", "build", "construction", "nail", "strike", "carpentry"]
+    },
+    "screwdriver": {
+      "label": "Screwdriver",
+      "description": "Screwdriver with handle and flat blade for assembly tasks",
+      "category": "Objects",
+      "tags": ["tool", "screw", "assemble", "repair", "flathead", "hardware"]
+    },
+    "smile": {
+      "label": "Smile",
+      "description": "Smiling face with upward curved mouth for positive sentiment",
+      "category": "Communication",
+      "tags": ["happy", "emoji", "face", "positive", "emotion", "joy"]
+    },
+    "frown": {
+      "label": "Frown",
+      "description": "Frowning face with downward curved mouth for negative sentiment",
+      "category": "Communication",
+      "tags": ["sad", "emoji", "face", "negative", "emotion", "unhappy"]
+    },
+    "meh": {
+      "label": "Meh",
+      "description": "Neutral face with straight mouth for indifferent sentiment",
+      "category": "Communication",
+      "tags": ["neutral", "emoji", "face", "indifferent", "emotion", "expressionless"]
+    },
+    "at-sign": {
+      "label": "At Sign",
+      "description": "At symbol for email addresses, mentions, and handles",
+      "category": "Communication",
+      "tags": ["email", "mention", "handle", "address", "username", "contact"]
+    },
+    "hash": {
+      "label": "Hash",
+      "description": "Hash or number sign for tags, channels, and numbering",
+      "category": "Communication",
+      "tags": ["hashtag", "pound", "number", "tag", "channel", "topic"]
+    },
+    "trending": {
+      "label": "Trending",
+      "description": "Upward trending line with arrow for growth and positive trends",
+      "category": "Data",
+      "tags": ["growth", "increase", "analytics", "chart", "upward", "stocks"]
+    },
+    "cursor": {
+      "label": "Cursor",
+      "description": "Mouse pointer arrow for selection and interaction",
+      "category": "Actions",
+      "tags": ["pointer", "mouse", "arrow", "select", "click", "interact"]
+    },
+    "crosshair": {
+      "label": "Crosshair",
+      "description": "Targeting reticle with cross lines for precision and focus",
+      "category": "Actions",
+      "tags": ["target", "aim", "scope", "precision", "focus", "reticle"]
+    },
+    "move": {
+      "label": "Move",
+      "description": "Four-directional arrows for dragging and repositioning",
+      "category": "Actions",
+      "tags": ["drag", "reposition", "arrows", "direction", "pan", "relocate"]
+    },
+    "hand": {
+      "label": "Hand",
+      "description": "Open palm hand raised for stop, wave, or high-five gestures",
+      "category": "Actions",
+      "tags": ["palm", "stop", "wave", "raise", "gesture", "high-five"]
+    },
+    "pointer": {
+      "label": "Pointer",
+      "description": "Mouse cursor arrow for click, select, and navigation actions",
+      "category": "Navigation",
+      "tags": ["cursor", "click", "mouse", "select", "arrow", "interface"]
+    },
+    "grab": {
+      "label": "Grab",
+      "description": "Grabbing hand with curled fingers for drag and move interactions",
+      "category": "Actions",
+      "tags": ["fist", "drag", "move", "grip", "hold", "interact"]
+    },
+    "pie-chart": {
+      "label": "Pie Chart",
+      "description": "Circular pie chart with separated wedge for proportional data",
+      "category": "Data",
+      "tags": ["pie", "circle", "proportion", "percentage", "analytics", "data"]
+    },
+    "line-chart": {
+      "label": "Line Chart",
+      "description": "Line graph with axis showing data trends over time",
+      "category": "Data",
+      "tags": ["line", "graph", "trend", "time series", "analytics", "data"]
+    },
+    "bar-chart": {
+      "label": "Bar Chart",
+      "description": "Vertical bar chart with axis for comparing quantities",
+      "category": "Data",
+      "tags": ["bar", "histogram", "comparison", "statistics", "analytics", "data"]
+    },
+    "trending-up": {
+      "label": "Trending Up",
+      "description": "Upward trending line with arrow indicating growth or increase",
+      "category": "Data",
+      "tags": ["growth", "increase", "rise", "positive", "stocks", "analytics"]
+    },
+    "trending-down": {
+      "label": "Trending Down",
+      "description": "Downward trending line with arrow indicating decline or decrease",
+      "category": "Data",
+      "tags": ["decline", "decrease", "drop", "negative", "stocks", "analytics"]
+    },
+    "activity": {
+      "label": "Activity",
+      "description": "ECG heartbeat pulse line for health monitoring and activity tracking",
+      "category": "Data",
+      "tags": ["pulse", "heartbeat", "ecg", "health", "monitor", "vital"]
+    },
+    "badge": {
+      "label": "Badge",
+      "description": "Shield badge with checkmark for credentials and security status",
+      "category": "System",
+      "tags": ["shield", "security", "credential", "protection", "trust", "identity"]
+    },
+    "verified": {
+      "label": "Verified",
+      "description": "Seal with checkmark indicating verification or authentication status",
+      "category": "System",
+      "tags": ["check", "approved", "authenticated", "certified", "seal", "confirm"]
+    },
+    "award": {
+      "label": "Award",
+      "description": "Medal with ribbon for achievements, recognition, and prizes",
+      "category": "Objects",
+      "tags": ["medal", "ribbon", "achievement", "prize", "trophy", "recognition"]
+    },
+    "scale": {
+      "label": "Scale",
+      "description": "Balance scale for justice, law, and fairness",
+      "category": "Objects",
+      "tags": ["balance", "justice", "law", "legal", "weigh", "fairness"]
+    },
+    "gavel": {
+      "label": "Gavel",
+      "description": "Judge's gavel with sound block for courts and legal rulings",
+      "category": "Objects",
+      "tags": ["judge", "court", "law", "legal", "hammer", "ruling"]
+    },
+    "briefcase": {
+      "label": "Briefcase",
+      "description": "Professional briefcase for business, work, and career",
+      "category": "Commerce",
+      "tags": ["business", "work", "career", "professional", "portfolio", "office"]
+    },
+    "luggage": {
+      "label": "Luggage",
+      "description": "Rolling suitcase for travel and trips",
+      "category": "Transport",
+      "tags": ["suitcase", "travel", "bag", "trip", "vacation", "baggage"]
+    },
+    "passport": {
+      "label": "Passport",
+      "description": "Travel passport booklet with photo emblem",
+      "category": "Transport",
+      "tags": ["travel", "identity", "document", "visa", "immigration", "international"]
+    },
+    "ticket": {
+      "label": "Ticket",
+      "description": "Admission ticket with perforated tear line",
+      "category": "Commerce",
+      "tags": ["admission", "event", "coupon", "pass", "entry", "boarding"]
+    },
+    "shirt": {
+      "label": "Shirt",
+      "description": "T-shirt with collar and short sleeves",
+      "category": "Objects",
+      "tags": ["clothing", "apparel", "tshirt", "fashion", "wear", "garment"]
+    },
+    "glasses": {
+      "label": "Glasses",
+      "description": "Eyeglasses with two lenses and bridge",
+      "category": "Objects",
+      "tags": ["eyewear", "spectacles", "vision", "reading", "optical", "accessory"]
+    },
+    "watch": {
+      "label": "Watch",
+      "description": "Wristwatch with circular face and band",
+      "category": "Objects",
+      "tags": ["time", "clock", "wristwatch", "timepiece", "accessory", "wearable"]
+    },
+    "satellite": {
+      "label": "Satellite",
+      "description": "Satellite with solar panels and antenna for space communication",
+      "category": "Devices",
+      "tags": ["space", "signal", "GPS", "communication", "solar panel", "spacecraft"]
+    },
+    "orbit": {
+      "label": "Orbit",
+      "description": "Elliptical orbit path with central body and orbiting object",
+      "category": "Objects",
+      "tags": ["space", "planet", "rotation", "astronomy", "trajectory", "revolve"]
+    },
+    "telescope": {
+      "label": "Telescope",
+      "description": "Telescope on tripod for astronomy and stargazing",
+      "category": "Objects",
+      "tags": ["astronomy", "stargazing", "lens", "observation", "science", "space"]
+    },
+    "zap": {
+      "label": "Zap",
+      "description": "Lightning bolt for energy, power, and instant actions",
+      "category": "Actions",
+      "tags": ["lightning", "bolt", "energy", "power", "electric", "flash"]
+    },
+    "solar-panel": {
+      "label": "Solar Panel",
+      "description": "Photovoltaic panel with grid cells on a stand",
+      "category": "Devices",
+      "tags": ["solar", "energy", "renewable", "photovoltaic", "green", "electricity"]
+    },
+    "plug": {
+      "label": "Plug",
+      "description": "Electrical plug with prongs and cord for power connections",
+      "category": "Devices",
+      "tags": ["electric", "power", "socket", "outlet", "cord", "connection"]
+    },
+    "puzzle": {
+      "label": "Puzzle",
+      "description": "Interlocking puzzle piece for integration and problem solving",
+      "category": "Objects",
+      "tags": ["piece", "jigsaw", "plugin", "extension", "module", "integration"]
+    },
+    "lightbulb": {
+      "label": "Lightbulb",
+      "description": "Light bulb for ideas, inspiration, and creativity",
+      "category": "Objects",
+      "tags": ["idea", "innovation", "creative", "lamp", "bright", "inspiration"]
+    },
+    "anchor": {
+      "label": "Anchor",
+      "description": "Nautical anchor for stability, links, and maritime themes",
+      "category": "Objects",
+      "tags": ["nautical", "marine", "link", "stability", "harbor", "dock"]
+    },
+    "accessibility": {
+      "label": "Accessibility",
+      "description": "Universal accessibility symbol with person figure in circle",
+      "category": "People",
+      "tags": ["a11y", "disability", "inclusive", "universal", "wheelchair", "ada"]
+    },
+    "braille": {
+      "label": "Braille",
+      "description": "Braille dot cells for tactile reading and accessibility",
+      "category": "Communication",
+      "tags": ["dots", "tactile", "blind", "visually impaired", "reading", "a11y"]
+    },
+    "sign-language": {
+      "label": "Sign Language",
+      "description": "Hand gesture with communication waves for sign language",
+      "category": "Communication",
+      "tags": ["asl", "deaf", "gesture", "hands", "signing", "a11y"]
+    },
+    "caret-left": {
+      "label": "Caret Left",
+      "description": "Small left-pointing triangle for compact directional indicators",
+      "category": "Navigation",
+      "tags": ["caret", "left", "triangle", "arrow", "back", "previous", "compact"]
+    },
+    "caret-right": {
+      "label": "Caret Right",
+      "description": "Small right-pointing triangle for compact directional indicators",
+      "category": "Navigation",
+      "tags": ["caret", "right", "triangle", "arrow", "forward", "next", "compact"]
+    },
+    "caret-double-left": {
+      "label": "Caret Double Left",
+      "description": "Two left-pointing triangles for fast-rewind and skip-back actions",
+      "category": "Navigation",
+      "tags": ["caret", "double", "left", "rewind", "skip", "fast-backward", "pagination", "first"]
+    },
+    "broadcast": {
+      "label": "Broadcast",
+      "description": "Radio broadcast signal with concentric arcs for live streaming",
+      "category": "Media",
+      "tags": ["radio", "live", "signal", "streaming", "wifi", "wireless", "antenna", "podcast"]
+    },
+    "newspaper": {
+      "label": "Newspaper",
+      "description": "Newspaper page with text lines and image placeholder for news content",
+      "category": "Files",
+      "tags": ["news", "article", "press", "media", "paper", "briefing", "blog", "publication"]
+    },
+    "trash": {
+      "label": "Trash",
+      "description": "Trash can with lid for delete and remove actions",
+      "category": "Actions",
+      "tags": ["delete", "remove", "bin", "garbage", "discard", "destroy", "recycle"]
+    },
+    "github": {
+      "label": "GitHub",
+      "description": "GitHub octocat logo silhouette for source code and repositories",
+      "category": "Brand",
+      "tags": ["git", "repository", "code", "source", "octocat", "vcs", "version control"]
+    },
+    "caret-down": {
+      "label": "Caret Down",
+      "description": "Small downward-pointing triangle for dropdowns and collapsible content",
+      "category": "Navigation",
+      "tags": ["arrow", "dropdown", "expand", "chevron", "triangle", "down", "select"]
+    },
+    "caret-up": {
+      "label": "Caret Up",
+      "description": "Small upward-pointing triangle for collapsible content and sorting",
+      "category": "Navigation",
+      "tags": ["arrow", "collapse", "chevron", "triangle", "up", "sort"]
+    },
+    "floppy-disk": {
+      "label": "Floppy Disk",
+      "description": "3.5-inch floppy disk for save actions and storage",
+      "category": "Actions",
+      "tags": ["save", "disk", "storage", "backup", "file", "diskette"]
+    },
+    "robot": {
+      "label": "Robot",
+      "description": "Robot face with antenna for AI, automation, and bots",
+      "category": "System",
+      "tags": ["ai", "bot", "automation", "machine", "android", "artificial intelligence"]
+    },
+    "dial": {
+      "label": "Dial",
+      "description": "Rotary dial knob with position indicator for volume and settings",
+      "category": "System",
+      "tags": ["knob", "volume", "rotary", "control", "adjust", "tuner"]
+    },
+    "binoculars": {
+      "label": "Binoculars",
+      "description": "Binoculars viewed from front with two connected lens tubes and bridge",
+      "category": "Objects",
+      "tags": ["observation", "scouting", "search", "look", "spy", "vision"]
+    },
+    "text-aa": {
+      "label": "Text Format",
+      "description": "Large and small letter A for text and typography controls",
+      "category": "Actions",
+      "tags": ["typography", "font", "text", "formatting", "letter", "style"]
+    },
+    "spinner": {
+      "label": "Spinner",
+      "description": "Loading spinner circle with a gap indicating progress",
+      "category": "System",
+      "tags": ["loading", "progress", "wait", "processing", "busy"]
+    },
+    "tree-structure": {
+      "label": "Tree Structure",
+      "description": "Hierarchical tree diagram with parent node connecting to child nodes",
+      "category": "Data",
+      "tags": ["hierarchy", "org chart", "file tree", "structure", "nodes", "diagram"]
+    },
+    "kanban": {
+      "label": "Kanban",
+      "description": "Kanban board with columns and task cards for project management",
+      "category": "Data",
+      "tags": ["board", "project", "tasks", "columns", "agile", "management"]
+    },
+    "pin": {
+      "label": "Pin",
+      "description": "Push pin for pinning, bookmarking, and marking important items",
+      "category": "Actions",
+      "tags": ["thumbtack", "pushpin", "bookmark", "attach", "important", "save"]
+    },
+    "package": {
+      "label": "Package",
+      "description": "Box with ribbon strap across top and vertical center line for packages and modules",
+      "category": "Objects",
+      "tags": ["box", "shipping", "delivery", "npm", "module", "parcel", "bundle"]
+    },
+    "replace": {
+      "label": "Replace",
+      "description": "Two opposing horizontal arrows for find-and-replace and swap actions",
+      "category": "Actions",
+      "tags": ["swap", "exchange", "substitute", "find and replace", "switch", "arrows", "cycle"]
+    },
+    "file-code": {
+      "label": "File Code",
+      "description": "Document with code angle brackets for source code files",
+      "category": "Files",
+      "tags": ["source", "code", "document", "programming", "script", "brackets", "development"]
+    },
+    "honey": {
+      "label": "Honey",
+      "description": "Honey jar with lid and dipper stick for sweet food and beekeeping",
+      "category": "Food",
+      "tags": ["jar", "pot", "sweet", "bee", "dipper", "syrup", "spread", "breakfast"]
+    },
+    "croissant": {
+      "label": "Croissant",
+      "description": "Crescent-shaped croissant pastry with score lines",
+      "category": "Food",
+      "tags": ["pastry", "bread", "bakery", "french", "breakfast", "baking", "crescent"]
+    },
+    "blueberries": {
+      "label": "Blueberries",
+      "description": "Cluster of round berries with a stem for fruit and healthy food",
+      "category": "Food",
+      "tags": ["berries", "fruit", "healthy", "snack", "organic", "cluster", "berry"]
+    },
+    "cereal": {
+      "label": "Cereal",
+      "description": "Bowl of cereal with small pieces and a spoon for breakfast and meals",
+      "category": "Food",
+      "tags": ["bowl", "breakfast", "spoon", "grain", "meal", "morning", "milk", "oatmeal"]
+    },
+    "edamame": {
+      "label": "Edamame",
+      "description": "Curved edamame pod with visible beans inside for snacks and appetizers",
+      "category": "Food",
+      "tags": ["soybean", "pod", "bean", "snack", "appetizer", "japanese", "healthy", "vegetable"]
+    },
+    "hummus": {
+      "label": "Hummus",
+      "description": "Wide bowl of hummus dip with swirled surface and garnish on top",
+      "category": "Food",
+      "tags": ["dip", "bowl", "chickpea", "spread", "appetizer", "mediterranean", "snack", "tahini"]
+    },
+    "coconut-water": {
+      "label": "Coconut Water",
+      "description": "Split coconut with a bendy straw for tropical drinks and hydration",
+      "category": "Food",
+      "tags": ["coconut", "tropical", "drink", "hydration", "water", "straw", "fruit", "refreshment"]
+    },
+    "creatine-powder": {
+      "label": "Creatine Powder",
+      "description": "Supplement container tub with a small scoop for fitness and nutrition",
+      "category": "Food",
+      "tags": ["supplement", "powder", "scoop", "fitness", "protein", "nutrition", "gym", "container", "tub"]
+    },
+    "kefir": {
+      "label": "Kefir",
+      "description": "Bottle of fermented kefir drink with bubble dots inside",
+      "category": "Food",
+      "tags": ["fermented", "drink", "probiotic", "dairy", "bottle", "gut health", "yogurt", "culture"]
+    },
+    "hazelnut-spread": {
+      "label": "Hazelnut Spread",
+      "description": "Wide jar of hazelnut spread with a lid and hazelnut symbol on front",
+      "category": "Food",
+      "tags": ["nutella", "hazelnut", "spread", "jar", "chocolate", "breakfast", "condiment", "nut butter"]
+    },
+    "pb-powder": {
+      "label": "PB Powder",
+      "description": "Cylindrical tub of powdered peanut butter with a peanut symbol",
+      "category": "Food",
+      "tags": ["peanut butter", "powder", "peanut", "protein", "spread", "fitness", "nutrition", "jar", "tub"]
+    },
+    "whey-protein": {
+      "label": "Whey Protein",
+      "description": "Protein supplement container with cap and plus symbol for fitness and nutrition",
+      "category": "Food",
+      "tags": ["protein", "whey", "supplement", "shaker", "fitness", "gym", "nutrition", "powder", "container"]
     }
   }
 }
