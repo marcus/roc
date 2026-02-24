@@ -1126,6 +1126,113 @@ function stageDemo(manifest, ontology) {
     border-radius: var(--radius-full);
     background: var(--color-success);
   }
+
+  /* ── Header dividers ───────────────────── */
+  .header-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--color-border-default);
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive: mobile ─────────────────── */
+  @media (max-width: 640px) {
+    /* Header: two-row layout */
+    .page-header {
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    /* Logo row stays compact */
+    .page-header-left {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    /* Controls row drops below the logo */
+    .header-controls {
+      flex: 0 0 100%;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    /* Search bar spans full width first */
+    .search-bar {
+      flex: 0 0 100%;
+      order: -1;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 36px;
+      /* 16px prevents iOS auto-zoom on focus */
+      font-size: 16px;
+    }
+
+    /* Hide vertical dividers — wastes space on mobile */
+    .header-divider { display: none; }
+
+    /* Hide keyboard shortcut hint on mobile */
+    .header-kbd { display: none; }
+
+    /* Theme toggle right-aligned on the second line */
+    .theme-toggle { margin-left: auto; }
+    .theme-toggle button {
+      width: 36px;
+      height: 36px;
+    }
+
+    /* Larger touch targets for view/size buttons */
+    .view-btn,
+    .size-btn {
+      min-height: 36px;
+      padding: var(--space-2) var(--space-3);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Footer simplify */
+    .page-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+    }
+  }
+
+  /* ── Category filter bar: always scrollable ── */
+  /* (kicks in at any size to prevent overflow)  */
+  .category-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;        /* Firefox */
+  }
+  .category-bar::-webkit-scrollbar { display: none; } /* WebKit */
+
+  /* Touch-friendly category buttons */
+  @media (max-width: 640px) {
+    .cat-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-height: 36px;
+      padding: var(--space-2) var(--space-3);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Slightly reduce grid min cell size so more icons fit on screen */
+    .icon-grid {
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      padding: var(--space-3) var(--space-4);
+    }
+
+    /* Count bar padding */
+    .count-bar {
+      padding: var(--space-2) var(--space-4);
+    }
+  }
 </style>
 </head>
 <body>
@@ -1146,13 +1253,13 @@ function stageDemo(manifest, ontology) {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${searchInnerSvg}</svg>
       <input class="search-input" id="search" type="text" placeholder="Search icons..." autocomplete="off">
     </div>
-    <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
+    <div class="header-divider" aria-hidden="true"></div>
     <div class="view-toggle">
       <label>View</label>
       <button class="view-btn active" data-view-mode="style" onclick="setViewMode('style')">By Style</button>
       <button class="view-btn" data-view-mode="category" onclick="setViewMode('category')">By Category</button>
     </div>
-    <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
+    <div class="header-divider" aria-hidden="true"></div>
     <div class="size-selector">
       <label>Size</label>
       <button class="size-btn" data-view="all" onclick="setView('all')">All</button>
@@ -1162,7 +1269,7 @@ function stageDemo(manifest, ontology) {
       <button class="size-btn" data-view="32" onclick="setView('32')">32</button>
       <button class="size-btn" data-view="48" onclick="setView('48')">48</button>
     </div>
-    <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
+    <div class="header-divider" aria-hidden="true"></div>
     <div class="theme-toggle">
       <button id="btn-dark" class="active" onclick="setTheme('dark')" aria-label="Dark mode">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">${moonInnerSvg}</svg>
@@ -1171,7 +1278,7 @@ function stageDemo(manifest, ontology) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">${sunInnerSvg}</svg>
       </button>
     </div>
-    <span class="kbd" title="Toggle theme">T</span>
+    <span class="kbd header-kbd" title="Toggle theme">T</span>
   </div>
 </header>
 
