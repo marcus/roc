@@ -95,8 +95,121 @@ function stageMetadata(manifest) {
   console.log(`  ✓ metadata.json (${metadata.icons.length} icons, ${metadata.totalCount} variants)`);
 }
 
+// ── Stage 2 — React component codegen ────────────────────────────────
+const STROKED_STYLES = new Set(['outline', 'duotone', 'sharp']);
+
+function toJsxAttributes(innerSvg, isSolid) {
+  let jsx = innerSvg;
+
+  // Convert stroke-width: dynamic {sw} for stroked styles, literal for solid
+  if (isSolid) {
+    jsx = jsx.replace(/stroke-width="([^"]*)"/g, 'strokeWidth="$1"');
+  } else {
+    jsx = jsx.replace(/stroke-width="[^"]*"/g, 'strokeWidth={sw}');
+  }
+
+  // Convert remaining kebab-case SVG attributes to camelCase JSX
+  jsx = jsx.replace(/stroke-linecap=/g,  'strokeLinecap=');
+  jsx = jsx.replace(/stroke-linejoin=/g, 'strokeLinejoin=');
+  jsx = jsx.replace(/stroke-miterlimit=/g, 'strokeMiterlimit=');
+  jsx = jsx.replace(/fill-rule=/g,       'fillRule=');
+  jsx = jsx.replace(/clip-rule=/g,       'clipRule=');
+
+  return jsx;
+}
+
+function stageReact(manifest) {
+  console.log('Stage 2: generating React components...');
+  const reactDir = path.join(DIST_DIR, 'react');
+
+  // Per-style barrel entries: style -> [{name, pascalName}]
+  const styleEntries = new Map();
+  // All entries for root barrel + TS declarations
+  const allEntries = [];
+
+  for (const { style, name, innerSvg } of manifest) {
+    const pascalName = toPascalCase(name);
+    const isSolid = style === 'solid';
+    const jsxInner = toJsxAttributes(innerSvg, isSolid);
+
+    let component;
+    if (isSolid) {
+      component = `import { forwardRef } from 'react';
+
+const ${pascalName} = forwardRef(({ size = 24, className, ...props }, ref) => (
+  <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} {...props}>
+    ${jsxInner}
+  </svg>
+));
+
+${pascalName}.displayName = '${pascalName}';
+export default ${pascalName};
+`;
+    } else {
+      component = `import { forwardRef } from 'react';
+
+const ${pascalName} = forwardRef(({ size = 24, strokeWidth, className, ...props }, ref) => {
+  const sw = strokeWidth ?? (size <= 16 ? 1.75 : 1.5);
+  return (
+    <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} {...props}>
+      ${jsxInner}
+    </svg>
+  );
+});
+
+${pascalName}.displayName = '${pascalName}';
+export default ${pascalName};
+`;
+    }
+
+    const styleDir = path.join(reactDir, style);
+    ensureDir(styleDir);
+    fs.writeFileSync(path.join(styleDir, `${pascalName}.jsx`), component);
+
+    // Collect entries for barrels
+    if (!styleEntries.has(style)) styleEntries.set(style, []);
+    styleEntries.get(style).push({ name, pascalName });
+
+    const suffixedName = pascalName + toPascalCase(style);
+    allEntries.push({ style, pascalName, suffixedName });
+  }
+
+  // Per-style barrel files: dist/react/{style}/index.js
+  for (const [style, entries] of styleEntries) {
+    const lines = entries
+      .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
+      .map((e) => `export { default as ${e.pascalName} } from './${e.pascalName}.jsx';`);
+    fs.writeFileSync(path.join(reactDir, style, 'index.js'), lines.join('\n') + '\n');
+  }
+
+  // Root barrel: dist/react/index.js
+  const rootLines = allEntries
+    .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
+    .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.jsx';`);
+  fs.writeFileSync(path.join(reactDir, 'index.js'), rootLines.join('\n') + '\n');
+
+  // TypeScript declarations: dist/react/index.d.ts
+  const tsLines = [
+    `import { ForwardRefExoticComponent, SVGProps } from 'react';`,
+    ``,
+    `interface IconProps extends SVGProps<SVGSVGElement> {`,
+    `  size?: number;`,
+    `  strokeWidth?: number;`,
+    `}`,
+    ``,
+    `type Icon = ForwardRefExoticComponent<IconProps>;`,
+    ``,
+    ...allEntries
+      .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
+      .map((e) => `export declare const ${e.suffixedName}: Icon;`),
+    ``,
+  ];
+  fs.writeFileSync(path.join(reactDir, 'index.d.ts'), tsLines.join('\n'));
+
+  console.log(`  ✓ ${manifest.length} React components → ${reactDir}/`);
+}
+
 // ── Placeholder stages ───────────────────────────────────────────────
-function stageReact()  { console.log('Stage 2: React components — not yet implemented'); }
 function stageSvelte() { console.log('Stage 3: Svelte components — not yet implemented'); }
 function stageSprite() { console.log('Stage 4: SVG sprite — not yet implemented'); }
 function stageDemo()   { console.log('Stage 6: Demo page — not yet implemented'); }
@@ -118,7 +231,7 @@ function main(rebuild = false) {
   let manifest;
   if (needsSvg) manifest = stageSvg();
 
-  if (runAll || flag('--react'))   stageReact();
+  if (runAll || flag('--react'))   stageReact(manifest);
   if (runAll || flag('--svelte'))  stageSvelte();
   if (runAll || flag('--sprite'))  stageSprite();
 
