@@ -2051,6 +2051,66 @@
       "description": "Protein supplement container with cap and plus symbol for fitness and nutrition",
       "category": "Food",
       "tags": ["protein", "whey", "supplement", "shaker", "fitness", "gym", "nutrition", "powder", "container"]
+    },
+    "croutons": {
+      "label": "Croutons",
+      "description": "Small bread cubes scattered and stacked with score lines for salads and soups",
+      "category": "Food",
+      "tags": ["bread", "cubes", "salad", "soup", "topping", "crunch", "baked", "garnish"]
+    },
+    "pancetta": {
+      "label": "Pancetta",
+      "description": "Cross-section of rolled cured meat showing concentric spiral layers of meat and fat",
+      "category": "Food",
+      "tags": ["meat", "cured", "italian", "pork", "bacon", "deli", "charcuterie", "spiral", "slice"]
+    },
+    "sardines": {
+      "label": "Sardines",
+      "description": "Open rectangular tin with small fish inside and peeled-back lid",
+      "category": "Food",
+      "tags": ["fish", "tin", "can", "canned", "seafood", "preserved", "omega-3", "protein", "tinned"]
+    },
+    "pumpkin-seeds": {
+      "label": "Pumpkin Seeds",
+      "description": "Scattered pumpkin seeds in small oval teardrop shapes",
+      "category": "Food",
+      "tags": ["seeds", "pumpkin", "pepitas", "snack", "healthy", "nuts", "roasted", "trail mix"]
+    },
+    "raspberry-jam": {
+      "label": "Raspberry Jam",
+      "description": "Jar of raspberry jam with lid and raspberry cluster on the label",
+      "category": "Food",
+      "tags": ["jam", "jelly", "raspberry", "jar", "preserve", "spread", "fruit", "breakfast", "toast"]
+    },
+    "snickerdoodle": {
+      "label": "Snickerdoodle",
+      "description": "Round cookie with crack lines across the surface",
+      "category": "Food",
+      "tags": ["cookie", "biscuit", "cinnamon", "sugar", "baking", "dessert", "sweet", "cracked", "snack"]
+    },
+    "beef-jerky": {
+      "label": "Beef Jerky",
+      "description": "Rough-edged strip of dried meat with texture lines for snack and protein contexts",
+      "category": "Food",
+      "tags": ["meat", "dried", "snack", "protein", "strip", "jerky", "beef", "chewy", "dehydrated"]
+    },
+    "bruschetta": {
+      "label": "Bruschetta",
+      "description": "Bread slice topped with diced tomato chunks for appetizer and Italian food contexts",
+      "category": "Food",
+      "tags": ["bread", "tomato", "italian", "appetizer", "toast", "topping", "antipasto", "crostini", "tapas"]
+    },
+    "potato-chips": {
+      "label": "Potato Chips",
+      "description": "Wavy overlapping potato chip shapes with ripple texture for snack contexts",
+      "category": "Food",
+      "tags": ["chips", "crisps", "snack", "potato", "wavy", "fried", "salty", "bag", "munch"]
+    },
+    "salmon-dip": {
+      "label": "Salmon Dip",
+      "description": "Wide bowl of salmon dip with creamy swirl surface and small fish silhouette garnish",
+      "category": "Food",
+      "tags": ["dip", "salmon", "fish", "bowl", "spread", "appetizer", "seafood", "cream", "garnish", "snack"]
     }
   }
 }

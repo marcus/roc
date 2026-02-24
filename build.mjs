@@ -1348,6 +1348,26 @@ let searchQuery = '';
 let activeCategory = '';
 let viewMode = 'style';
 
+// ── URL sync ──────────────────────────────────────────────────
+function readURL() {
+  var p = new URLSearchParams(window.location.search);
+  if (p.has('q')) searchQuery = p.get('q');
+  if (p.has('category')) activeCategory = p.get('category');
+  if (p.has('size')) currentView = p.get('size');
+  if (p.has('view')) viewMode = p.get('view');
+}
+
+function syncURL() {
+  var p = new URLSearchParams();
+  if (searchQuery) p.set('q', searchQuery);
+  if (activeCategory) p.set('category', activeCategory);
+  if (currentView !== '24') p.set('size', currentView);
+  if (viewMode !== 'style') p.set('view', viewMode);
+  var qs = p.toString();
+  var url = window.location.pathname + (qs ? '?' + qs : '');
+  history.replaceState(null, '', url);
+}
+
 // Stroke widths that look optically correct at each size
 function sw(size) {
   if (size <= 16) return 1.75;
@@ -1480,6 +1500,7 @@ function setView(v) {
   document.querySelectorAll('.size-btn').forEach(function(b) {
     b.classList.toggle('active', b.dataset.view === v);
   });
+  syncURL();
   render();
 }
 
@@ -1494,6 +1515,7 @@ function setCat(cat) {
   document.querySelectorAll('.cat-btn').forEach(function(b) {
     b.classList.toggle('active', b.dataset.cat === cat);
   });
+  syncURL();
   render();
 }
 
@@ -1513,6 +1535,7 @@ function setViewMode(mode) {
       b.classList.toggle('active', b.dataset.cat === '');
     });
   }
+  syncURL();
   render();
 }
 
@@ -1613,6 +1636,7 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('search').value = '';
     searchQuery = '';
     document.getElementById('search').blur();
+    syncURL();
     render();
     return;
   }
@@ -1666,11 +1690,31 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Initialize
-setView('24');
+// Initialize from URL params (if any), then render
+readURL();
+
+// Apply URL state to UI controls
+document.querySelectorAll('.size-btn').forEach(function(b) {
+  b.classList.toggle('active', b.dataset.view === currentView);
+});
+document.querySelectorAll('.cat-btn').forEach(function(b) {
+  b.classList.toggle('active', b.dataset.cat === activeCategory);
+});
+document.querySelectorAll('.view-btn').forEach(function(b) {
+  b.classList.toggle('active', b.dataset.viewMode === viewMode);
+});
+if (viewMode === 'category') {
+  var catBar = document.getElementById('category-bar');
+  if (catBar) catBar.style.display = 'none';
+}
+if (searchQuery) {
+  document.getElementById('search').value = searchQuery;
+}
+render();
 
 document.getElementById('search').addEventListener('input', function(e) {
   searchQuery = e.target.value;
+  syncURL();
   render();
 });
 </script>
