@@ -209,8 +209,78 @@ export default ${pascalName};
   console.log(`  ✓ ${manifest.length} React components → ${reactDir}/`);
 }
 
+// ── Stage 3 — Svelte component codegen ──────────────────────────────
+function stageSvelte(manifest) {
+  console.log('Stage 3: generating Svelte components...');
+  const svelteDir = path.join(DIST_DIR, 'svelte');
+
+  // Per-style barrel entries: style -> [{name, pascalName}]
+  const styleEntries = new Map();
+  // All entries for root barrel
+  const allEntries = [];
+
+  for (const { style, name, innerSvg } of manifest) {
+    const pascalName = toPascalCase(name);
+    const isStroked = STROKED_STYLES.has(style);
+
+    // For stroked styles, replace stroke-width="..." with stroke-width="{sw}"
+    let svgInner = innerSvg;
+    if (isStroked) {
+      svgInner = svgInner.replace(/stroke-width="[^"]*"/g, 'stroke-width="{sw}"');
+    }
+
+    let component;
+    if (isStroked) {
+      component = `<script>
+  export let size = 24;
+  $: sw = size <= 16 ? 1.75 : 1.5;
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...$$restProps}>
+  ${svgInner}
+</svg>
+`;
+    } else {
+      component = `<script>
+  export let size = 24;
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...$$restProps}>
+  ${svgInner}
+</svg>
+`;
+    }
+
+    const styleDir = path.join(svelteDir, style);
+    ensureDir(styleDir);
+    fs.writeFileSync(path.join(styleDir, `${pascalName}.svelte`), component);
+
+    // Collect entries for barrels
+    if (!styleEntries.has(style)) styleEntries.set(style, []);
+    styleEntries.get(style).push({ name, pascalName });
+
+    const suffixedName = pascalName + toPascalCase(style);
+    allEntries.push({ style, pascalName, suffixedName });
+  }
+
+  // Per-style barrel files: dist/svelte/{style}/index.js
+  for (const [style, entries] of styleEntries) {
+    const lines = entries
+      .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
+      .map((e) => `export { default as ${e.pascalName} } from './${e.pascalName}.svelte';`);
+    fs.writeFileSync(path.join(svelteDir, style, 'index.js'), lines.join('\n') + '\n');
+  }
+
+  // Root barrel: dist/svelte/index.js
+  const rootLines = allEntries
+    .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
+    .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.svelte';`);
+  fs.writeFileSync(path.join(svelteDir, 'index.js'), rootLines.join('\n') + '\n');
+
+  console.log(`  ✓ ${manifest.length} Svelte components → ${svelteDir}/`);
+}
+
 // ── Placeholder stages ───────────────────────────────────────────────
-function stageSvelte() { console.log('Stage 3: Svelte components — not yet implemented'); }
 function stageSprite() { console.log('Stage 4: SVG sprite — not yet implemented'); }
 function stageDemo()   { console.log('Stage 6: Demo page — not yet implemented'); }
 
@@ -232,7 +302,7 @@ function main(rebuild = false) {
   if (needsSvg) manifest = stageSvg();
 
   if (runAll || flag('--react'))   stageReact(manifest);
-  if (runAll || flag('--svelte'))  stageSvelte();
+  if (runAll || flag('--svelte'))  stageSvelte(manifest);
   if (runAll || flag('--sprite'))  stageSprite();
 
   if (manifest) stageMetadata(manifest);
