@@ -18,7 +18,8 @@
     "build:sprite": "node build.mjs --sprite",
     "build:demo": "node build.mjs --demo",
     "dev": "node build.mjs --watch",
-    "preview": "open demo/index.html"
+    "preview": "open demo/index.html",
+    "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
   },
   "devDependencies": {
     "svgo": "^3.0.0"

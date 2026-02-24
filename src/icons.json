@@ -1,0 +1,67 @@
+{
+  "categories": [
+    "Navigation",
+    "Data",
+    "Communication",
+    "People",
+    "System",
+    "Brand",
+    "Actions"
+  ],
+  "icons": {
+    "home": {
+      "label": "Home",
+      "description": "House shape for navigation and home actions",
+      "category": "Navigation",
+      "tags": ["house", "main", "start", "dashboard", "landing"]
+    },
+    "chart": {
+      "label": "Analytics",
+      "description": "Bar chart for data visualization and metrics",
+      "category": "Data",
+      "tags": ["graph", "bar chart", "data", "metrics", "statistics", "report"]
+    },
+    "bell": {
+      "label": "Alerts",
+      "description": "Notification bell with clapper",
+      "category": "Communication",
+      "tags": ["notification", "alert", "ring", "reminder", "alarm", "updates"]
+    },
+    "users": {
+      "label": "Team",
+      "description": "Two-person silhouette for team and contacts",
+      "category": "People",
+      "tags": ["people", "group", "contacts", "members", "community"]
+    },
+    "settings": {
+      "label": "Settings",
+      "description": "Gear shape for configuration and preferences",
+      "category": "System",
+      "tags": ["gear", "cog", "preferences", "configuration", "controls", "options"]
+    },
+    "roc": {
+      "label": "Roc",
+      "description": "Mythical giant bird in flight, project namesake",
+      "category": "Brand",
+      "tags": ["bird", "mythical", "flight", "logo", "mascot"]
+    },
+    "arrow-up": {
+      "label": "Arrow Up",
+      "description": "Upward pointing arrow for navigation and directional actions",
+      "category": "Actions",
+      "tags": ["up", "direction", "navigate", "move", "upload", "increase"]
+    },
+    "arrow-down": {
+      "label": "Arrow Down",
+      "description": "Downward pointing arrow for navigation and directional actions",
+      "category": "Actions",
+      "tags": ["down", "direction", "navigate", "move", "download", "decrease"]
+    },
+    "arrow-left": {
+      "label": "Arrow Left",
+      "description": "Leftward pointing arrow for navigation and back actions",
+      "category": "Actions",
+      "tags": ["left", "direction", "navigate", "move", "back", "previous"]
+    }
+  }
+}

@@ -6,15 +6,16 @@ This guide specifies how to create new SVG icons for the `@marcus/roc` library. 
 
 ## Quick Start
 
-To add a new icon (e.g., "star"):
+To add a new icon
 
 1. Create 4 SVG files:
-   - `src/svg/outline/star.svg`
-   - `src/svg/solid/star.svg`
-   - `src/svg/duotone/star.svg`
-   - `src/svg/sharp/star.svg`
-2. Run `npm run build`
-3. Run `npm run preview` to verify in the demo page
+   - `src/svg/outline/{{icon}}.svg`
+   - `src/svg/solid/{{icon}}.svg`
+   - `src/svg/duotone/{{icon}}.svg`
+   - `src/svg/sharp/{{icon}}.svg`
+2. Add an entry to `src/icons.json` with `label`, `description`, `category`, and `tags`
+3. Run `npm run build`
+4. Run `npm run preview` to verify in the demo page
 
 Each file must follow the style-specific rules below. Design the **outline** variant first, then derive the other three.
 
@@ -256,3 +257,4 @@ Before submitting a new icon, verify:
 - [ ] `npm run build` completes without errors
 - [ ] Icon renders correctly in all 4 styles in the demo page
 - [ ] Filename is kebab-case and descriptive
+- [ ] Ontology entry added to `src/icons.json` with label, description, category, and tags

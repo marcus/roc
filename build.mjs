@@ -34,6 +34,23 @@ function readSvgs() {
   return icons;
 }
 
+function loadOntology() {
+  const ontPath = path.join('src', 'icons.json');
+  if (!fs.existsSync(ontPath)) {
+    console.warn('  ⚠ src/icons.json not found – using empty ontology');
+    return { categories: [], icons: {} };
+  }
+  const ont = JSON.parse(fs.readFileSync(ontPath, 'utf-8'));
+  // Validate categories
+  const validCats = new Set(ont.categories || []);
+  for (const [name, meta] of Object.entries(ont.icons || {})) {
+    if (meta.category && !validCats.has(meta.category)) {
+      console.warn(`  ⚠ icon "${name}" has unknown category "${meta.category}"`);
+    }
+  }
+  return ont;
+}
+
 function toPascalCase(str) {
   return str.replace(/(^|-)(\w)/g, (_, _sep, c) => c.toUpperCase());
 }
@@ -71,7 +88,7 @@ function stageSvg() {
 }
 
 // ── Stage 5 — Metadata JSON ─────────────────────────────────────────
-function stageMetadata(manifest) {
+function stageMetadata(manifest, ontology) {
   console.log('Stage 5: generating metadata...');
   const byName = new Map();
   for (const { name, style } of manifest) {
@@ -80,11 +97,22 @@ function stageMetadata(manifest) {
   }
 
   const metadata = {
-    icons:      [...byName.entries()]
-                  .map(([name, styles]) => ({ name, styles }))
-                  .sort((a, b) => a.name.localeCompare(b.name)),
+    icons: [...byName.entries()]
+      .map(([name, styles]) => {
+        const meta = (ontology.icons || {})[name] || {};
+        return {
+          name,
+          label: meta.label || name.charAt(0).toUpperCase() + name.slice(1),
+          description: meta.description || '',
+          category: meta.category || 'Uncategorized',
+          tags: meta.tags || [],
+          styles,
+        };
+      })
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    categories: ontology.categories || [],
     totalCount: manifest.length,
-    styles:     STYLES,
+    styles: STYLES,
   };
 
   ensureDir(DIST_DIR);
@@ -307,7 +335,7 @@ function stageSprite(manifest) {
 }
 
 // ── Stage 6 — Demo page ──────────────────────────────────────────────
-function stageDemo(manifest) {
+function stageDemo(manifest, ontology) {
   console.log('Stage 6: generating demo page...');
 
   // Group icons by style, then by name
@@ -340,10 +368,17 @@ function stageDemo(manifest) {
     sharp:   { label: 'Sharp',   tag: 'Geometric', desc: 'Angular cuts, squared joins, no curves — engineered density for compact UI' },
   };
 
-  // Pretty labels for icon names
-  const ICON_LABELS = {
-    home: 'Home', chart: 'Analytics', users: 'Team', bell: 'Alerts', settings: 'Settings', roc: 'Roc',
-  };
+  // Build icon metadata from ontology
+  const ICON_META = {};
+  for (const name of iconNames) {
+    const meta = (ontology.icons || {})[name] || {};
+    ICON_META[name] = {
+      label: meta.label || name.charAt(0).toUpperCase() + name.slice(1),
+      description: meta.description || '',
+      category: meta.category || 'Uncategorized',
+      tags: meta.tags || [],
+    };
+  }
 
   const html = `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -550,7 +585,6 @@ function stageDemo(manifest) {
   /* ── Icon grid ──────────────────────────── */
   .icon-grid {
     display: grid;
-    grid-template-columns: repeat(${iconNames.length}, 1fr);
   }
   .icon-column {
     display: flex;
@@ -662,6 +696,265 @@ function stageDemo(manifest) {
     color: var(--color-accent-default);
   }
 
+  /* ── View toggle ───────────────────────── */
+  .view-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+  }
+  .view-toggle label {
+    font-weight: var(--font-medium);
+    color: var(--color-text-tertiary);
+  }
+  .view-btn {
+    all: unset;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    transition: all var(--duration-fast);
+  }
+  .view-btn:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .view-btn.active {
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-default);
+  }
+
+  /* ── Category view ─────────────────────── */
+  .cat-section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-6);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-secondary);
+  }
+  .cat-section-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    letter-spacing: -0.01em;
+  }
+  .cat-section-count {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+  }
+  .cat-icon-row {
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-6);
+    border-bottom: 1px solid var(--color-border-subtle);
+    gap: var(--space-4);
+  }
+  .cat-icon-name {
+    min-width: 100px;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text-secondary);
+  }
+  .cat-icon-variants {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .cat-icon-variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .cat-icon-variant .variant-label {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+  }
+
+  /* ── Search bar ────────────────────────── */
+  .search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .search-bar svg {
+    position: absolute;
+    left: 8px;
+    width: 14px;
+    height: 14px;
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+  }
+  .search-input {
+    all: unset;
+    width: 180px;
+    height: 28px;
+    padding: 0 var(--space-2) 0 28px;
+    font-size: var(--text-xs);
+    font-family: inherit;
+    color: var(--color-text-primary);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--duration-fast);
+  }
+  .search-input::placeholder { color: var(--color-text-tertiary); }
+  .search-input:focus { border-color: var(--color-accent-default); outline: none; }
+
+  /* ── Category filter bar ───────────────── */
+  .category-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-6);
+    border-bottom: 1px solid var(--color-border-strong);
+    background: var(--color-bg-secondary);
+  }
+  .cat-btn {
+    all: unset;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    transition: all var(--duration-fast);
+  }
+  .cat-btn:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .cat-btn.active {
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-default);
+  }
+
+  /* ── Empty state ───────────────────────── */
+  .empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12) var(--space-6);
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+  }
+
+  /* ── Detail panel ──────────────────────── */
+  .detail-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    display: none;
+  }
+  .detail-backdrop.visible { display: block; }
+  .detail-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    z-index: 201;
+    display: none;
+    min-width: 480px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+  .detail-panel.visible { display: block; }
+  .detail-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+  .detail-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+  }
+  .detail-filename {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    font-family: monospace;
+  }
+  .detail-close {
+    all: unset;
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    font-size: var(--text-lg);
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+  .detail-close:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .detail-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+  .detail-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .detail-category {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-accent-default);
+    background: var(--color-accent-subtle);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+  .detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+  .detail-tag {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-tertiary);
+    padding: 1px var(--space-2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-default);
+  }
+  .detail-variants {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .detail-variant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-primary);
+  }
+  .detail-variant-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-text-tertiary);
+  }
+  .detail-copy-btn {
+    all: unset;
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 1px var(--space-2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-default);
+    transition: all var(--duration-fast);
+  }
+  .detail-copy-btn:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-tertiary);
+  }
+
   /* ── Compact single-size view ───────────── */
   .icon-grid.single-size .icon-sizes {
     padding: var(--space-5) var(--space-4);
@@ -719,6 +1012,17 @@ function stageDemo(manifest) {
 <header class="page-header">
   <h1>Roc</h1>
   <div class="header-controls">
+    <div class="search-bar">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+      <input class="search-input" id="search" type="text" placeholder="Search icons..." autocomplete="off">
+    </div>
+    <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
+    <div class="view-toggle">
+      <label>View</label>
+      <button class="view-btn active" data-view-mode="style" onclick="setViewMode('style')">By Style</button>
+      <button class="view-btn" data-view-mode="category" onclick="setViewMode('category')">By Category</button>
+    </div>
+    <div style="width:1px;height:20px;background:var(--color-border-default)"></div>
     <div class="size-selector">
       <label>Size</label>
       <button class="size-btn" data-view="all" onclick="setView('all')">All</button>
@@ -741,19 +1045,28 @@ function stageDemo(manifest) {
   </div>
 </header>
 
+<!-- category bar -->
+<div class="category-bar" id="category-bar">
+  <button class="cat-btn active" data-cat="" onclick="setCat('')">All</button>
+  ${(ontology.categories || []).map(c => `<button class="cat-btn" data-cat="${c}" onclick="setCat('${c}')">${c}</button>`).join('\n  ')}
+</div>
+
 <!-- content -->
 <main class="page-content" id="content"></main>
 
 <div class="toast" id="toast">SVG copied</div>
 
+<div class="detail-backdrop" id="detail-backdrop"></div>
+<div class="detail-panel" id="detail-panel"></div>
+
 <!-- footer -->
 <footer class="page-footer">
   <div class="footer-stats">
-    <span class="footer-stat"><span class="footer-dot"></span> ${iconCount} icons</span>
+    <span class="footer-stat"><span class="footer-dot"></span> <span id="footer-count">${iconNames.length} icons</span></span>
     <span class="footer-stat">${STYLES.length} styles</span>
     <span class="footer-stat">5 sizes</span>
   </div>
-  <span>Press <span class="kbd">T</span> to toggle theme</span>
+  <span>Press <span class="kbd">/</span> to search · <span class="kbd">T</span> toggle theme</span>
 </footer>
 
 <script>
@@ -764,11 +1077,16 @@ const STROKED_STYLES = new Set(${JSON.stringify([...STROKED_STYLES])});
 
 const STYLE_META = ${JSON.stringify(STYLE_META, null, 2)};
 
-const ICON_LABELS = ${JSON.stringify(ICON_LABELS, null, 2)};
+const ICON_META = ${JSON.stringify(ICON_META, null, 2)};
+const CATEGORIES = ${JSON.stringify(ontology.categories || [])};
 
 const STYLE_ORDER = ${JSON.stringify(STYLES)};
 const ICON_NAMES = ${JSON.stringify(iconNames)};
 const SIZES = [16, 20, 24, 32, 48];
+
+let searchQuery = '';
+let activeCategory = '';
+let viewMode = 'style';
 
 // Stroke widths that look optically correct at each size
 function sw(size) {
@@ -787,47 +1105,116 @@ function svgWrap(size, innerSvg, style) {
 
 let currentView = '24';
 
+function matchesSearch(name, query) {
+  if (!query) return true;
+  var q = query.toLowerCase();
+  var m = ICON_META[name];
+  if (name.includes(q)) return true;
+  if (m.label.toLowerCase().includes(q)) return true;
+  if (m.description.toLowerCase().includes(q)) return true;
+  return m.tags.some(function(t) { return t.toLowerCase().includes(q); });
+}
+
+function matchesCategory(name, cat) {
+  if (!cat) return true;
+  return ICON_META[name].category === cat;
+}
+
+function getFilteredNames() {
+  return ICON_NAMES.filter(function(n) {
+    return matchesSearch(n, searchQuery) && matchesCategory(n, activeCategory);
+  });
+}
+
 function render() {
-  const content = document.getElementById('content');
-  const isSingle = currentView !== 'all';
-  const sizes = isSingle ? [parseInt(currentView)] : SIZES;
+  var content = document.getElementById('content');
+  var isSingle = currentView !== 'all';
+  var sizes = isSingle ? [parseInt(currentView)] : SIZES;
+  var filteredNames = getFilteredNames();
 
-  let html = '';
+  var html = '';
 
-  for (const styleKey of STYLE_ORDER) {
-    const icons = ICONS[styleKey];
-    if (!icons) continue;
-    const meta = STYLE_META[styleKey] || { label: styleKey, tag: '', desc: '' };
+  if (filteredNames.length === 0) {
+    html = '<div class="empty-state">No icons match your search</div>';
+  } else if (viewMode === 'category') {
+    // Group filtered icons by category
+    for (var ci = 0; ci < CATEGORIES.length; ci++) {
+      var cat = CATEGORIES[ci];
+      var catIcons = filteredNames.filter(function(n) { return ICON_META[n].category === cat; });
+      if (catIcons.length === 0) continue;
 
-    html += '<section class="style-section">';
-    html += '<div class="style-header">';
-    html += '<span class="style-label">' + meta.label + '</span>';
-    html += '<span class="style-tag">' + meta.tag + '</span>';
-    html += '<span class="style-desc">' + meta.desc + '</span>';
-    html += '</div>';
-    html += '<div class="icon-grid' + (isSingle ? ' single-size' : '') + '">';
+      html += '<section class="style-section">';
+      html += '<div class="cat-section-header">';
+      html += '<span class="cat-section-label">' + cat + '</span>';
+      html += '<span class="cat-section-count">' + catIcons.length + (catIcons.length === 1 ? ' icon' : ' icons') + '</span>';
+      html += '</div>';
 
-    for (const iconName of ICON_NAMES) {
-      const innerSvg = icons[iconName];
-      if (!innerSvg) continue;
-      const label = ICON_LABELS[iconName] || iconName;
-      html += '<div class="icon-column">';
-      html += '<div class="icon-name-row">' + label + '</div>';
-      html += '<div class="icon-sizes">';
-      for (const sz of sizes) {
-        const isActive = isSingle ? ' active-size' : '';
-        html += '<div class="icon-size-item' + isActive + '">';
-        html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
-        html += '<span class="size-label">' + sz + '</span>';
-        html += '</div>';
+      for (var i = 0; i < catIcons.length; i++) {
+        var iconName = catIcons[i];
+        var label = ICON_META[iconName].label;
+        html += '<div class="cat-icon-row">';
+        html += '<span class="cat-icon-name" data-icon-name="' + iconName + '">' + label + '</span>';
+        html += '<div class="cat-icon-variants">';
+        for (var si = 0; si < STYLE_ORDER.length; si++) {
+          var styleKey = STYLE_ORDER[si];
+          var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+          if (!innerSvg) continue;
+          var sz = isSingle ? parseInt(currentView) : 24;
+          html += '<div class="cat-icon-variant">';
+          html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+          html += '<span class="variant-label">' + STYLE_META[styleKey].label + '</span>';
+          html += '</div>';
+        }
+        html += '</div></div>';
       }
-      html += '</div></div>';
+      html += '</section>';
     }
+  } else {
+    // Existing "by style" rendering
+    for (var si = 0; si < STYLE_ORDER.length; si++) {
+      var styleKey = STYLE_ORDER[si];
+      var icons = ICONS[styleKey];
+      if (!icons) continue;
+      var meta = STYLE_META[styleKey] || { label: styleKey, tag: '', desc: '' };
 
-    html += '</div></section>';
+      html += '<section class="style-section">';
+      html += '<div class="style-header">';
+      html += '<span class="style-label">' + meta.label + '</span>';
+      html += '<span class="style-tag">' + meta.tag + '</span>';
+      html += '<span class="style-desc">' + meta.desc + '</span>';
+      html += '</div>';
+      html += '<div class="icon-grid' + (isSingle ? ' single-size' : '') + '" style="grid-template-columns:repeat(' + filteredNames.length + ',1fr)">';
+
+      for (var i = 0; i < filteredNames.length; i++) {
+        var iconName = filteredNames[i];
+        var innerSvg = icons[iconName];
+        if (!innerSvg) continue;
+        var label = ICON_META[iconName].label;
+        html += '<div class="icon-column">';
+        html += '<div class="icon-name-row" data-icon-name="' + iconName + '">' + label + '</div>';
+        html += '<div class="icon-sizes">';
+        for (var j = 0; j < sizes.length; j++) {
+          var sz = sizes[j];
+          var isActive = isSingle ? ' active-size' : '';
+          html += '<div class="icon-size-item' + isActive + '">';
+          html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+          html += '<span class="size-label">' + sz + '</span>';
+          html += '</div>';
+        }
+        html += '</div></div>';
+      }
+      html += '</div></section>';
+    }
   }
 
   content.innerHTML = html;
+  updateFooter(filteredNames.length);
+}
+
+function updateFooter(shown) {
+  var el = document.getElementById('footer-count');
+  if (!el) return;
+  el.textContent = shown < ICON_NAMES.length ? shown + ' of ' + ICON_NAMES.length + ' icons' : ICON_NAMES.length + ' icons';
 }
 
 function setView(v) {
@@ -844,8 +1231,118 @@ function setTheme(t) {
   document.getElementById('btn-light').classList.toggle('active', t === 'light');
 }
 
+function setCat(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  render();
+}
+
+function setViewMode(mode) {
+  viewMode = mode;
+  document.querySelectorAll('.view-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.viewMode === mode);
+  });
+  // Hide category pills when in category view (redundant)
+  var catBar = document.getElementById('category-bar');
+  if (catBar) {
+    catBar.style.display = mode === 'category' ? 'none' : '';
+  }
+  if (mode === 'category') {
+    activeCategory = '';
+    document.querySelectorAll('.cat-btn').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.cat === '');
+    });
+  }
+  render();
+}
+
+function openDetail(iconName) {
+  var m = ICON_META[iconName];
+  var isSingle = currentView !== 'all';
+  var sz = isSingle ? parseInt(currentView) : 24;
+
+  var html = '<div class="detail-header">';
+  html += '<div><span class="detail-title">' + m.label + '</span> ';
+  html += '<span class="detail-filename">' + iconName + '.svg</span></div>';
+  html += '<button class="detail-close" id="detail-close-btn">&times;</button>';
+  html += '</div>';
+  html += '<div class="detail-desc">' + m.description + '</div>';
+  html += '<div class="detail-meta">';
+  html += '<span class="detail-category">' + m.category + '</span>';
+  html += '<div class="detail-tags">';
+  for (var i = 0; i < m.tags.length; i++) {
+    html += '<span class="detail-tag">' + m.tags[i] + '</span>';
+  }
+  html += '</div></div>';
+  html += '<div class="detail-variants">';
+  for (var si = 0; si < STYLE_ORDER.length; si++) {
+    var styleKey = STYLE_ORDER[si];
+    var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+    if (!innerSvg) continue;
+    html += '<div class="detail-variant">';
+    html += '<div class="icon-wrap" data-style="' + styleKey + '" data-icon="' + iconName + '">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
+    html += '<span class="detail-variant-label">' + STYLE_META[styleKey].label + '</span>';
+    html += '<button class="detail-copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '">Copy SVG</button>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  document.getElementById('detail-panel').innerHTML = html;
+  document.getElementById('detail-panel').classList.add('visible');
+  document.getElementById('detail-backdrop').classList.add('visible');
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.remove('visible');
+  document.getElementById('detail-backdrop').classList.remove('visible');
+}
+
+function copyVariant(iconName, styleKey, sz) {
+  var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+  if (!innerSvg) return;
+  var svgString = svgWrap(sz, innerSvg, styleKey);
+  navigator.clipboard.writeText(svgString).then(function() {
+    var toast = document.getElementById('toast');
+    toast.textContent = STYLE_META[styleKey].label + ' SVG copied';
+    toast.classList.add('visible');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
+  });
+}
+
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
+  var inSearch = document.activeElement === document.getElementById('search');
+
+  if (e.key === 'Escape') {
+    var panel = document.getElementById('detail-panel');
+    if (panel && panel.classList.contains('visible')) {
+      closeDetail();
+      return;
+    }
+  }
+
+  if (e.key === '/' && !inSearch) {
+    e.preventDefault();
+    document.getElementById('search').focus();
+    return;
+  }
+  if (e.key === 'Escape' && inSearch) {
+    document.getElementById('search').value = '';
+    searchQuery = '';
+    document.getElementById('search').blur();
+    render();
+    return;
+  }
+  if (e.key === 'Escape' && activeCategory) {
+    setCat('');
+    return;
+  }
+
+  if (inSearch) return;
+
   if (e.key === 't' || e.key === 'T') {
     var current = document.documentElement.getAttribute('data-theme');
     setTheme(current === 'dark' ? 'light' : 'dark');
@@ -858,24 +1355,50 @@ document.addEventListener('keydown', function(e) {
   if (e.key === '0') setView('all');
 });
 
-// Copy SVG on click
+// Click handler — detail panel + copy
 document.addEventListener('click', function(e) {
+  // Detail panel copy button
+  var copyBtn = e.target.closest('.detail-copy-btn');
+  if (copyBtn) {
+    copyVariant(copyBtn.dataset.icon, copyBtn.dataset.style, parseInt(copyBtn.dataset.sz));
+    return;
+  }
+
+  // Close detail panel on backdrop click or close button
+  if (e.target.id === 'detail-backdrop' || e.target.id === 'detail-close-btn') {
+    closeDetail();
+    return;
+  }
+
+  // Open detail on icon name click
+  var nameEl = e.target.closest('[data-icon-name]');
+  if (nameEl) {
+    openDetail(nameEl.dataset.iconName);
+    return;
+  }
+
+  // Copy SVG on icon click (keep existing behavior for quick copy)
   var wrap = e.target.closest('.icon-wrap');
-  if (!wrap) return;
-  var svg = wrap.querySelector('svg');
-  if (!svg) return;
-  var svgString = svg.outerHTML;
-  navigator.clipboard.writeText(svgString).then(function() {
-    var toast = document.getElementById('toast');
-    toast.textContent = 'SVG copied to clipboard';
-    toast.classList.add('visible');
-    clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
-  });
+  if (wrap) {
+    var svg = wrap.querySelector('svg');
+    if (!svg) return;
+    navigator.clipboard.writeText(svg.outerHTML).then(function() {
+      var toast = document.getElementById('toast');
+      toast.textContent = 'SVG copied to clipboard';
+      toast.classList.add('visible');
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
+    });
+  }
 });
 
 // Initialize — default to "all sizes" view
 setView('all');
+
+document.getElementById('search').addEventListener('input', function(e) {
+  searchQuery = e.target.value;
+  render();
+});
 </script>
 </body>
 </html>
@@ -898,11 +1421,20 @@ function stageWatch() {
       main(true);
     }, 200);
   });
+  fs.watch(path.join('src', 'icons.json'), () => {
+    clearTimeout(watchTimer);
+    watchTimer = setTimeout(() => {
+      console.log('\n  changed: icons.json');
+      main(true);
+    }, 200);
+  });
 }
 
 // ── Main ─────────────────────────────────────────────────────────────
 function main(rebuild = false) {
   const needsSvg = runAll || flag('--svg') || flag('--react') || flag('--svelte') || flag('--sprite') || rebuild;
+
+  const ontology = loadOntology();
 
   let manifest;
   if (needsSvg) manifest = stageSvg();
@@ -911,9 +1443,9 @@ function main(rebuild = false) {
   if (runAll || flag('--svelte'))  stageSvelte(manifest);
   if (runAll || flag('--sprite'))  stageSprite(manifest);
 
-  if (manifest) stageMetadata(manifest);
+  if (manifest) stageMetadata(manifest, ontology);
 
-  if (runAll || flag('--demo'))    stageDemo(manifest);
+  if (runAll || flag('--demo'))    stageDemo(manifest, ontology);
 }
 
 main();
