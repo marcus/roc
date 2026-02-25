@@ -264,20 +264,20 @@ function stageSvelte(manifest) {
     let component;
     if (isStroked) {
       component = `<script>
-  export let size = 24;
-  $: sw = size <= 16 ? 1.75 : 1.5;
+  let { size = 24, ...rest } = $props();
+  let sw = $derived(size <= 16 ? 1.75 : 1.5);
 </script>
 
-<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...$$restProps}>
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...rest}>
   ${svgInner}
 </svg>
 `;
     } else {
       component = `<script>
-  export let size = 24;
+  let { size = 24, ...rest } = $props();
 </script>
 
-<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...$$restProps}>
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" {...rest}>
   ${svgInner}
 </svg>
 `;
