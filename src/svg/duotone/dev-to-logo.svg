@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <rect x="2" y="5" width="20" height="14" rx="3" fill="var(--color-duotone-fill)"/>
+  <rect x="2" y="5" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M5.5 9.5v5h1.25a2.5 2.5 0 0 0 0-5H5.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10.5 9.5v5h2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10.5 12h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M15 9.5l1.75 5 1.75-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

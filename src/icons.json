@@ -2287,6 +2287,240 @@
       "description": "Scattered snowflakes of varying sizes falling gently suggesting a snowfall scene",
       "category": "Nature",
       "tags": ["snow", "snowfall", "flurry", "winter", "cold", "falling", "weather", "blizzard", "flake"]
+    },
+    "reddit-logo": {
+      "label": "Reddit",
+      "description": "Reddit Snoo alien head with antenna, dot eyes, and smile",
+      "category": "Brand",
+      "tags": ["reddit", "snoo", "social", "community", "subreddit", "forum", "logo"]
+    },
+    "gitlab-logo": {
+      "label": "GitLab",
+      "description": "GitLab fox tanuki shield logo for CI/CD and repositories",
+      "category": "Brand",
+      "tags": ["gitlab", "git", "repository", "cicd", "devops", "tanuki", "fox", "logo"]
+    },
+    "stack-overflow-logo": {
+      "label": "Stack Overflow",
+      "description": "Stack Overflow layered overflow logo for developer Q&A",
+      "category": "Brand",
+      "tags": ["stackoverflow", "stack overflow", "developer", "qa", "programming", "code", "logo"]
+    },
+    "dev-to-logo": {
+      "label": "DEV",
+      "description": "DEV.to community logo with block letters in rounded rectangle",
+      "category": "Brand",
+      "tags": ["dev", "dev.to", "blog", "developer", "community", "writing", "logo"]
+    },
+    "youtube-logo": {
+      "label": "YouTube",
+      "description": "YouTube play button inside rounded rectangle",
+      "category": "Brand",
+      "tags": ["youtube", "video", "streaming", "play", "media", "google", "logo"]
+    },
+    "twitch-logo": {
+      "label": "Twitch",
+      "description": "Twitch speech bubble with glitch eyes for live streaming",
+      "category": "Brand",
+      "tags": ["twitch", "streaming", "live", "gaming", "broadcast", "chat", "logo"]
+    },
+    "spotify-logo": {
+      "label": "Spotify",
+      "description": "Spotify circle with three curved sound wave lines",
+      "category": "Brand",
+      "tags": ["spotify", "music", "streaming", "audio", "playlist", "podcast", "logo"]
+    },
+    "soundcloud-logo": {
+      "label": "SoundCloud",
+      "description": "SoundCloud cloud shape with audio waveform bars",
+      "category": "Brand",
+      "tags": ["soundcloud", "music", "audio", "cloud", "waveform", "streaming", "logo"]
+    },
+    "twitter-logo": {
+      "label": "Twitter",
+      "description": "Classic Twitter bird silhouette in flight",
+      "category": "Brand",
+      "tags": ["twitter", "bird", "social", "tweet", "microblog", "logo"]
+    },
+    "x-logo": {
+      "label": "X",
+      "description": "X logo letterform for x.com social platform",
+      "category": "Brand",
+      "tags": ["x", "twitter", "social", "x.com", "microblog", "logo"]
+    },
+    "threads-logo": {
+      "label": "Threads",
+      "description": "Meta Threads stylized at-sign loop symbol",
+      "category": "Brand",
+      "tags": ["threads", "meta", "social", "microblog", "instagram", "logo"]
+    },
+    "mastodon-logo": {
+      "label": "Mastodon",
+      "description": "Mastodon decentralized social network logo",
+      "category": "Brand",
+      "tags": ["mastodon", "fediverse", "social", "decentralized", "activitypub", "logo"]
+    },
+    "instagram-logo": {
+      "label": "Instagram",
+      "description": "Instagram camera icon with rounded square, lens, and flash",
+      "category": "Brand",
+      "tags": ["instagram", "camera", "photo", "social", "meta", "stories", "logo"]
+    },
+    "facebook-logo": {
+      "label": "Facebook",
+      "description": "Facebook lowercase f letterform",
+      "category": "Brand",
+      "tags": ["facebook", "social", "meta", "network", "community", "logo"]
+    },
+    "tiktok-logo": {
+      "label": "TikTok",
+      "description": "TikTok musical note with double-exposure effect",
+      "category": "Brand",
+      "tags": ["tiktok", "video", "social", "music", "short-form", "viral", "logo"]
+    },
+    "fediverse-logo": {
+      "label": "Fediverse",
+      "description": "Fediverse pentagon network with connected nodes",
+      "category": "Brand",
+      "tags": ["fediverse", "activitypub", "decentralized", "federation", "network", "bluesky", "logo"]
+    },
+    "linkedin-logo": {
+      "label": "LinkedIn",
+      "description": "LinkedIn in letterform for professional networking",
+      "category": "Brand",
+      "tags": ["linkedin", "professional", "network", "career", "jobs", "business", "logo"]
+    },
+    "discord-logo": {
+      "label": "Discord",
+      "description": "Discord game controller face with dot eyes",
+      "category": "Brand",
+      "tags": ["discord", "chat", "gaming", "voice", "community", "server", "logo"]
+    },
+    "slack-logo": {
+      "label": "Slack",
+      "description": "Slack hash mark with rounded pill shapes",
+      "category": "Brand",
+      "tags": ["slack", "chat", "messaging", "workspace", "team", "communication", "logo"]
+    },
+    "telegram-logo": {
+      "label": "Telegram",
+      "description": "Telegram paper airplane for encrypted messaging",
+      "category": "Brand",
+      "tags": ["telegram", "messaging", "chat", "encrypted", "paper plane", "logo"]
+    },
+    "medium-logo": {
+      "label": "Medium",
+      "description": "Medium stylized M letterform for publishing",
+      "category": "Brand",
+      "tags": ["medium", "blog", "writing", "publishing", "articles", "logo"]
+    },
+    "ny-times-logo": {
+      "label": "NY Times",
+      "description": "New York Times gothic serif T letterform",
+      "category": "Brand",
+      "tags": ["nytimes", "new york times", "news", "newspaper", "journalism", "media", "logo"]
+    },
+    "notion-logo": {
+      "label": "Notion",
+      "description": "Notion page with N letterform for workspace and docs",
+      "category": "Brand",
+      "tags": ["notion", "workspace", "docs", "notes", "wiki", "productivity", "logo"]
+    },
+    "goodreads-logo": {
+      "label": "Goodreads",
+      "description": "Goodreads G letterform for book reviews and reading",
+      "category": "Brand",
+      "tags": ["goodreads", "books", "reading", "reviews", "library", "amazon", "logo"]
+    },
+    "figma-logo": {
+      "label": "Figma",
+      "description": "Figma overlapping rounded rectangle grid for design",
+      "category": "Brand",
+      "tags": ["figma", "design", "ui", "prototype", "vector", "collaboration", "logo"]
+    },
+    "dribbble-logo": {
+      "label": "Dribbble",
+      "description": "Dribbble basketball with curved seam lines",
+      "category": "Brand",
+      "tags": ["dribbble", "design", "portfolio", "basketball", "creative", "showcase", "logo"]
+    },
+    "behance-logo": {
+      "label": "Behance",
+      "description": "Behance Be letterform for creative portfolios",
+      "category": "Brand",
+      "tags": ["behance", "design", "portfolio", "creative", "adobe", "showcase", "logo"]
+    },
+    "pinterest-logo": {
+      "label": "Pinterest",
+      "description": "Pinterest P pin letterform for visual bookmarking",
+      "category": "Brand",
+      "tags": ["pinterest", "pin", "visual", "bookmarks", "inspiration", "boards", "logo"]
+    },
+    "codepen-logo": {
+      "label": "CodePen",
+      "description": "CodePen 3D cube wireframe for front-end playground",
+      "category": "Brand",
+      "tags": ["codepen", "code", "frontend", "playground", "sandbox", "web", "logo"]
+    },
+    "replit-logo": {
+      "label": "Replit",
+      "description": "Replit three stacked horizontal bars for cloud IDE",
+      "category": "Brand",
+      "tags": ["replit", "ide", "code", "cloud", "programming", "sandbox", "logo"]
+    },
+    "openai-logo": {
+      "label": "OpenAI",
+      "description": "OpenAI hexagonal knot flower shape for AI research",
+      "category": "Brand",
+      "tags": ["openai", "ai", "gpt", "chatgpt", "artificial intelligence", "research", "logo"]
+    },
+    "tumblr-logo": {
+      "label": "Tumblr",
+      "description": "Tumblr lowercase t letterform for microblogging",
+      "category": "Brand",
+      "tags": ["tumblr", "blog", "microblog", "social", "creative", "reblog", "logo"]
+    },
+    "amazon-logo": {
+      "label": "Amazon",
+      "description": "Amazon a letterform with smile arrow underneath",
+      "category": "Brand",
+      "tags": ["amazon", "shopping", "ecommerce", "aws", "cloud", "smile", "logo"]
+    },
+    "google-logo": {
+      "label": "Google",
+      "description": "Google G letterform with crossbar",
+      "category": "Brand",
+      "tags": ["google", "search", "alphabet", "android", "chrome", "cloud", "logo"]
+    },
+    "windows-logo": {
+      "label": "Windows",
+      "description": "Microsoft Windows four-pane window grid",
+      "category": "Brand",
+      "tags": ["windows", "microsoft", "os", "pc", "desktop", "software", "logo"]
+    },
+    "steam-logo": {
+      "label": "Steam",
+      "description": "Steam circle with mechanical gear and piston details",
+      "category": "Brand",
+      "tags": ["steam", "gaming", "valve", "store", "games", "platform", "logo"]
+    },
+    "linux-logo": {
+      "label": "Linux",
+      "description": "Linux Tux penguin silhouette mascot",
+      "category": "Brand",
+      "tags": ["linux", "tux", "penguin", "open source", "os", "kernel", "logo"]
+    },
+    "android-logo": {
+      "label": "Android",
+      "description": "Android bugdroid robot head with antennae and dot eyes",
+      "category": "Brand",
+      "tags": ["android", "google", "mobile", "robot", "os", "phone", "logo"]
+    },
+    "dropbox-logo": {
+      "label": "Dropbox",
+      "description": "Dropbox open box diamond pattern for cloud storage",
+      "category": "Brand",
+      "tags": ["dropbox", "cloud", "storage", "sync", "files", "backup", "logo"]
     }
   }
 }

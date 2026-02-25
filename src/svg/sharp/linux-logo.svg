@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M9.5 10L10 3h4l.5 7 3 2.5V18l-1.5 2h-8L6.5 18v-3.5L9.5 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="10" y="13" width="4" height="6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="10" y="6.5" width="1" height="1" fill="currentColor"/>
+  <rect x="13" y="6.5" width="1" height="1" fill="currentColor"/>
+  <path d="M7 19L5.5 21.5" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M17 19l1.5 2.5" stroke="currentColor" stroke-width="1.5"/>
+</svg>

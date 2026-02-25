@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M3.5 5.88V14.5c0 3 .75 5.5 4 6.5 1.7.47 3.16.57 4.34.5 2.13-.12 3.33-.76 3.33-.76l-.07-1.53-3.23.42c-1.69-.06-3.48-.18-3.75-2.3V17s1.66.41 3.77.5c1.29.06 2.49-.07 3.72-.22 2.36-.28 4.41-1.74 4.67-3.07.4-2.1.37-5.12.37-5.12 0-3.5-2.5-5-2.5-5-1.38-.63-3.75-.88-6.22-.92h-.06c-2.47.04-4.84.29-6.22.92 0 0-2.65 1.38-2.65 5.79Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M8 10.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M16 10.5V14.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M12 10V15" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M8 12h4M12 12h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+</svg>
