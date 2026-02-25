@@ -5,6 +5,11 @@
   "private": true,
   "exports": {
     "./react/*": "./dist/react/*",
+    "./svelte": "./dist/svelte/index.js",
+    "./svelte/outline": "./dist/svelte/outline/index.js",
+    "./svelte/solid": "./dist/svelte/solid/index.js",
+    "./svelte/duotone": "./dist/svelte/duotone/index.js",
+    "./svelte/sharp": "./dist/svelte/sharp/index.js",
     "./svelte/*": "./dist/svelte/*",
     "./svg/*": "./dist/svg/*",
     "./sprite": "./dist/sprite.svg",
