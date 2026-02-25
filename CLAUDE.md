@@ -245,6 +245,35 @@ Source files are at `src/svg/{style}/{name}.svg`.
 
 ---
 
+## Batch Icon Creation (Orchestration)
+
+When creating multiple icons at once, **always use the sub-agent pattern**:
+
+1. **The main agent acts as orchestrator** -- it does NOT create SVG files itself
+2. **Group icons into thematic batches** of 2--4 icons (e.g., "currency icons", "programming language icons", "bird icons")
+3. **Launch one sub-agent per batch** using the Task tool, running them in parallel
+4. Each sub-agent receives:
+   - The list of icon names it's responsible for
+   - The full style specifications from this guide (or a reference to read CLAUDE.md)
+   - Instructions to create all 4 variants per icon and add entries to `src/icons.json`
+5. **After all sub-agents complete**, the orchestrator:
+   - Runs `npm run build` to verify everything compiles
+   - Runs `npm run deploy` if requested
+   - Summarizes what was created
+
+**Why this pattern:**
+- Parallelism -- 5 batches of 3 icons finishes much faster than 15 sequential icons
+- Context isolation -- each sub-agent focuses on a small set of icons without context bloat
+- Reliability -- if one batch fails, the others still succeed
+
+**Example batch groupings:**
+- UI actions: `sign-in`, `sign-out`, `lock`, `unlock`
+- Currencies: `dollar`, `euro`, `pound`, `yen`, `bitcoin`
+- Programming: `ruby`, `python`, `rust`, `go`
+- Animals/nature: `eagle`, `osprey`, `fire`
+
+---
+
 ## Checklist for New Icons
 
 Before submitting a new icon, verify:

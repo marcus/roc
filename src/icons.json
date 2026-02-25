@@ -15,7 +15,9 @@
     "Development",
     "Devices",
     "Objects",
-    "Food"
+    "Food",
+    "Gaming",
+    "Nature"
   ],
   "icons": {
     "home": {
@@ -2111,6 +2113,180 @@
       "description": "Wide bowl of salmon dip with creamy swirl surface and small fish silhouette garnish",
       "category": "Food",
       "tags": ["dip", "salmon", "fish", "bowl", "spread", "appetizer", "seafood", "cream", "garnish", "snack"]
+    },
+    "ice-cream": {
+      "label": "Ice Cream",
+      "description": "Classic ice cream cone with three scoops stacked on a waffle cone",
+      "category": "Food",
+      "tags": ["ice cream", "cone", "scoops", "dessert", "sweet", "frozen", "treat", "gelato", "summer"]
+    },
+    "yerba-mate": {
+      "label": "Yerba Mate",
+      "description": "Traditional mate gourd with bombilla straw extending at an angle from the opening",
+      "category": "Food",
+      "tags": ["mate", "yerba", "gourd", "bombilla", "straw", "tea", "drink", "beverage", "south american", "argentine"]
+    },
+    "sign-out": {
+      "label": "Sign Out",
+      "description": "Arrow exiting through a door frame for logout and sign-out actions",
+      "category": "Actions",
+      "tags": ["logout", "exit", "leave", "door", "arrow", "session", "disconnect", "log off"]
+    },
+    "dollar": {
+      "label": "Dollar",
+      "description": "Dollar currency symbol with S-curve and vertical strikes",
+      "category": "Commerce",
+      "tags": ["currency", "money", "usd", "finance", "payment", "price", "cost", "cash"]
+    },
+    "euro": {
+      "label": "Euro",
+      "description": "Euro currency symbol with C-curve and horizontal crossbars",
+      "category": "Commerce",
+      "tags": ["currency", "money", "eur", "finance", "payment", "europe", "price", "cost"]
+    },
+    "pound": {
+      "label": "Pound",
+      "description": "British pound sterling symbol with curved stem and crossbar",
+      "category": "Commerce",
+      "tags": ["currency", "money", "gbp", "sterling", "finance", "payment", "british", "price"]
+    },
+    "yen": {
+      "label": "Yen",
+      "description": "Japanese yen symbol with Y-shape and horizontal crossbars",
+      "category": "Commerce",
+      "tags": ["currency", "money", "jpy", "finance", "payment", "japanese", "price", "yuan"]
+    },
+    "bitcoin": {
+      "label": "Bitcoin",
+      "description": "Bitcoin cryptocurrency symbol with B-shape and vertical strikes",
+      "category": "Commerce",
+      "tags": ["currency", "crypto", "btc", "cryptocurrency", "blockchain", "digital", "finance", "payment"]
+    },
+    "starcraft": {
+      "label": "StarCraft",
+      "description": "Protoss pylon crystal shape with angular facet lines radiating from center",
+      "category": "Gaming",
+      "tags": ["starcraft", "protoss", "pylon", "crystal", "rts", "strategy", "esports", "blizzard", "gaming"]
+    },
+    "rocket-league": {
+      "label": "Rocket League",
+      "description": "Side-profile car with rocket booster exhaust trailing behind",
+      "category": "Gaming",
+      "tags": ["rocket league", "car", "rocket", "boost", "soccer", "racing", "esports", "gaming", "vehicle"]
+    },
+    "apple": {
+      "label": "Apple",
+      "description": "Apple logo silhouette with rounded body, leaf, and stem",
+      "category": "Brand",
+      "tags": ["apple", "mac", "macos", "ios", "iphone", "brand", "logo", "tech", "company"]
+    },
+    "microsoft": {
+      "label": "Microsoft",
+      "description": "Microsoft logo as a 2x2 grid of four equal squares with gaps between them",
+      "category": "Brand",
+      "tags": ["microsoft", "windows", "brand", "logo", "tech", "company", "grid", "squares", "office"]
+    },
+    "ruby": {
+      "label": "Ruby",
+      "description": "Faceted gemstone shape with flat top, angled sides, and pointed bottom for the Ruby language",
+      "category": "Development",
+      "tags": ["ruby", "gem", "gemstone", "programming", "language", "rails", "development", "code"]
+    },
+    "python": {
+      "label": "Python",
+      "description": "Two intertwined snake shapes with dot eyes forming the Python language logo",
+      "category": "Development",
+      "tags": ["python", "snake", "programming", "language", "development", "code", "django", "flask"]
+    },
+    "rust": {
+      "label": "Rust",
+      "description": "Industrial gear cog with center hole representing the Rust programming language",
+      "category": "Development",
+      "tags": ["rust", "gear", "cog", "programming", "language", "development", "code", "systems", "mozilla"]
+    },
+    "go": {
+      "label": "Go",
+      "description": "Simplified Go gopher head with big round eyes, ears, and smile",
+      "category": "Development",
+      "tags": ["go", "golang", "gopher", "programming", "language", "development", "code", "google"]
+    },
+    "fire": {
+      "label": "Fire",
+      "description": "Classic flame shape with outer and inner fire forms",
+      "category": "Nature",
+      "tags": ["flame", "fire", "burn", "hot", "heat", "campfire", "blaze", "ignite", "warm"]
+    },
+    "eagle": {
+      "label": "Eagle",
+      "description": "Majestic eagle in soaring flight viewed from front with wings spread wide",
+      "category": "Nature",
+      "tags": ["eagle", "bird", "raptor", "wings", "soaring", "majestic", "flight", "predator", "hawk"]
+    },
+    "osprey": {
+      "label": "Osprey",
+      "description": "Osprey in a dynamic diving pose with swept-back wings and extended talons",
+      "category": "Nature",
+      "tags": ["osprey", "bird", "raptor", "diving", "hunting", "fish hawk", "talons", "predator", "flight"]
+    },
+    "earth": {
+      "label": "Earth",
+      "description": "Globe with latitude and longitude lines representing the planet Earth",
+      "category": "Nature",
+      "tags": ["globe", "world", "planet", "earth", "map", "geography", "international", "global", "sphere"]
+    },
+    "water": {
+      "label": "Water",
+      "description": "Water droplet in a classic teardrop shape with a highlight curve",
+      "category": "Nature",
+      "tags": ["water", "drop", "droplet", "rain", "liquid", "tear", "hydration", "wet", "fluid"]
+    },
+    "air": {
+      "label": "Air",
+      "description": "Three flowing wavy lines suggesting air currents or a gentle breeze",
+      "category": "Nature",
+      "tags": ["air", "wind", "breeze", "flow", "atmosphere", "current", "blow", "gust", "wave"]
+    },
+    "ice": {
+      "label": "Ice",
+      "description": "Six-pointed snowflake crystal with branching arms",
+      "category": "Nature",
+      "tags": ["ice", "snow", "snowflake", "crystal", "cold", "frost", "freeze", "winter", "frozen"]
+    },
+    "tornado": {
+      "label": "Tornado",
+      "description": "Funnel cloud twister shape, wide at top and narrowing to a point with curved lines suggesting rotation",
+      "category": "Nature",
+      "tags": ["tornado", "twister", "funnel", "storm", "wind", "cyclone", "weather", "disaster", "vortex"]
+    },
+    "volcano": {
+      "label": "Volcano",
+      "description": "Erupting volcanic mountain with crater opening and ejection lines above the peak",
+      "category": "Nature",
+      "tags": ["volcano", "eruption", "mountain", "lava", "crater", "magma", "disaster", "geological", "fire"]
+    },
+    "meteor": {
+      "label": "Meteor",
+      "description": "Shooting meteor with rocky body and trailing streaks suggesting atmospheric entry",
+      "category": "Nature",
+      "tags": ["meteor", "shooting star", "asteroid", "comet", "space", "streak", "fireball", "sky", "impact"]
+    },
+    "crystal": {
+      "label": "Crystal",
+      "description": "Cluster of elongated hexagonal crystal prisms growing upward from a base like natural quartz",
+      "category": "Nature",
+      "tags": ["crystal", "quartz", "gem", "mineral", "prism", "cluster", "geode", "stone", "formation"]
+    },
+    "comet": {
+      "label": "Comet",
+      "description": "Comet with a round head and long graceful sweeping tail streaking across the sky",
+      "category": "Nature",
+      "tags": ["comet", "tail", "space", "sky", "astronomy", "celestial", "streak", "shooting", "luminous"]
+    },
+    "snow": {
+      "label": "Snow",
+      "description": "Scattered snowflakes of varying sizes falling gently suggesting a snowfall scene",
+      "category": "Nature",
+      "tags": ["snow", "snowfall", "flurry", "winter", "cold", "falling", "weather", "blizzard", "flake"]
     }
   }
 }

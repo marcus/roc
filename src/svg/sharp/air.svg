@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M3 8l3-1.5 3 1.5 3-1.5 3 1.5 3-1.5 3 1.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M3 12l3-1.5 3 1.5 3-1.5 3 1.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M5 16l2.25-1.5L9.5 16l2.25-1.5L14 16l2.25-1.5L18.5 16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+</svg>
