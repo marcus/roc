@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <path d="M6 7.5C6 4.46 8.69 2 12 2c3.31 0 6 2.46 6 5.5v5c0 3.04-2.69 5.5-6 5.5H9.5" fill="var(--color-duotone-fill)"/>
-  <path d="M6 7.5C4.5 7.5 2.5 9 2.5 11.5S4 15.5 6 15.5" fill="var(--color-duotone-fill)"/>
-  <path d="M6 7.5C6 4.46 8.69 2 12 2c3.31 0 6 2.46 6 5.5v5c0 3.04-2.69 5.5-6 5.5H9.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M6 7.5C4.5 7.5 2.5 9 2.5 11.5S4 15.5 6 15.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M9.5 18v-2c0-.75-.5-1.25-1-1.75L7 12.5c-.75-.75-1-1.5-1-2.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M9.5 18c0 1 .5 2.5 1.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M18 9h1.5c.83 0 1.5.67 1.5 1.5v0c0 .83-.67 1.5-1.5 1.5H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="15" cy="7.5" r="0.75" fill="currentColor"/>
+  <path d="M21 9C21 5.5 17.5 3 14 3C11.5 3 9 3.5 7.5 5.5C6.5 7 6 8.5 6 10.5C5 12 3.5 14.5 3 16.5C2.5 18.5 3.5 19.5 5 19C5.5 18.5 6 17.5 6.5 16C7 14.5 8.5 13.5 10 13.5L10 15L10 20.5L12 20.5L12 15.5L16 15.5L16 20.5L18 20.5L18 15C19.5 14 21 12 21 9Z" fill="var(--color-duotone-fill)"/>
+  <path d="M11 5.5C9.5 6 8.5 7.5 8.5 9.5C8.5 11 9.5 12 11 11.5" fill="var(--color-duotone-fill)"/>
+  <path d="M21 9C21 5.5 17.5 3 14 3C11.5 3 9 3.5 7.5 5.5C6.5 7 6 8.5 6 10.5C5 12 3.5 14.5 3 16.5C2.5 18.5 3.5 19.5 5 19C5.5 18.5 6 17.5 6.5 16C7 14.5 8.5 13.5 10 13.5L10 15L10 20.5L12 20.5L12 15.5L16 15.5L16 20.5L18 20.5L18 15C19.5 14 21 12 21 9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M11 5.5C9.5 6 8.5 7.5 8.5 9.5C8.5 11 9.5 12 11 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="9.5" cy="8" r="0.75" fill="currentColor"/>
+  <path d="M21 9L22 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
