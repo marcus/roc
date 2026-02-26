@@ -239,9 +239,43 @@ Source files are at `src/svg/{style}/{name}.svg`.
 | `npm run build:react` | Generate React JSX components in `dist/react/` |
 | `npm run build:svelte` | Generate Svelte components in `dist/svelte/` |
 | `npm run build:sprite` | Generate `dist/sprite.svg` with `<symbol>` elements |
-| `npm run build:demo` | Regenerate `demo/index.html` from source SVGs |
-| `npm run dev` | Watch mode -- rebuilds on changes to `src/svg/` |
+| `npm run build:demo` | Regenerate `demo/index.html` from `demo/src/` + source SVGs |
+| `npm run dev` | Watch mode -- rebuilds on changes to `src/svg/` and `demo/src/` |
 | `npm run preview` | Open `demo/index.html` in the browser |
+
+---
+
+## Demo Page Architecture
+
+The demo page (`demo/index.html`) is a single-file app assembled by the build from multiple sources. **Never edit `demo/index.html` directly** -- it is regenerated on every build.
+
+### Source files
+
+| File | Contents | Interpolated? |
+|------|----------|---------------|
+| `demo/src/styles.css` | All CSS (tokens, layout, components, responsive) | No -- static |
+| `demo/src/app.js` | App logic (render, search, filter, detail panel, URL sync, keyboard shortcuts) | No -- static |
+| `demo/src/disco.js` | Easter egg: disco mode triggered by double-clicking the disco-ball icon | No -- static |
+
+### Generated content (in `build.mjs` `stageDemo()`)
+
+The HTML skeleton and JS data block remain in `build.mjs` as a template literal because they contain build-time interpolations:
+
+- **HTML**: icon count in meta tags, inline SVGs for logo/search/theme icons, category buttons from ontology
+- **JS data**: `ICONS` (all SVG inner content by style+name), `ICON_META`, `STYLE_META`, `CATEGORIES`, `STYLE_ORDER`, `ICON_NAMES`, `STROKED_STYLES`
+
+### Assembly order in generated output
+
+1. `<style>` -- contents of `demo/src/styles.css`
+2. HTML body -- skeleton with interpolated SVGs and category buttons
+3. `<script>` -- JS data block (interpolated) + contents of `demo/src/app.js`
+4. `<script>` -- contents of `demo/src/disco.js`
+
+### Editing the demo
+
+- **CSS/JS changes**: edit files in `demo/src/`, then run `npm run build:demo`
+- **In watch mode** (`npm run dev`): changes to `demo/src/` auto-rebuild the demo page only (skips SVG optimization)
+- **Adding icons**: add SVGs to `src/svg/{style}/` + entry in `src/icons.json`, then `npm run build`
 
 ---
 
@@ -261,10 +295,7 @@ When creating multiple icons at once, **always use the sub-agent pattern**:
    - Runs `npm run deploy` if requested
    - Summarizes what was created
 
-**Why this pattern:**
-- Parallelism -- 5 batches of 3 icons finishes much faster than 15 sequential icons
-- Context isolation -- each sub-agent focuses on a small set of icons without context bloat
-- Reliability -- if one batch fails, the others still succeed
+Always commit and push changes after icons are created.
 
 **Example batch groupings:**
 - UI actions: `sign-in`, `sign-out`, `lock`, `unlock`
