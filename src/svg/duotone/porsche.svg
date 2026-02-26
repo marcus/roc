@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M4 4.5h16v4.5c0 5.25-3.5 10.5-8 12.5-4.5-2-8-7.25-8-12.5V4.5Z" fill="var(--color-duotone-fill)"/>
+  <path d="M4 4.5h16v4.5c0 5.25-3.5 10.5-8 12.5-4.5-2-8-7.25-8-12.5V4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M4 9h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12 4.5v4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12 12.5c-.25-.75-.13-1.5.5-2 .5-.38 1.13-.38 1.5 0 .5.5.25 1.13 0 1.5-.38.5-.5 1-.25 1.5.25.38.5.75.5 1.25 0 .75-.5 1.25-1.25 1.25-.5 0-.88-.25-1-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

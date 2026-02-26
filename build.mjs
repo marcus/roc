@@ -1349,23 +1349,30 @@ let activeCategory = '';
 let viewMode = 'style';
 
 // ── URL sync ──────────────────────────────────────────────────
+var activeIcon = '';
+
 function readURL() {
   var p = new URLSearchParams(window.location.search);
   if (p.has('q')) searchQuery = p.get('q');
   if (p.has('category')) activeCategory = p.get('category');
   if (p.has('size')) currentView = p.get('size');
   if (p.has('view')) viewMode = p.get('view');
+  if (p.has('icon')) activeIcon = p.get('icon');
 }
 
-function syncURL() {
+function buildURL() {
   var p = new URLSearchParams();
   if (searchQuery) p.set('q', searchQuery);
   if (activeCategory) p.set('category', activeCategory);
   if (currentView !== '24') p.set('size', currentView);
   if (viewMode !== 'style') p.set('view', viewMode);
+  if (activeIcon) p.set('icon', activeIcon);
   var qs = p.toString();
-  var url = window.location.pathname + (qs ? '?' + qs : '');
-  history.replaceState(null, '', url);
+  return window.location.pathname + (qs ? '?' + qs : '');
+}
+
+function syncURL() {
+  history.replaceState(null, '', buildURL());
 }
 
 // Stroke widths that look optically correct at each size
@@ -1595,11 +1602,15 @@ function openDetail(iconName) {
   document.getElementById('detail-panel').innerHTML = html;
   document.getElementById('detail-panel').classList.add('open');
   document.getElementById('detail-backdrop').classList.add('open');
+  activeIcon = iconName;
+  history.pushState(null, '', buildURL());
 }
 
 function closeDetail() {
   document.getElementById('detail-panel').classList.remove('open');
   document.getElementById('detail-backdrop').classList.remove('open');
+  activeIcon = '';
+  history.pushState(null, '', buildURL());
 }
 
 function copyVariant(iconName, styleKey, sz) {
@@ -1711,6 +1722,25 @@ if (searchQuery) {
   document.getElementById('search').value = searchQuery;
 }
 render();
+if (activeIcon && ICON_META[activeIcon]) {
+  openDetail(activeIcon);
+  // Replace the initial pushState so we don't get a double entry
+  history.replaceState(null, '', buildURL());
+}
+
+window.addEventListener('popstate', function() {
+  var p = new URLSearchParams(window.location.search);
+  var icon = p.get('icon') || '';
+  activeIcon = icon;
+  if (icon && ICON_META[icon]) {
+    openDetail(icon);
+    // openDetail pushes state, undo that so popstate doesn't stack
+    history.replaceState(null, '', buildURL());
+  } else {
+    closeDetail();
+    history.replaceState(null, '', buildURL());
+  }
+});
 
 document.getElementById('search').addEventListener('input', function(e) {
   searchQuery = e.target.value;

@@ -2660,6 +2660,114 @@
       "description": "Simplified map outline of Saint Vincent with Grenadine island chain",
       "category": "Countries",
       "tags": ["saint vincent", "grenadines", "country", "map", "caribbean", "islands"]
+    },
+    "disco-ball": {
+      "label": "Disco Ball",
+      "description": "Faceted mirror ball with hanging mount for dance and party themes",
+      "category": "Media",
+      "tags": ["disco", "party", "dance", "mirror", "ball", "club", "nightlife", "celebration", "music", "70s"]
+    },
+    "piano": {
+      "label": "Piano",
+      "description": "Piano keyboard section showing white and black keys",
+      "category": "Media",
+      "tags": ["keyboard", "keys", "music", "instrument", "classical", "jazz", "compose", "play", "notes"]
+    },
+    "banjo": {
+      "label": "Banjo",
+      "description": "Banjo with round body, neck, and tuning pegs",
+      "category": "Media",
+      "tags": ["music", "instrument", "string", "bluegrass", "folk", "country", "pluck"]
+    },
+    "guitar": {
+      "label": "Guitar",
+      "description": "Acoustic guitar with figure-eight body, sound hole, neck, and headstock",
+      "category": "Media",
+      "tags": ["music", "instrument", "string", "acoustic", "strum", "rock", "folk"]
+    },
+    "drums": {
+      "label": "Drums",
+      "description": "Drum with crossed drumsticks",
+      "category": "Media",
+      "tags": ["music", "instrument", "percussion", "beat", "rhythm", "snare", "drumsticks"]
+    },
+    "bass": {
+      "label": "Bass",
+      "description": "Electric bass guitar with long neck and pickup",
+      "category": "Media",
+      "tags": ["music", "instrument", "string", "electric", "bass guitar", "rock", "rhythm"]
+    },
+    "toyota": {
+      "label": "Toyota",
+      "description": "Toyota logo with three overlapping ellipses forming the distinctive T shape",
+      "category": "Brand",
+      "tags": ["car", "automobile", "vehicle", "japanese", "automaker", "brand", "logo", "motor"]
+    },
+    "ford": {
+      "label": "Ford",
+      "description": "Ford oval badge with classic cursive script lettering",
+      "category": "Brand",
+      "tags": ["car", "automobile", "vehicle", "american", "automaker", "brand", "logo", "motor", "truck"]
+    },
+    "chevrolet": {
+      "label": "Chevrolet",
+      "description": "Chevrolet bowtie cross emblem",
+      "category": "Brand",
+      "tags": ["car", "automobile", "vehicle", "american", "automaker", "brand", "logo", "motor", "chevy", "bowtie"]
+    },
+    "porsche": {
+      "label": "Porsche",
+      "description": "Porsche shield crest with rearing horse emblem",
+      "category": "Brand",
+      "tags": ["car", "automobile", "vehicle", "german", "automaker", "brand", "logo", "motor", "luxury", "sports car", "crest"]
+    },
+    "volkswagen": {
+      "label": "Volkswagen",
+      "description": "Volkswagen VW monogram with V over W inside a double-circle badge",
+      "category": "Brand",
+      "tags": ["vw", "volkswagen", "car", "auto", "vehicle", "german", "brand", "logo"]
+    },
+    "mini": {
+      "label": "Mini",
+      "description": "Mini winged badge with MINI letterforms inside a circle flanked by horizontal wings",
+      "category": "Brand",
+      "tags": ["mini", "cooper", "bmw", "car", "auto", "vehicle", "british", "brand", "logo"]
+    },
+    "mazda": {
+      "label": "Mazda",
+      "description": "Mazda stylized M wing shape inside a horizontal oval",
+      "category": "Brand",
+      "tags": ["mazda", "car", "auto", "vehicle", "japanese", "brand", "logo", "wing"]
+    },
+    "honda": {
+      "label": "Honda",
+      "description": "Honda bold H letterform inside a trapezoid badge",
+      "category": "Brand",
+      "tags": ["honda", "car", "auto", "vehicle", "japanese", "brand", "logo", "motorcycle"]
+    },
+    "lamborghini": {
+      "label": "Lamborghini",
+      "description": "Lamborghini charging bull inside a shield emblem",
+      "category": "Brand",
+      "tags": ["lamborghini", "car", "automobile", "bull", "shield", "supercar", "italian", "luxury", "logo", "brand"]
+    },
+    "ferrari": {
+      "label": "Ferrari",
+      "description": "Ferrari prancing horse inside a shield emblem",
+      "category": "Brand",
+      "tags": ["ferrari", "car", "automobile", "horse", "prancing", "shield", "supercar", "italian", "luxury", "logo", "brand"]
+    },
+    "tesla": {
+      "label": "Tesla",
+      "description": "Tesla stylized T lettermark with flared crown shape",
+      "category": "Brand",
+      "tags": ["tesla", "car", "automobile", "electric", "ev", "logo", "brand", "tech"]
+    },
+    "audi": {
+      "label": "Audi",
+      "description": "Audi four interlocking rings in a horizontal row",
+      "category": "Brand",
+      "tags": ["audi", "car", "automobile", "rings", "german", "luxury", "logo", "brand"]
     }
   }
 }
