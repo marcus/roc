@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <circle cx="12" cy="12" r="8.75" fill="currentColor"/>
   <path d="M12 8.4 15 10.6 13.85 14h-3.7L9 10.6 12 8.4Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-  <rect x="7.1" y="11.45" width="2.8" height=".9" fill="currentColor" transform="rotate(-40 7.1 11.45)" rx=".45"/>
-  <rect x="15.2" y="11" width="2.8" height=".9" fill="currentColor" transform="rotate(40 15.2 11)" rx=".45"/>
-  <rect x="9.1" y="14.2" width="3" height=".9" fill="currentColor" transform="rotate(-66 9.1 14.2)" rx=".45"/>
-  <rect x="14.8" y="13.3" width="3" height=".9" fill="currentColor" transform="rotate(66 14.8 13.3)" rx=".45"/>
+  <rect x="11.45" y="3.9" width="1.1" height="5.4" fill="currentColor" rx=".55"/>
+  <rect x="6.15" y="7.7" width="4.5" height="1" fill="currentColor" rx=".5" transform="rotate(28 6.15 7.7)"/>
+  <rect x="14.35" y="9.82" width="4.5" height="1" fill="currentColor" rx=".5" transform="rotate(-28 14.35 9.82)"/>
+  <rect x="7.1" y="16.1" width="5.6" height="1" fill="currentColor" rx=".5" transform="rotate(-46 7.1 16.1)"/>
+  <rect x="12.15" y="12.1" width="5.6" height="1" fill="currentColor" rx=".5" transform="rotate(46 12.15 12.1)"/>
 </svg>

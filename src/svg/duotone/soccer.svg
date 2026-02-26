@@ -3,10 +3,5 @@
   <path d="M12 8.8 14.4 10.5 13.5 13.3h-3l-.9-2.8L12 8.8Z" fill="var(--color-duotone-fill)"/>
   <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
   <path d="M12 8.8 14.4 10.5 13.5 13.3h-3l-.9-2.8L12 8.8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M9.6 10.5 7.8 12.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M14.4 10.5 16.2 12.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M10.5 13.3 9.4 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M13.5 13.3 14.6 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M7.9 10.1 5.8 8.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M16.1 10.1 18.2 8.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12 8.8V4M9.6 10.5 5.07 8M14.4 10.5 18.93 8M10.5 13.3 7.3 18.47M13.5 13.3 16.7 18.47M7.3 18.47 12 20M16.7 18.47 12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
