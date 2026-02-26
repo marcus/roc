@@ -18,6 +18,7 @@
     "Food",
     "Gaming",
     "Nature",
+    "Sports",
     "Countries"
   ],
   "icons": {
@@ -2858,6 +2859,72 @@
       "description": "Elephant head with large ear and curving trunk",
       "category": "Nature",
       "tags": ["elephant", "animal", "wildlife", "trunk", "mammal", "safari", "nature"]
+    },
+    "skateboarding": {
+      "label": "Skateboarding",
+      "description": "Skateboard deck with wheels for skateboarding and street sports",
+      "category": "Sports",
+      "tags": ["skateboard", "skating", "deck", "wheels", "street", "action sports"]
+    },
+    "surfing": {
+      "label": "Surfing",
+      "description": "Surfboard with wave line for surfing and ocean sports",
+      "category": "Sports",
+      "tags": ["surf", "surfboard", "wave", "ocean", "beach", "water sports"]
+    },
+    "skiing": {
+      "label": "Skiing",
+      "description": "Crossed skis and poles for skiing and winter sports",
+      "category": "Sports",
+      "tags": ["ski", "skis", "snow", "winter", "poles", "downhill"]
+    },
+    "snowboarding": {
+      "label": "Snowboarding",
+      "description": "Snowboard deck with bindings for snowboarding and mountain sports",
+      "category": "Sports",
+      "tags": ["snowboard", "snow", "winter", "bindings", "mountain", "board"]
+    },
+    "football-american": {
+      "label": "American Football",
+      "description": "Laced football ball for American football and gridiron sports",
+      "category": "Sports",
+      "tags": ["football", "american football", "nfl", "gridiron", "ball", "laces"]
+    },
+    "soccer": {
+      "label": "Soccer",
+      "description": "Soccer ball with panel seams for football and field sports",
+      "category": "Sports",
+      "tags": ["soccer", "football", "futbol", "ball", "sport", "match"]
+    },
+    "hockey": {
+      "label": "Hockey",
+      "description": "Hockey stick and puck for ice hockey and rink sports",
+      "category": "Sports",
+      "tags": ["hockey", "stick", "puck", "ice hockey", "rink", "sport"]
+    },
+    "golf": {
+      "label": "Golf",
+      "description": "Flagstick and golf ball for golf and course sports",
+      "category": "Sports",
+      "tags": ["golf", "flag", "hole", "tee", "ball", "course"]
+    },
+    "basketball": {
+      "label": "Basketball",
+      "description": "Basketball with seam lines for court sports and hoops",
+      "category": "Sports",
+      "tags": ["basketball", "ball", "hoops", "nba", "court", "dribble"]
+    },
+    "weightlifting": {
+      "label": "Weightlifting",
+      "description": "Barbell with plates for weightlifting, gym, and strength training",
+      "category": "Sports",
+      "tags": ["weightlifting", "barbell", "gym", "fitness", "strength", "workout"]
+    },
+    "rock-climbing": {
+      "label": "Rock Climbing",
+      "description": "Mountain face with climber for rock climbing and ascent activities",
+      "category": "Sports",
+      "tags": ["climbing", "rock climbing", "mountain", "climber", "ascent", "outdoor"]
     }
   }
 }
