@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <ellipse cx="7.5" cy="6.5" rx="2.75" ry="3.25" fill="currentColor"/>
-  <ellipse cx="12" cy="5" rx="2.5" ry="3" fill="currentColor"/>
-  <ellipse cx="16.5" cy="6.5" rx="2.75" ry="3.25" fill="currentColor"/>
-  <ellipse cx="19" cy="11.5" rx="2.25" ry="2.75" fill="currentColor"/>
-  <ellipse cx="5" cy="11.5" rx="2.25" ry="2.75" fill="currentColor"/>
-  <path d="M7.25 14C6.25 15.5 6 17.25 6.75 18.75c.75 1.5 2.25 2.25 3.75 1.75.5-.25.75-.75 1-1.25.25-.75 1-.75 1.25 0 .25.5.5 1 1 1.25 1 .5 2.25.25 3.25-.75.75-1 1.25-2.5.75-4-.5-1.5-1.75-2.25-3-1.75-1 .25-2 .5-3 .5s-2-.25-2.75-.5c-.5-.25-1-.25-1.25 0Z" fill="currentColor"/>
+  <ellipse cx="7.5" cy="5.75" rx="2.25" ry="2.75" fill="currentColor"/>
+  <ellipse cx="16.5" cy="5.75" rx="2.25" ry="2.75" fill="currentColor"/>
+  <ellipse cx="10.75" cy="4" rx="2" ry="2.5" fill="currentColor"/>
+  <ellipse cx="13.25" cy="4" rx="2" ry="2.5" fill="currentColor"/>
+  <path d="M8 10.5c-.75-.5-2-1.25-2.75-.75s-.75 2 .25 3.75 2 3.5 2.75 4.25c.75.75 1.5 1.5 2.5 1.75.5.17 1 .25 1.25.25s.75-.08 1.25-.25c1-.25 1.75-1 2.5-1.75.75-.75 1.75-2.5 2.75-4.25s1-3.25.25-3.75-2 .25-2.75.75c-.75.5-2 1.25-4 1.25s-3.25-.75-4-1.25Z" fill="currentColor"/>
 </svg>

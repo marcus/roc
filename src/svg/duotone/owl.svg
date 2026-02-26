@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M5.5 9C4.5 10.5 4 12.25 4 14c0 3.5 3.5 6.5 8 6.5s8-3 8-6.5c0-1.75-.5-3.5-1.5-5C17.25 7 14.75 6 12 6S6.75 7 5.5 9Z" fill="var(--color-duotone-fill)"/>
+  <path d="M8 3l2 3h4l2-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M5.5 9C4.5 10.5 4 12.25 4 14c0 3.5 3.5 6.5 8 6.5s8-3 8-6.5c0-1.75-.5-3.5-1.5-5C17.25 7 14.75 6 12 6S6.75 7 5.5 9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="9" cy="12.5" r="2.25" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="15" cy="12.5" r="2.25" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="9" cy="12.5" r="0.75" fill="currentColor"/>
+  <circle cx="15" cy="12.5" r="0.75" fill="currentColor"/>
+  <path d="M11.25 12.5L12 14l.75-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 17.5c.5.75 1.25 1 2 1s1.5-.25 2-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

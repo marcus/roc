@@ -2768,6 +2768,96 @@
       "description": "Audi four interlocking rings in a horizontal row",
       "category": "Brand",
       "tags": ["audi", "car", "automobile", "rings", "german", "luxury", "logo", "brand"]
+    },
+    "cat": {
+      "label": "Cat",
+      "description": "Front-facing cat head with pointed ears and whiskers",
+      "category": "Nature",
+      "tags": ["animal", "pet", "feline", "kitten", "kitty", "meow", "whiskers"]
+    },
+    "dog": {
+      "label": "Dog",
+      "description": "Dog head with ears and snout for pets and animals",
+      "category": "Nature",
+      "tags": ["animal", "pet", "canine", "puppy", "hound", "bark", "woof"]
+    },
+    "rabbit": {
+      "label": "Rabbit",
+      "description": "Rabbit head with tall upright ears",
+      "category": "Nature",
+      "tags": ["animal", "bunny", "hare", "pet", "ears", "easter", "hop"]
+    },
+    "horse": {
+      "label": "Horse",
+      "description": "Side-view horse head profile with elongated face, pointed ears, and flowing mane",
+      "category": "Nature",
+      "tags": ["horse", "equine", "stallion", "mare", "pony", "animal", "equestrian", "riding"]
+    },
+    "deer": {
+      "label": "Deer",
+      "description": "Front-facing deer head with branching antlers and alert ears",
+      "category": "Nature",
+      "tags": ["deer", "stag", "buck", "antlers", "animal", "wildlife", "forest", "elk"]
+    },
+    "fox": {
+      "label": "Fox",
+      "description": "Front-facing fox head with large pointed ears and narrow snout",
+      "category": "Nature",
+      "tags": ["fox", "animal", "wildlife", "forest", "cunning", "vixen", "canine"]
+    },
+    "wolf": {
+      "label": "Wolf",
+      "description": "Front-facing wolf head with angular features, pointed ears, and whisker lines",
+      "category": "Nature",
+      "tags": ["wolf", "animal", "wildlife", "predator", "pack", "howl", "canine", "wild"]
+    },
+    "dolphin": {
+      "label": "Dolphin",
+      "description": "Side-view dolphin in a leaping pose with curved body, dorsal fin, and tail flukes",
+      "category": "Nature",
+      "tags": ["dolphin", "animal", "marine", "ocean", "sea", "aquatic", "mammal", "swimming"]
+    },
+    "snake": {
+      "label": "Snake",
+      "description": "S-curved snake with visible head and sinuous body coils",
+      "category": "Nature",
+      "tags": ["snake", "animal", "reptile", "serpent", "coil", "wildlife", "slither"]
+    },
+    "turtle": {
+      "label": "Turtle",
+      "description": "Side-view turtle with domed shell, extended head, and legs",
+      "category": "Nature",
+      "tags": ["turtle", "animal", "reptile", "shell", "tortoise", "slow", "marine", "wildlife"]
+    },
+    "owl": {
+      "label": "Owl",
+      "description": "Front-facing owl with large round eyes, ear tufts, and compact body",
+      "category": "Nature",
+      "tags": ["owl", "animal", "bird", "nocturnal", "wisdom", "wildlife", "raptor", "night"]
+    },
+    "bear": {
+      "label": "Bear",
+      "description": "Front-facing bear head with round ears and snout",
+      "category": "Nature",
+      "tags": ["bear", "animal", "wildlife", "grizzly", "mammal", "nature", "forest"]
+    },
+    "lion": {
+      "label": "Lion",
+      "description": "Front-facing lion head with radiating mane",
+      "category": "Nature",
+      "tags": ["lion", "animal", "wildlife", "mane", "cat", "big cat", "king", "safari", "nature"]
+    },
+    "tiger": {
+      "label": "Tiger",
+      "description": "Front-facing tiger head with pointed ears and stripes",
+      "category": "Nature",
+      "tags": ["tiger", "animal", "wildlife", "stripes", "cat", "big cat", "safari", "nature"]
+    },
+    "elephant": {
+      "label": "Elephant",
+      "description": "Elephant head with large ear and curving trunk",
+      "category": "Nature",
+      "tags": ["elephant", "animal", "wildlife", "trunk", "mammal", "safari", "nature"]
     }
   }
 }
