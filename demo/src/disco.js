@@ -23,13 +23,14 @@
     '  100% { filter: hue-rotate(360deg); }',
     '}',
 
-    // Spotlight sweep — two radial gradients drifting across the page
+    // Spotlight sweep — five radial gradients drifting across the page
     '@keyframes disco-spotlight {',
-    '  0%   { background-position: 20% 30%, 80% 70%; }',
-    '  25%  { background-position: 60% 10%, 30% 80%; }',
-    '  50%  { background-position: 80% 60%, 10% 20%; }',
-    '  75%  { background-position: 40% 90%, 70% 40%; }',
-    '  100% { background-position: 20% 30%, 80% 70%; }',
+    '  0%   { background-position: 20% 30%, 80% 70%, 50% 10%, 10% 60%, 90% 40%; }',
+    '  20%  { background-position: 60% 10%, 30% 80%, 80% 50%, 40% 90%, 20% 20%; }',
+    '  40%  { background-position: 80% 60%, 10% 20%, 30% 80%, 70% 30%, 50% 70%; }',
+    '  60%  { background-position: 40% 90%, 70% 40%, 10% 40%, 90% 70%, 30% 10%; }',
+    '  80%  { background-position: 10% 50%, 50% 10%, 70% 70%, 20% 20%, 80% 80%; }',
+    '  100% { background-position: 20% 30%, 80% 70%, 50% 10%, 10% 60%, 90% 40%; }',
     '}',
 
     // Icon wobble/dance — a playful rotation + slight scale
@@ -62,12 +63,15 @@
     '  z-index: 0;',
     '  pointer-events: none;',
     '  background:',
-    '    radial-gradient(ellipse 600px 600px, rgba(255,50,150,0.12), transparent),',
-    '    radial-gradient(ellipse 500px 500px, rgba(50,100,255,0.10), transparent);',
+    '    radial-gradient(ellipse 500px 500px, rgba(255,50,150,0.14), transparent),',
+    '    radial-gradient(ellipse 450px 450px, rgba(50,100,255,0.12), transparent),',
+    '    radial-gradient(ellipse 400px 400px, rgba(255,200,50,0.10), transparent),',
+    '    radial-gradient(ellipse 350px 350px, rgba(50,255,150,0.10), transparent),',
+    '    radial-gradient(ellipse 500px 500px, rgba(180,50,255,0.12), transparent);',
     '  background-size: 100% 100%;',
     '  animation:',
-    '    disco-spotlight 6s ease-in-out infinite,',
-    '    disco-hue 8s linear infinite;',
+    '    disco-spotlight 8s ease-in-out infinite,',
+    '    disco-hue 10s linear infinite;',
     '  opacity: 1;',
     '  transition: opacity 0.6s ease;',
     '}',
@@ -169,8 +173,11 @@
     '  z-index: 0;',
     '  pointer-events: none;',
     '  background:',
-    '    radial-gradient(ellipse 600px 600px, rgba(255,50,150,0.12), transparent),',
-    '    radial-gradient(ellipse 500px 500px, rgba(50,100,255,0.10), transparent);',
+    '    radial-gradient(ellipse 500px 500px, rgba(255,50,150,0.14), transparent),',
+    '    radial-gradient(ellipse 450px 450px, rgba(50,100,255,0.12), transparent),',
+    '    radial-gradient(ellipse 400px 400px, rgba(255,200,50,0.10), transparent),',
+    '    radial-gradient(ellipse 350px 350px, rgba(50,255,150,0.10), transparent),',
+    '    radial-gradient(ellipse 500px 500px, rgba(180,50,255,0.12), transparent);',
     '  opacity: 0;',
     '  transition: opacity 0.6s ease;',
     '}',
@@ -203,23 +210,26 @@
   document.head.appendChild(styleEl);
 
   // ---------------------------------------------------------------------------
-  // 2. Listen for double-click on disco-ball icon cells
+  // 2. Single-click on any disco-ball icon cell toggles disco mode
+  //
+  // Uses a capture-phase listener so it fires before app.js's bubble-phase
+  // click handler. We stopImmediatePropagation to prevent the detail panel
+  // from opening.
   // ---------------------------------------------------------------------------
 
   var fadeOutTimer = null;
 
-  document.addEventListener('dblclick', function (e) {
-    // Walk up from the double-click target to see if we're inside a
-    // [data-icon-name="disco-ball"] element.
+  document.addEventListener('click', function (e) {
     var discoBall = e.target.closest('[data-icon-name="disco-ball"]');
     if (!discoBall) return;
 
-    // Prevent the double-click from selecting text
+    // Swallow the click so app.js never sees it (we'll open the panel ourselves)
+    e.stopImmediatePropagation();
     e.preventDefault();
 
     var html = document.documentElement;
 
-    // If we're currently fading out, cancel that and just snap off
+    // If we're currently fading out, cancel and snap off
     if (fadeOutTimer) {
       clearTimeout(fadeOutTimer);
       fadeOutTimer = null;
@@ -237,11 +247,16 @@
       fadeOutTimer = setTimeout(function () {
         html.classList.remove('disco-fade-out');
         fadeOutTimer = null;
-      }, 650); // slightly longer than the 0.6s CSS transition
+      }, 650);
     } else {
-      // -- Turn on: remove any lingering fade-out, add disco-mode ------
+      // -- Turn on -----------------------------------------------------
       html.classList.remove('disco-fade-out');
       html.classList.add('disco-mode');
     }
-  });
+
+    // Still open the detail panel so users can access the icon
+    if (typeof openDetail === 'function') {
+      openDetail('disco-ball');
+    }
+  }, true); // ← capture phase: fires before app.js bubble-phase listener
 })();
