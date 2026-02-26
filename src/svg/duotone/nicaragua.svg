@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M3.5 2.5l2 .5 2 1 2.5.5 2 1 2.5.5 2 .5 1.5 1 .5 2v2l-.5 2-1 2-.5 2-1 1.5-1.5 1-2 .5-1.5 1-2-.5-1.5-1L5 17l-.5-2v-2l.5-2-.5-2L4.5 7 4 5l-.5-1.5V2.5Z" fill="var(--color-duotone-fill)"/>
+  <path d="M3.5 2.5l2 .5 2 1 2.5.5 2 1 2.5.5 2 .5 1.5 1 .5 2v2l-.5 2-1 2-.5 2-1 1.5-1.5 1-2 .5-1.5 1-2-.5-1.5-1L5 17l-.5-2v-2l.5-2-.5-2L4.5 7 4 5l-.5-1.5V2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <ellipse cx="9.5" cy="15" rx="2" ry="1.5" stroke="currentColor" stroke-width="1"/>
+</svg>

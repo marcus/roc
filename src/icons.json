@@ -17,7 +17,8 @@
     "Objects",
     "Food",
     "Gaming",
-    "Nature"
+    "Nature",
+    "Countries"
   ],
   "icons": {
     "home": {
@@ -2521,6 +2522,144 @@
       "description": "Dropbox open box diamond pattern for cloud storage",
       "category": "Brand",
       "tags": ["dropbox", "cloud", "storage", "sync", "files", "backup", "logo"]
+    },
+    "united-states": {
+      "label": "United States",
+      "description": "Simplified map outline of the contiguous United States",
+      "category": "Countries",
+      "tags": ["usa", "america", "country", "map", "north america", "us"]
+    },
+    "canada": {
+      "label": "Canada",
+      "description": "Simplified map outline of Canada with Hudson Bay",
+      "category": "Countries",
+      "tags": ["canada", "country", "map", "north america", "maple"]
+    },
+    "mexico": {
+      "label": "Mexico",
+      "description": "Simplified map outline of Mexico with Baja California peninsula",
+      "category": "Countries",
+      "tags": ["mexico", "country", "map", "north america", "latin america"]
+    },
+    "guatemala": {
+      "label": "Guatemala",
+      "description": "Simplified map outline of Guatemala",
+      "category": "Countries",
+      "tags": ["guatemala", "country", "map", "central america", "latin america"]
+    },
+    "belize": {
+      "label": "Belize",
+      "description": "Simplified map outline of Belize",
+      "category": "Countries",
+      "tags": ["belize", "country", "map", "central america", "caribbean"]
+    },
+    "honduras": {
+      "label": "Honduras",
+      "description": "Simplified map outline of Honduras",
+      "category": "Countries",
+      "tags": ["honduras", "country", "map", "central america", "latin america"]
+    },
+    "el-salvador": {
+      "label": "El Salvador",
+      "description": "Simplified map outline of El Salvador",
+      "category": "Countries",
+      "tags": ["el salvador", "country", "map", "central america", "latin america"]
+    },
+    "nicaragua": {
+      "label": "Nicaragua",
+      "description": "Simplified map outline of Nicaragua with Lake Nicaragua",
+      "category": "Countries",
+      "tags": ["nicaragua", "country", "map", "central america", "latin america"]
+    },
+    "costa-rica": {
+      "label": "Costa Rica",
+      "description": "Simplified map outline of Costa Rica with Nicoya Peninsula",
+      "category": "Countries",
+      "tags": ["costa rica", "country", "map", "central america", "latin america"]
+    },
+    "panama": {
+      "label": "Panama",
+      "description": "Simplified map outline of Panama with its distinctive S-shape",
+      "category": "Countries",
+      "tags": ["panama", "country", "map", "central america", "latin america", "canal"]
+    },
+    "cuba": {
+      "label": "Cuba",
+      "description": "Simplified map outline of Cuba island",
+      "category": "Countries",
+      "tags": ["cuba", "country", "map", "caribbean", "island"]
+    },
+    "jamaica": {
+      "label": "Jamaica",
+      "description": "Simplified map outline of Jamaica island",
+      "category": "Countries",
+      "tags": ["jamaica", "country", "map", "caribbean", "island"]
+    },
+    "haiti": {
+      "label": "Haiti",
+      "description": "Simplified map outline of Haiti with its distinctive two peninsulas",
+      "category": "Countries",
+      "tags": ["haiti", "country", "map", "caribbean", "hispaniola"]
+    },
+    "dominican-republic": {
+      "label": "Dominican Republic",
+      "description": "Simplified map outline of the Dominican Republic",
+      "category": "Countries",
+      "tags": ["dominican republic", "country", "map", "caribbean", "hispaniola"]
+    },
+    "bahamas": {
+      "label": "Bahamas",
+      "description": "Simplified map of the Bahamas archipelago island chain",
+      "category": "Countries",
+      "tags": ["bahamas", "country", "map", "caribbean", "islands", "archipelago"]
+    },
+    "trinidad-and-tobago": {
+      "label": "Trinidad and Tobago",
+      "description": "Simplified map outline of Trinidad and Tobago twin islands",
+      "category": "Countries",
+      "tags": ["trinidad", "tobago", "country", "map", "caribbean", "islands"]
+    },
+    "barbados": {
+      "label": "Barbados",
+      "description": "Simplified map outline of Barbados island",
+      "category": "Countries",
+      "tags": ["barbados", "country", "map", "caribbean", "island"]
+    },
+    "antigua-and-barbuda": {
+      "label": "Antigua and Barbuda",
+      "description": "Simplified map outline of Antigua and Barbuda twin islands",
+      "category": "Countries",
+      "tags": ["antigua", "barbuda", "country", "map", "caribbean", "islands"]
+    },
+    "dominica": {
+      "label": "Dominica",
+      "description": "Simplified map outline of the island nation of Dominica",
+      "category": "Countries",
+      "tags": ["dominica", "country", "map", "caribbean", "island"]
+    },
+    "saint-lucia": {
+      "label": "Saint Lucia",
+      "description": "Simplified map outline of Saint Lucia with Pitons",
+      "category": "Countries",
+      "tags": ["saint lucia", "country", "map", "caribbean", "island", "pitons"]
+    },
+    "grenada": {
+      "label": "Grenada",
+      "description": "Simplified map outline of Grenada island",
+      "category": "Countries",
+      "tags": ["grenada", "country", "map", "caribbean", "island", "spice"]
+    },
+    "saint-kitts-and-nevis": {
+      "label": "Saint Kitts and Nevis",
+      "description": "Simplified map outline of Saint Kitts and Nevis twin islands",
+      "category": "Countries",
+      "tags": ["saint kitts", "nevis", "country", "map", "caribbean", "islands"]
+    },
+    "saint-vincent-and-the-grenadines": {
+      "label": "Saint Vincent and the Grenadines",
+      "description": "Simplified map outline of Saint Vincent with Grenadine island chain",
+      "category": "Countries",
+      "tags": ["saint vincent", "grenadines", "country", "map", "caribbean", "islands"]
     }
   }
 }

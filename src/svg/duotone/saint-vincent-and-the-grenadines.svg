@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M11.5 2c-1 .5-2 1.5-2.75 3-.5 1-.75 2.25-.75 3.5 0 1 .25 2 .5 2.75.5 1 1 1.75 1.75 2.25.75.5 1.75.75 2.75.5 1-.25 1.75-1 2.25-2 .5-1 .75-2.25.75-3.5 0-1.25-.25-2.5-.75-3.5C14.75 4 14 3.25 13 2.75 12.5 2.25 12 2 11.5 2Z" fill="var(--color-duotone-fill)"/>
+  <ellipse cx="13.5" cy="16.25" rx="1.25" ry="1" fill="var(--color-duotone-fill)"/>
+  <circle cx="15" cy="19" r=".75" fill="var(--color-duotone-fill)"/>
+  <circle cx="16.25" cy="21" r=".75" fill="var(--color-duotone-fill)"/>
+  <path d="M11.5 2c-1 .5-2 1.5-2.75 3-.5 1-.75 2.25-.75 3.5 0 1 .25 2 .5 2.75.5 1 1 1.75 1.75 2.25.75.5 1.75.75 2.75.5 1-.25 1.75-1 2.25-2 .5-1 .75-2.25.75-3.5 0-1.25-.25-2.5-.75-3.5C14.75 4 14 3.25 13 2.75 12.5 2.25 12 2 11.5 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <ellipse cx="13.5" cy="16.25" rx="1.25" ry="1" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="15" cy="19" r=".75" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="16.25" cy="21" r=".75" stroke="currentColor" stroke-width="1.5"/>
+</svg>
