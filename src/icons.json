@@ -2929,61 +2929,61 @@
     "excited": {
       "label": "Excited",
       "description": "Grinning face with raised eyebrows and open mouth for high energy",
-      "category": "Communication",
+      "category": "People",
       "tags": ["excited", "grin", "emoji", "face", "energy", "enthusiasm", "happy"]
     },
     "interested": {
       "label": "Interested",
       "description": "Attentive face with raised eyebrow and subtle smile for curiosity",
-      "category": "Communication",
+      "category": "People",
       "tags": ["interested", "curious", "emoji", "face", "energy", "engaged", "intrigued"]
     },
     "neutral": {
       "label": "Neutral",
       "description": "Expressionless face with straight mouth for neutral energy",
-      "category": "Communication",
+      "category": "People",
       "tags": ["neutral", "emoji", "face", "energy", "indifferent", "baseline"]
     },
     "avoid": {
       "label": "Avoid",
       "description": "Squinting face with grimace mouth for aversion and low energy",
-      "category": "Communication",
+      "category": "People",
       "tags": ["avoid", "averse", "emoji", "face", "energy", "discomfort", "grimace"]
     },
     "snooze": {
       "label": "Snooze",
       "description": "Sleeping face with closed eyes and floating Z for snoozed or deferred",
-      "category": "Communication",
+      "category": "People",
       "tags": ["snooze", "sleep", "emoji", "face", "deferred", "zzz", "rest"]
     },
     "laugh": {
       "label": "Laugh",
       "description": "Laughing face with squinted happy eyes and open mouth",
-      "category": "Communication",
+      "category": "People",
       "tags": ["laugh", "lol", "emoji", "face", "happy", "joy", "hilarious"]
     },
     "wink": {
       "label": "Wink",
       "description": "Winking face with one closed eye and smile",
-      "category": "Communication",
+      "category": "People",
       "tags": ["wink", "emoji", "face", "playful", "flirt", "cheeky"]
     },
     "angry": {
       "label": "Angry",
       "description": "Angry face with furrowed brows and frown mouth",
-      "category": "Communication",
+      "category": "People",
       "tags": ["angry", "mad", "emoji", "face", "frustrated", "rage", "furious"]
     },
     "surprised": {
       "label": "Surprised",
       "description": "Surprised face with wide open eyes and O-shaped mouth",
-      "category": "Communication",
+      "category": "People",
       "tags": ["surprised", "shocked", "emoji", "face", "wow", "astonished"]
     },
     "thinking": {
       "label": "Thinking",
       "description": "Thinking face with raised brow and tilted mouth for contemplation",
-      "category": "Communication",
+      "category": "People",
       "tags": ["thinking", "pondering", "emoji", "face", "hmm", "contemplation"]
     }
   }
