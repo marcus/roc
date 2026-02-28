@@ -3,13 +3,31 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
+  "files": [
+    "dist/"
+  ],
   "exports": {
     "./react/*": "./dist/react/*",
-    "./svelte": "./dist/svelte/index.js",
-    "./svelte/outline": "./dist/svelte/outline/index.js",
-    "./svelte/solid": "./dist/svelte/solid/index.js",
-    "./svelte/duotone": "./dist/svelte/duotone/index.js",
-    "./svelte/sharp": "./dist/svelte/sharp/index.js",
+    "./svelte": {
+      "types": "./dist/svelte/index.d.ts",
+      "default": "./dist/svelte/index.js"
+    },
+    "./svelte/outline": {
+      "types": "./dist/svelte/outline/index.d.ts",
+      "default": "./dist/svelte/outline/index.js"
+    },
+    "./svelte/solid": {
+      "types": "./dist/svelte/solid/index.d.ts",
+      "default": "./dist/svelte/solid/index.js"
+    },
+    "./svelte/duotone": {
+      "types": "./dist/svelte/duotone/index.d.ts",
+      "default": "./dist/svelte/duotone/index.js"
+    },
+    "./svelte/sharp": {
+      "types": "./dist/svelte/sharp/index.d.ts",
+      "default": "./dist/svelte/sharp/index.js"
+    },
     "./svelte/*": "./dist/svelte/*",
     "./svg/*": "./dist/svg/*",
     "./sprite": "./dist/sprite.svg",
@@ -24,6 +42,7 @@
     "build:demo": "node build.mjs --demo",
     "dev": "node build.mjs --watch",
     "preview": "open demo/index.html",
+    "check:types": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
   },
   "devDependencies": {

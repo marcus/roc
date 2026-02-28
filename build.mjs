@@ -309,6 +309,39 @@ function stageSvelte(manifest) {
     .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.svelte';`);
   fs.writeFileSync(path.join(svelteDir, 'index.js'), rootLines.join('\n') + '\n');
 
+  // TypeScript declarations
+  const tsHeader = [
+    `import type { Component } from 'svelte';`,
+    `import type { SVGAttributes } from 'svelte/elements';`,
+    ``,
+    `interface IconProps extends SVGAttributes<SVGSVGElement> {`,
+    `  size?: number;`,
+    `}`,
+    ``,
+    `type Icon = Component<IconProps>;`,
+    ``,
+  ].join('\n');
+
+  // Per-style .d.ts: dist/svelte/{style}/index.d.ts
+  for (const [style, entries] of styleEntries) {
+    const lines = entries
+      .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
+      .map((e) => `export declare const ${e.pascalName}: Icon;`);
+    fs.writeFileSync(
+      path.join(svelteDir, style, 'index.d.ts'),
+      tsHeader + lines.join('\n') + '\n',
+    );
+  }
+
+  // Root .d.ts: dist/svelte/index.d.ts
+  const rootTsLines = allEntries
+    .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
+    .map((e) => `export declare const ${e.suffixedName}: Icon;`);
+  fs.writeFileSync(
+    path.join(svelteDir, 'index.d.ts'),
+    tsHeader + rootTsLines.join('\n') + '\n',
+  );
+
   console.log(`  ✓ ${manifest.length} Svelte components → ${svelteDir}/`);
 }
 
