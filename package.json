@@ -2,7 +2,6 @@
   "name": "@marcus/roc",
   "version": "0.1.0",
   "type": "module",
-  "private": true,
   "files": [
     "dist/"
   ],
@@ -34,6 +33,7 @@
     "./metadata": "./dist/metadata.json"
   },
   "scripts": {
+    "prepare": "node build.mjs",
     "build": "node build.mjs",
     "build:svg": "node build.mjs --svg",
     "build:react": "node build.mjs --react",
@@ -43,6 +43,7 @@
     "dev": "node build.mjs --watch",
     "preview": "open demo/index.html",
     "check:types": "node scripts/check-svelte-types.mjs",
+    "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
   },
   "devDependencies": {
