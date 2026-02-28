@@ -10,7 +10,16 @@ A handcrafted SVG icon library with React, Svelte, and sprite outputs. Every ico
 npm install @marcus/roc
 ```
 
-Requires Node.js 22+. The only runtime dependency is `svgo`.
+Requires Node.js 22+.
+
+If you're consuming directly from git (for example before publishing to npm),
+use a pinned ref:
+
+```bash
+npm install git+https://github.com/marcus/roc.git#<commit-or-tag>
+```
+
+`prepare` runs automatically for git installs and builds `dist/`.
 
 ## Quick Start
 

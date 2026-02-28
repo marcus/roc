@@ -2,7 +2,12 @@
   "name": "@marcus/roc",
   "version": "0.1.0",
   "type": "module",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     "./react/*": "./dist/react/*",
     "./svelte": "./dist/svelte/index.js",
@@ -22,9 +27,18 @@
     "build:svelte": "node build.mjs --svelte",
     "build:sprite": "node build.mjs --sprite",
     "build:demo": "node build.mjs --demo",
+    "prepare": "npm run build",
     "dev": "node build.mjs --watch",
     "preview": "open demo/index.html",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcus/roc.git"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "svelte": ">=5"
   },
   "devDependencies": {
     "svgo": "^3.0.0"
