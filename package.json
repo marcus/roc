@@ -1,6 +1,6 @@
 {
   "name": "@marcus/roc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "files": [
     "dist/"
@@ -9,25 +9,33 @@
     "./react/*": "./dist/react/*",
     "./svelte": {
       "types": "./dist/svelte/index.d.ts",
+      "svelte": "./dist/svelte/index.js",
       "default": "./dist/svelte/index.js"
     },
     "./svelte/outline": {
       "types": "./dist/svelte/outline/index.d.ts",
+      "svelte": "./dist/svelte/outline/index.js",
       "default": "./dist/svelte/outline/index.js"
     },
     "./svelte/solid": {
       "types": "./dist/svelte/solid/index.d.ts",
+      "svelte": "./dist/svelte/solid/index.js",
       "default": "./dist/svelte/solid/index.js"
     },
     "./svelte/duotone": {
       "types": "./dist/svelte/duotone/index.d.ts",
+      "svelte": "./dist/svelte/duotone/index.js",
       "default": "./dist/svelte/duotone/index.js"
     },
     "./svelte/sharp": {
       "types": "./dist/svelte/sharp/index.d.ts",
+      "svelte": "./dist/svelte/sharp/index.js",
       "default": "./dist/svelte/sharp/index.js"
     },
-    "./svelte/*": "./dist/svelte/*",
+    "./svelte/*": {
+      "svelte": "./dist/svelte/*",
+      "default": "./dist/svelte/*"
+    },
     "./svg/*": "./dist/svg/*",
     "./sprite": "./dist/sprite.svg",
     "./metadata": "./dist/metadata.json"
