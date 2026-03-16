@@ -2348,7 +2348,7 @@
       "label": "X",
       "description": "X logo letterform for x.com social platform",
       "category": "Brand",
-      "tags": ["x", "twitter", "social", "x.com", "microblog", "logo"]
+      "tags": ["x", "xai", "twitter", "grok", "social", "x.com", "ai", "microblog", "logo"]
     },
     "threads-logo": {
       "label": "Threads",
@@ -2475,6 +2475,48 @@
       "description": "OpenAI hexagonal knot flower shape for AI research",
       "category": "Brand",
       "tags": ["openai", "ai", "gpt", "chatgpt", "artificial intelligence", "research", "logo"]
+    },
+    "deepseek-logo": {
+      "label": "DeepSeek",
+      "description": "DeepSeek whale silhouette for open-source AI research",
+      "category": "Brand",
+      "tags": ["deepseek", "ai", "whale", "chinese", "open source", "artificial intelligence", "research", "logo"]
+    },
+    "anthropic-logo": {
+      "label": "Anthropic",
+      "description": "Anthropic starburst radiance mark for Claude AI",
+      "category": "Brand",
+      "tags": ["anthropic", "claude", "ai", "artificial intelligence", "safety", "research", "logo"]
+    },
+    "gemini-logo": {
+      "label": "Gemini",
+      "description": "Google Gemini four-pointed sparkle star for multimodal AI",
+      "category": "Brand",
+      "tags": ["gemini", "google", "ai", "multimodal", "bard", "deepmind", "artificial intelligence", "logo"]
+    },
+    "meta-ai-logo": {
+      "label": "Meta AI",
+      "description": "Meta AI flowing infinity loop for Llama and multimodal models",
+      "category": "Brand",
+      "tags": ["meta", "llama", "ai", "facebook", "artificial intelligence", "open source", "logo"]
+    },
+    "mistral-logo": {
+      "label": "Mistral",
+      "description": "Mistral AI diagonal wind dot pattern for open-weight models",
+      "category": "Brand",
+      "tags": ["mistral", "ai", "french", "open source", "artificial intelligence", "european", "logo"]
+    },
+    "perplexity-logo": {
+      "label": "Perplexity",
+      "description": "Perplexity AI abstract search scope mark for AI-powered answers",
+      "category": "Brand",
+      "tags": ["perplexity", "ai", "search", "answers", "artificial intelligence", "research", "logo"]
+    },
+    "cohere-logo": {
+      "label": "Cohere",
+      "description": "Cohere bold C arc for enterprise AI and language models",
+      "category": "Brand",
+      "tags": ["cohere", "ai", "enterprise", "nlp", "language model", "artificial intelligence", "logo"]
     },
     "tumblr-logo": {
       "label": "Tumblr",
