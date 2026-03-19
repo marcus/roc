@@ -358,6 +358,12 @@
       "category": "Communication",
       "tags": ["speech", "bubble", "comment", "message", "reply", "text", "rectangle", "square"]
     },
+    "message-square-plus": {
+      "label": "Message Square Plus",
+      "description": "Rectangular speech bubble with a plus sign for new messages or conversations",
+      "category": "Communication",
+      "tags": ["new", "create", "compose", "chat", "conversation", "message", "add", "plus", "bubble"]
+    },
     "chat": {
       "label": "Chat",
       "description": "Two overlapping speech bubbles for conversations and messaging",
