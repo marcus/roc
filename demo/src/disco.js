@@ -5,9 +5,7 @@
  * All effects are CSS-driven and scoped under `.disco-mode` on <html>,
  * so nothing fires until activated. No dependencies on app.js.
  */
-(function () {
-  'use strict';
-
+(() => {
   // ---------------------------------------------------------------------------
   // 1. Inject disco styles into <head>
   // ---------------------------------------------------------------------------
@@ -204,7 +202,6 @@
     '  opacity: 0;',
     '  transition: opacity 0.6s ease;',
     '}',
-
   ].join('\n');
 
   document.head.appendChild(styleEl);
@@ -219,44 +216,48 @@
 
   var fadeOutTimer = null;
 
-  document.addEventListener('click', function (e) {
-    var discoBall = e.target.closest('[data-icon-name="disco-ball"]');
-    if (!discoBall) return;
+  document.addEventListener(
+    'click',
+    (e) => {
+      var discoBall = e.target.closest('[data-icon-name="disco-ball"]');
+      if (!discoBall) return;
 
-    // Swallow the click so app.js never sees it (we'll open the panel ourselves)
-    e.stopImmediatePropagation();
-    e.preventDefault();
+      // Swallow the click so app.js never sees it (we'll open the panel ourselves)
+      e.stopImmediatePropagation();
+      e.preventDefault();
 
-    var html = document.documentElement;
+      var html = document.documentElement;
 
-    // If we're currently fading out, cancel and snap off
-    if (fadeOutTimer) {
-      clearTimeout(fadeOutTimer);
-      fadeOutTimer = null;
-      html.classList.remove('disco-mode', 'disco-fade-out');
-      return;
-    }
-
-    var isActive = html.classList.contains('disco-mode');
-
-    if (isActive) {
-      // -- Turn off: fade out, then clean up classes --------------------
-      html.classList.add('disco-fade-out');
-      html.classList.remove('disco-mode');
-
-      fadeOutTimer = setTimeout(function () {
-        html.classList.remove('disco-fade-out');
+      // If we're currently fading out, cancel and snap off
+      if (fadeOutTimer) {
+        clearTimeout(fadeOutTimer);
         fadeOutTimer = null;
-      }, 650);
-    } else {
-      // -- Turn on -----------------------------------------------------
-      html.classList.remove('disco-fade-out');
-      html.classList.add('disco-mode');
-    }
+        html.classList.remove('disco-mode', 'disco-fade-out');
+        return;
+      }
 
-    // Still open the detail panel so users can access the icon
-    if (typeof openDetail === 'function') {
-      openDetail('disco-ball');
-    }
-  }, true); // ← capture phase: fires before app.js bubble-phase listener
+      var isActive = html.classList.contains('disco-mode');
+
+      if (isActive) {
+        // -- Turn off: fade out, then clean up classes --------------------
+        html.classList.add('disco-fade-out');
+        html.classList.remove('disco-mode');
+
+        fadeOutTimer = setTimeout(() => {
+          html.classList.remove('disco-fade-out');
+          fadeOutTimer = null;
+        }, 650);
+      } else {
+        // -- Turn on -----------------------------------------------------
+        html.classList.remove('disco-fade-out');
+        html.classList.add('disco-mode');
+      }
+
+      // Still open the detail panel so users can access the icon
+      if (typeof openDetail === 'function') {
+        openDetail('disco-ball');
+      }
+    },
+    true,
+  ); // ← capture phase: fires before app.js bubble-phase listener
 })();

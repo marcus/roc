@@ -49,12 +49,15 @@
     "build:sprite": "node build.mjs --sprite",
     "build:demo": "node build.mjs --demo",
     "dev": "node build.mjs --watch",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "preview": "open demo/index.html",
     "check:types": "node scripts/check-svelte-types.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.10",
     "svgo": "^3.0.0"
   }
 }
