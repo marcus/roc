@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Verify that Svelte subpath exports resolve with TypeScript types.
+ * Verify that packaged React and Svelte exports resolve with TypeScript types.
  *
  * Steps:
  *   1. npm pack the package
- *   2. Create a temp fixture with a minimal tsconfig + check file
+ *   2. Create a temp fixture with minimal tsconfig + check files
  *   3. Install the tarball
  *   4. Run tsc --noEmit to verify type resolution
  *   5. Clean up
@@ -29,7 +29,7 @@ console.log(`   → ${tarball}`);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'roc-type-check-'));
 console.log(`2. Fixture dir: ${tmp}`);
 
-// Read a few icon names from dist to use in the check file
+// Read a few icon names from dist to use in the check files
 const sampleIcons = fs.readdirSync(path.join(ROOT, 'dist/svelte/outline'))
   .filter(f => f.endsWith('.svelte'))
   .slice(0, 3)
@@ -50,33 +50,57 @@ fs.writeFileSync(path.join(tmp, 'tsconfig.json'), JSON.stringify({
     module: 'ESNext',
     moduleResolution: 'bundler',
     target: 'ESNext',
+    jsx: 'react-jsx',
     skipLibCheck: true,
     types: [],
   },
-  include: ['check.ts'],
+  include: ['check-react.ts', 'check-svelte.ts'],
 }, null, 2));
 
-// check.ts -- import from each subpath and verify types
-const lines = [];
+// check-svelte.ts -- import from each subpath and verify types
+const svelteLines = [];
 for (const style of STYLES) {
   const aliases = sampleIcons.map(n => `${n} as ${n}_${style}`).join(', ');
-  lines.push(`import { ${aliases} } from '@marcus/roc/svelte/${style}';`);
+  svelteLines.push(`import { ${aliases} } from '@marcus/roc/svelte/${style}';`);
 }
-// Also test root barrel with suffixed names
+
+const sampleIcon = sampleIcons[0];
+const sampleStyle = STYLES[0];
+
+// Also test root barrel with suffixed names and a direct file import.
 const suffixed = sampleIcons.map(n => `${n}Outline`).join(', ');
-lines.push(`import { ${suffixed} } from '@marcus/roc/svelte';`);
-lines.push('');
-// Basic type assertion: each import should be a Svelte Component
-lines.push(`import type { Component } from 'svelte';`);
+svelteLines.push(`import { ${suffixed} } from '@marcus/roc/svelte';`);
+svelteLines.push(`import ${sampleIcon}${sampleStyle}File from '@marcus/roc/svelte/${sampleStyle}/${sampleIcon}.svelte';`);
+svelteLines.push('');
+svelteLines.push(`import type { Component } from 'svelte';`);
 for (const name of sampleIcons) {
-  lines.push(`const _check_${name}: Component<{ size?: number }> = ${name}Outline;`);
+  svelteLines.push(`const _check_${name}: Component<{ size?: number }> = ${name}Outline;`);
 }
-lines.push('');
-fs.writeFileSync(path.join(tmp, 'check.ts'), lines.join('\n'));
+svelteLines.push(`const _fileCheck: Component<{ size?: number }> = ${sampleIcon}${sampleStyle}File;`);
+svelteLines.push('');
+fs.writeFileSync(path.join(tmp, 'check-svelte.ts'), svelteLines.join('\n'));
+
+// check-react.ts -- import React entry points and direct files
+const reactLines = [];
+for (const style of STYLES) {
+  const aliases = sampleIcons.map(n => `${n} as ${n}_${style}`).join(', ');
+  reactLines.push(`import { ${aliases} } from '@marcus/roc/react/${style}';`);
+}
+const reactSuffixed = sampleIcons.map(n => `${n}Outline`).join(', ');
+reactLines.push(`import { ${reactSuffixed} } from '@marcus/roc/react';`);
+reactLines.push(`import ${sampleIcon}${sampleStyle}Jsx from '@marcus/roc/react/${sampleStyle}/${sampleIcon}.jsx';`);
+reactLines.push('');
+reactLines.push(`import type { ForwardRefExoticComponent, SVGProps } from 'react';`);
+for (const name of sampleIcons) {
+  reactLines.push(`const _react_${name}: ForwardRefExoticComponent<SVGProps<SVGSVGElement> & { size?: number; strokeWidth?: number }> = ${name}Outline;`);
+}
+reactLines.push(`const _reactFileCheck: ForwardRefExoticComponent<SVGProps<SVGSVGElement> & { size?: number; strokeWidth?: number }> = ${sampleIcon}${sampleStyle}Jsx;`);
+reactLines.push('');
+fs.writeFileSync(path.join(tmp, 'check-react.ts'), reactLines.join('\n'));
 
 // ── 3. Install ───────────────────────────────────────────────────────
 console.log('3. Installing tarball + dependencies...');
-execSync(`npm install "${tarballPath}" svelte typescript --save-exact 2>&1`, {
+execSync(`npm install "${tarballPath}" react @types/react svelte typescript --save-exact 2>&1`, {
   cwd: tmp,
   encoding: 'utf8',
   stdio: 'pipe',
@@ -97,7 +121,7 @@ try {
 
 // ── 5. Clean up ──────────────────────────────────────────────────────
 cleanup();
-console.log('5. Done — Svelte types verified.');
+console.log('5. Done — package types verified.');
 
 function cleanup() {
   try { fs.rmSync(tmp, { recursive: true, force: true }); } catch {}
