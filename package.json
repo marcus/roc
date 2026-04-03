@@ -3,10 +3,35 @@
   "version": "0.1.1",
   "type": "module",
   "files": [
-    "dist/"
+    "dist/",
+    "docs/",
+    "CLAUDE.md"
   ],
   "exports": {
-    "./react/*": "./dist/react/*",
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "default": "./dist/react/index.js"
+    },
+    "./react/outline": {
+      "types": "./dist/react/outline/index.d.ts",
+      "default": "./dist/react/outline/index.js"
+    },
+    "./react/solid": {
+      "types": "./dist/react/solid/index.d.ts",
+      "default": "./dist/react/solid/index.js"
+    },
+    "./react/duotone": {
+      "types": "./dist/react/duotone/index.d.ts",
+      "default": "./dist/react/duotone/index.js"
+    },
+    "./react/sharp": {
+      "types": "./dist/react/sharp/index.d.ts",
+      "default": "./dist/react/sharp/index.js"
+    },
+    "./react/*": {
+      "types": "./dist/react/*.d.ts",
+      "default": "./dist/react/*"
+    },
     "./svelte": {
       "types": "./dist/svelte/index.d.ts",
       "svelte": "./dist/svelte/index.js",
@@ -33,6 +58,7 @@
       "default": "./dist/svelte/sharp/index.js"
     },
     "./svelte/*": {
+      "types": "./dist/svelte/*.d.ts",
       "svelte": "./dist/svelte/*",
       "default": "./dist/svelte/*"
     },
