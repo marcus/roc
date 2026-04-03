@@ -153,6 +153,17 @@ function toJsxAttributes(innerSvg, isSolid) {
 function stageReact(manifest) {
   console.log('Stage 2: generating React components...');
   const reactDir = path.join(DIST_DIR, 'react');
+  const tsHeader = [
+    `import type { ForwardRefExoticComponent, SVGProps } from 'react';`,
+    ``,
+    `interface IconProps extends SVGProps<SVGSVGElement> {`,
+    `  size?: number;`,
+    `  strokeWidth?: number;`,
+    `}`,
+    ``,
+    `type Icon = ForwardRefExoticComponent<IconProps>;`,
+    ``,
+  ].join('\n');
 
   // Per-style barrel entries: style -> [{name, pascalName}]
   const styleEntries = new Map();
@@ -197,6 +208,10 @@ export default ${pascalName};
     const styleDir = path.join(reactDir, style);
     ensureDir(styleDir);
     fs.writeFileSync(path.join(styleDir, `${pascalName}.jsx`), component);
+    fs.writeFileSync(
+      path.join(styleDir, `${pascalName}.jsx.d.ts`),
+      tsHeader + `declare const ${pascalName}: Icon;\nexport default ${pascalName};\n`,
+    );
 
     // Collect entries for barrels
     if (!styleEntries.has(style)) styleEntries.set(style, []);
@@ -212,6 +227,14 @@ export default ${pascalName};
       .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
       .map((e) => `export { default as ${e.pascalName} } from './${e.pascalName}.jsx';`);
     fs.writeFileSync(path.join(reactDir, style, 'index.js'), lines.join('\n') + '\n');
+
+    const tsLines = entries
+      .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
+      .map((e) => `export declare const ${e.pascalName}: Icon;`);
+    fs.writeFileSync(
+      path.join(reactDir, style, 'index.d.ts'),
+      tsHeader + tsLines.join('\n') + '\n',
+    );
   }
 
   // Root barrel: dist/react/index.js
@@ -222,21 +245,12 @@ export default ${pascalName};
 
   // TypeScript declarations: dist/react/index.d.ts
   const tsLines = [
-    `import { ForwardRefExoticComponent, SVGProps } from 'react';`,
-    ``,
-    `interface IconProps extends SVGProps<SVGSVGElement> {`,
-    `  size?: number;`,
-    `  strokeWidth?: number;`,
-    `}`,
-    ``,
-    `type Icon = ForwardRefExoticComponent<IconProps>;`,
-    ``,
     ...allEntries
       .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
       .map((e) => `export declare const ${e.suffixedName}: Icon;`),
     ``,
   ];
-  fs.writeFileSync(path.join(reactDir, 'index.d.ts'), tsLines.join('\n'));
+  fs.writeFileSync(path.join(reactDir, 'index.d.ts'), tsHeader + tsLines.join('\n'));
 
   console.log(`  ✓ ${manifest.length} React components → ${reactDir}/`);
 }
@@ -245,6 +259,21 @@ export default ${pascalName};
 function stageSvelte(manifest) {
   console.log('Stage 3: generating Svelte components...');
   const svelteDir = path.join(DIST_DIR, 'svelte');
+  const tsHeader = [
+    `import type { Component } from 'svelte';`,
+    `import type { SVGAttributes } from 'svelte/elements';`,
+    ``,
+    `interface IconProps extends SVGAttributes<SVGSVGElement> {`,
+    `  size?: number | string;`,
+    `  weight?: string | number;`,
+    `  color?: string;`,
+    `  class?: string;`,
+    `  [key: string]: unknown;`,
+    `}`,
+    ``,
+    `type Icon = Component<IconProps>;`,
+    ``,
+  ].join('\n');
 
   // Per-style barrel entries: style -> [{name, pascalName}]
   const styleEntries = new Map();
@@ -286,6 +315,10 @@ function stageSvelte(manifest) {
     const styleDir = path.join(svelteDir, style);
     ensureDir(styleDir);
     fs.writeFileSync(path.join(styleDir, `${pascalName}.svelte`), component);
+    fs.writeFileSync(
+      path.join(styleDir, `${pascalName}.svelte.d.ts`),
+      tsHeader + `declare const ${pascalName}: Icon;\nexport default ${pascalName};\n`,
+    );
 
     // Collect entries for barrels
     if (!styleEntries.has(style)) styleEntries.set(style, []);
@@ -308,23 +341,6 @@ function stageSvelte(manifest) {
     .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
     .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.svelte';`);
   fs.writeFileSync(path.join(svelteDir, 'index.js'), rootLines.join('\n') + '\n');
-
-  // TypeScript declarations
-  const tsHeader = [
-    `import type { Component } from 'svelte';`,
-    `import type { SVGAttributes } from 'svelte/elements';`,
-    ``,
-    `interface IconProps extends SVGAttributes<SVGSVGElement> {`,
-    `  size?: number | string;`,
-    `  weight?: string | number;`,
-    `  color?: string;`,
-    `  class?: string;`,
-    `  [key: string]: unknown;`,
-    `}`,
-    ``,
-    `type Icon = Component<IconProps>;`,
-    ``,
-  ].join('\n');
 
   // Per-style .d.ts: dist/svelte/{style}/index.d.ts
   for (const [style, entries] of styleEntries) {
