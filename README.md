@@ -108,6 +108,32 @@ npm run deploy       # Build + deploy demo to roc.haplab.com
 
 Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
 
+## Changelog Generation
+
+Generate a Markdown changelog directly from git history:
+
+```bash
+npm run changelog
+```
+
+Because this repo does not use release tags yet, the default behavior is to scan the full history up to `HEAD` and group commits into stable sections such as Features, Fixes, Docs, Icons & Assets, and Maintenance.
+
+Supported flags:
+
+- `--from <rev>` starts the range using normal git revision semantics (`<from>` is exclusive)
+- `--to <rev>` ends the range at a specific revision instead of `HEAD`
+- `--write <path>` writes the generated Markdown to a file
+- `--title <text>` overrides the top-level heading
+
+Examples:
+
+```bash
+npm run changelog -- --from 7fa6f96
+npm run changelog -- --from 7fa6f96 --to d0149b2
+npm run changelog -- --write CHANGELOG.md
+npm run check:changelog
+```
+
 ## Adding Icons
 
 See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
