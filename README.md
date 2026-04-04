@@ -1,8 +1,8 @@
 # Roc
 
-A handcrafted SVG icon library with React, Svelte, and sprite outputs. Every icon ships in 4 styles (outline, solid, duotone, sharp) — optimized with SVGO, built with a single Node.js script.
+Handcrafted SVG icons for React, Svelte, sprites, and raw SVG workflows. The package currently ships 501 icons in 4 styles: outline, solid, duotone, and sharp.
 
-**[Browse all icons](https://roc.haplab.com)**
+**[Browse the icon gallery](https://roc.haplab.com)**
 
 ## Install
 
@@ -10,53 +10,63 @@ A handcrafted SVG icon library with React, Svelte, and sprite outputs. Every ico
 npm install @marcus/roc
 ```
 
-Requires Node.js 22+. The only runtime dependency is `svgo`.
+The published package contains generated ESM assets under `dist/` and does not bundle any runtime dependencies. React apps still need `react`, and Svelte apps still need `svelte`.
+
+If you want to build Roc locally, use Node.js 22+.
 
 ## Quick Start
 
 ### React
 
-```jsx
-import { Home, Bell, Search } from '@marcus/roc/react/outline';
+Use the typed root React barrel in React toolchains that compile JSX from dependencies:
 
-function App() {
+```jsx
+import { BellOutline, HomeOutline, SearchSharp } from '@marcus/roc/react/index.js';
+
+export function App() {
   return (
     <nav>
-      <Home size={20} className="text-gray-500" />
-      <Bell size={20} />
-      <Search size={16} /> {/* stroke auto-adjusts to 1.75 at ≤16px */}
+      <HomeOutline size={20} className="text-gray-500" />
+      <BellOutline size={20} />
+      <SearchSharp size={16} />
     </nav>
   );
 }
 ```
 
-Each style has its own entry point:
+React exports use style-suffixed names such as `HomeOutline`, `HomeSolid`, `HomeDuotone`, and `HomeSharp`.
 
-```jsx
-// Single style
-import { Home } from '@marcus/roc/react/outline';
-import { Home } from '@marcus/roc/react/solid';
-import { Home } from '@marcus/roc/react/duotone';
-import { Home } from '@marcus/roc/react/sharp';
-```
+Stroked React icons accept `strokeWidth`. When you do not pass one, Roc uses `1.75` at `size <= 16` and `1.5` above that.
 
-Stroked icons (outline, duotone, sharp) accept a `strokeWidth` prop. Default stroke width adjusts automatically: `1.75` at 16px, `1.5` at 20px+.
+> **Note**: Roc's React output is published as generated `.jsx` files. Use it in bundlers or frameworks that transpile JSX in dependencies, such as Vite or Next.js. Bare Node ESM imports fail with `ERR_UNKNOWN_FILE_EXTENSION`, and only `@marcus/roc/react/index.js` ships bundled TypeScript declarations today.
 
 ### Svelte
 
+Use the typed style barrels for unsuffixed names:
+
 ```svelte
 <script>
-  import Home from '@marcus/roc/svelte/outline/Home.svelte';
-  import Bell from '@marcus/roc/svelte/solid/Bell.svelte';
+  import { Bell, Home, Search } from '@marcus/roc/svelte/outline';
 </script>
 
-<Home size={24} class="icon" />
-<Bell size={20} />
+<nav>
+  <Home size={20} class="icon" />
+  <Bell size={20} />
+  <Search size={16} />
+</nav>
 ```
 
-### HTML / Sprite
+You can also use the root Svelte barrel when you want style-suffixed exports:
 
-Copy `dist/sprite.svg` to your public directory, then reference icons by symbol ID:
+```svelte
+<script>
+  import { HomeOutline, BellSolid } from '@marcus/roc/svelte';
+</script>
+```
+
+### Sprite
+
+Copy [`dist/sprite.svg`](dist/sprite.svg) into your app's public assets, then reference symbols as `{name}-{style}`:
 
 ```html
 <svg width="24" height="24" class="text-gray-700">
@@ -64,22 +74,30 @@ Copy `dist/sprite.svg` to your public directory, then reference icons by symbol 
 </svg>
 ```
 
-Symbol IDs follow the `{name}-{style}` pattern (e.g. `bell-solid`, `search-duotone`).
-
 ### Raw SVGs
 
-Optimized SVGs are available at `dist/svg/{style}/{name}.svg` for direct use in any framework or tool.
+Optimized SVGs are exported from `@marcus/roc/svg/*`. In bundlers that support asset imports, you can import them directly:
+
+```js
+import homeOutlineUrl from '@marcus/roc/svg/outline/home.svg';
+```
 
 ### Metadata
 
+`@marcus/roc/metadata` resolves to [`dist/metadata.json`](dist/metadata.json):
+
 ```js
-import metadata from '@marcus/roc/metadata';
-// { icons: [...], categories: [...], total: N }
+const { default: metadata } = await import('@marcus/roc/metadata', {
+  with: { type: 'json' },
+});
+
+console.log(metadata.icons.length); // 501
+console.log(metadata.totalCount);   // 2004
 ```
 
-### Duotone
+## Duotone Theming
 
-Duotone icons use a CSS custom property for the background layer. Define it once:
+Duotone icons use `--color-duotone-fill` for the background layer.
 
 ```css
 :root {
@@ -90,32 +108,36 @@ Duotone icons use a CSS custom property for the background layer. Define it once
 ## Styles
 
 | Style | Description |
-|-------|-------------|
-| **outline** | Stroke-based with rounded caps and joins |
-| **solid** | Filled shapes using `currentColor` |
-| **duotone** | Tinted background layer + outline strokes |
-| **sharp** | Angular geometry with miter joins and butt caps |
+| --- | --- |
+| `outline` | Rounded stroke icons for general UI use |
+| `solid` | Filled silhouettes using `currentColor` |
+| `duotone` | Background fill plus foreground strokes |
+| `sharp` | Angular geometry with miter joins |
 
-## Development
+## Build Commands
 
 ```bash
 npm install
-npm run build        # Full pipeline: SVGO + React + Svelte + sprite + demo
-npm run preview      # Open demo page in browser
-npm run dev          # Watch mode — rebuilds on SVG changes
-npm run deploy       # Build + deploy demo to roc.haplab.com
+npm run build
+npm run check:types
+npm run preview
 ```
 
-Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
+Other useful commands:
 
-## Adding Icons
+- `npm run dev` watches `src/svg/`, `src/icons.json`, and `demo/src/`
+- `npm run build:svg` regenerates optimized SVGs
+- `npm run build:react` regenerates React output
+- `npm run build:svelte` regenerates Svelte output
+- `npm run build:sprite` regenerates the SVG sprite
+- `npm run build:demo` regenerates [`demo/index.html`](demo/index.html)
 
-See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
+## Documentation
 
-1. Create 4 SVGs in `src/svg/{outline,solid,duotone,sharp}/icon-name.svg`
-2. Add metadata to `src/icons.json` (label, description, category, tags)
-3. Run `npm run build`
-4. Verify in the demo page with `npm run preview`
+- [API reference](docs/api.md)
+- [Contributing guide](CONTRIBUTING.md)
+- [Icon design rules](CLAUDE.md)
+- [Internal build spec](docs/spec.md)
 
 ## License
 
