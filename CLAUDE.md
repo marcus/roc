@@ -208,7 +208,7 @@ Redesign the icon with angular geometry:
 | React components | PascalCase | `ArrowLeft` |
 | Svelte components | PascalCase | `ArrowLeft.svelte` |
 | Sprite symbol IDs | `{name}-{style}` | `arrow-left-outline` |
-| Import paths (React) | `@marcus/roc/react/{style}` | `import { ArrowLeft } from '@marcus/roc/react/outline'` |
+| Import paths (React) | `@marcus/roc/react/{style}/index.js` | `import { ArrowLeft } from '@marcus/roc/react/outline/index.js'` |
 | Import paths (Svelte) | `@marcus/roc/svelte/{style}` | `import ArrowLeft from '@marcus/roc/svelte/outline/ArrowLeft.svelte'` |
 
 ---
@@ -281,27 +281,14 @@ The HTML skeleton and JS data block remain in `build.mjs` as a template literal 
 
 ## Batch Icon Creation (Orchestration)
 
-When creating multiple icons at once, **always use the sub-agent pattern**:
+When creating multiple icons at once, keep this file focused on the SVG rules and use [`CONTRIBUTING.md`](CONTRIBUTING.md#batch-icon-authoring) for the operational workflow.
 
-1. **The main agent acts as orchestrator** -- it does NOT create SVG files itself
-2. **Group icons into thematic batches** of 2--4 icons (e.g., "currency icons", "programming language icons", "bird icons")
-3. **Launch one sub-agent per batch** using the Task tool, running them in parallel
-4. Each sub-agent receives:
-   - The list of icon names it's responsible for
-   - The full style specifications from this guide (or a reference to read CLAUDE.md)
-   - Instructions to create all 4 variants per icon and add entries to `src/icons.json`
-5. **After all sub-agents complete**, the orchestrator:
-   - Runs `npm run build` to verify everything compiles
-   - Runs `npm run deploy` if requested
-   - Summarizes what was created
+For batch execution:
 
-Always commit and push changes after icons are created.
-
-**Example batch groupings:**
-- UI actions: `sign-in`, `sign-out`, `lock`, `unlock`
-- Currencies: `dollar`, `euro`, `pound`, `yen`, `bitcoin`
-- Programming: `ruby`, `python`, `rust`, `go`
-- Animals/nature: `eagle`, `osprey`, `fire`
+- use [`scripts/icon-batches.json`](scripts/icon-batches.json) as the source of batch groupings
+- use [`scripts/icon-batch-prompt.md`](scripts/icon-batch-prompt.md) as the reusable execution template
+- keep `src/icons.json` updates in the same change as the new SVG files
+- run `npm run build`, `npm run check:types`, and `npm run preview` after the batch lands
 
 ---
 
