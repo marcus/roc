@@ -50,6 +50,8 @@
     "build:demo": "node build.mjs --demo",
     "dev": "node build.mjs --watch",
     "preview": "open demo/index.html",
+    "hooks:install": "node scripts/install-git-hooks.mjs",
+    "check:commit-message": "node scripts/check-commit-message-normalizer.mjs",
     "check:types": "node scripts/check-svelte-types.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
