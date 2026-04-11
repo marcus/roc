@@ -8,6 +8,8 @@ You are building icons for the `@marcus/roc` icon library. Build exactly the ico
 
 ## Rules (follow exactly)
 
+Use [`scripts/icon-batches.json`](icon-batches.json) as the source for batch groupings. Stay within the assigned batch unless the request explicitly expands scope.
+
 ### File Locations
 For each icon `{name}`, create:
 - `src/svg/outline/{name}.svg`
@@ -52,20 +54,21 @@ No `width`/`height`. Always `fill="none"` on root.
 
 ## Ontology Update
 
-After creating SVG files, update `src/icons.json` — add entries for each new icon to the `"icons"` object. Each entry needs: `label`, `description`, `category`, `tags` (array of 4-6 relevant search terms).
+After creating SVG files, update `src/icons.json` — add entries for each new icon to the `"icons"` object. Each entry needs: `label`, `description`, `category`, `tags` (array of 4-6 relevant search terms). Match the existing category spelling and capitalization exactly.
 
-Valid categories: Navigation, Data, Communication, People, System, Brand, Media, Files, Commerce, Weather, Devices, Development, Transport, Actions, Objects
+Valid categories: Navigation, Data, Communication, People, System, Brand, Actions, Files, Media, Weather, Transport, Commerce, Development, Devices, Objects, Food, Gaming, Nature, Sports, Countries
 
-Add any new categories to the `"categories"` array if needed.
+Only add a new category to the top-level `"categories"` array when the ontology is intentionally expanding in the same change.
 
 ## Build & Verify
 
 After creating all files, run:
 ```
 npm run build
+npm run check:types
 ```
 
-Verify no errors. If build fails, fix and re-run.
+Verify both commands succeed. If either command fails, fix the issues and re-run.
 
 ## Reference Examples
 
@@ -77,11 +80,10 @@ Verify no errors. If build fails, fix and re-run.
 </svg>
 ```
 
-**Solid (bell):**
+**Solid (home):**
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <path d="M5 10a7 7 0 0 1 14 0v2.5c0 1.3.4 2.2 1.2 3 .3.3.1.8-.3.8H4.1c-.4 0-.6-.5-.3-.8.8-.8 1.2-1.7 1.2-3V10Z" fill="currentColor"/>
-  <path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M12.39 2.6a.6.6 0 0 0-.78 0L3.36 9.48A1.5 1.5 0 0 0 2.83 10.6V19.5A1.5 1.5 0 0 0 4.33 21H9.5v-6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6h5.17a1.5 1.5 0 0 0 1.5-1.5V10.6a1.5 1.5 0 0 0-.53-1.14L12.39 2.6Z" fill="currentColor"/>
 </svg>
 ```
 
