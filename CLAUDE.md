@@ -239,7 +239,6 @@ Source files are at `src/svg/{style}/{name}.svg`.
 | `npm run build:react` | Generate React JSX components in `dist/react/` |
 | `npm run build:svelte` | Generate Svelte components in `dist/svelte/` |
 | `npm run build:sprite` | Generate `dist/sprite.svg` with `<symbol>` elements |
-| `npm run build:demo` | Regenerate `demo/index.html` from `demo/src/` + source SVGs |
 | `npm run dev` | Watch mode -- rebuilds on changes to `src/svg/` and `demo/src/` |
 | `npm run preview` | Open `demo/index.html` in the browser |
 
@@ -273,35 +272,22 @@ The HTML skeleton and JS data block remain in `build.mjs` as a template literal 
 
 ### Editing the demo
 
-- **CSS/JS changes**: edit files in `demo/src/`, then run `npm run build:demo`
-- **In watch mode** (`npm run dev`): changes to `demo/src/` auto-rebuild the demo page only (skips SVG optimization)
+- **CSS/JS changes**: edit files in `demo/src/`, then run `npm run build`
+- **In watch mode** (`npm run dev`): changes to `demo/src/` trigger a rebuild using the current SVG + ontology state
 - **Adding icons**: add SVGs to `src/svg/{style}/` + entry in `src/icons.json`, then `npm run build`
 
 ---
 
 ## Batch Icon Creation (Orchestration)
 
-When creating multiple icons at once, **always use the sub-agent pattern**:
+When creating multiple icons at once, keep this file focused on the SVG rules and use [`CONTRIBUTING.md`](CONTRIBUTING.md#batch-icon-authoring) for the operational workflow.
 
-1. **The main agent acts as orchestrator** -- it does NOT create SVG files itself
-2. **Group icons into thematic batches** of 2--4 icons (e.g., "currency icons", "programming language icons", "bird icons")
-3. **Launch one sub-agent per batch** using the Task tool, running them in parallel
-4. Each sub-agent receives:
-   - The list of icon names it's responsible for
-   - The full style specifications from this guide (or a reference to read CLAUDE.md)
-   - Instructions to create all 4 variants per icon and add entries to `src/icons.json`
-5. **After all sub-agents complete**, the orchestrator:
-   - Runs `npm run build` to verify everything compiles
-   - Runs `npm run deploy` if requested
-   - Summarizes what was created
+For batch execution:
 
-Always commit and push changes after icons are created.
-
-**Example batch groupings:**
-- UI actions: `sign-in`, `sign-out`, `lock`, `unlock`
-- Currencies: `dollar`, `euro`, `pound`, `yen`, `bitcoin`
-- Programming: `ruby`, `python`, `rust`, `go`
-- Animals/nature: `eagle`, `osprey`, `fire`
+- use [`scripts/icon-batches.json`](scripts/icon-batches.json) as the source of batch groupings
+- use [`scripts/icon-batch-prompt.md`](scripts/icon-batch-prompt.md) as the reusable execution template
+- keep `src/icons.json` updates in the same change as the new SVG files
+- run `npm run build`, `npm run check:types`, and `npm run preview` after the batch lands
 
 ---
 
