@@ -694,6 +694,12 @@
       "category": "Transport",
       "tags": ["boat", "vessel", "maritime", "sea", "ocean", "cruise", "ferry", "sailing", "travel"]
     },
+    "spaceship": {
+      "label": "Spaceship",
+      "description": "Profile starship silhouette with a dorsal command dome above an elongated hull and engine exhaust trails behind for sci-fi and space contexts",
+      "category": "Transport",
+      "tags": ["starship", "star ship", "vessel", "craft", "spacecraft", "sci-fi", "scifi", "space", "cruiser", "shuttle", "culture", "gcu", "gsv", "rou"]
+    },
     "bicycle": {
       "label": "Bicycle",
       "description": "Two-wheeled bicycle with frame, handlebars, and seat for cycling and eco transport",
