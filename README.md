@@ -108,6 +108,12 @@ npm run deploy       # Build + deploy demo to roc.haplab.com
 
 Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
 
+Commit subjects in this repo use short sentence-style imperatives such as `Add search icon` or `Update README`.
+To install the tracked local hook, run `npm run hooks:install`.
+The hook normalizes only the subject line by trimming extra whitespace, converting common `feat:`/`fix:`/`docs:` prefixes to sentence style, capitalizing a plain lowercase leading word, and removing a trailing `.` or `!`.
+Commit bodies and trailers stay untouched, and auto-generated `Merge`, `Revert`, `fixup!`, and `squash!` messages are skipped.
+Run `npm run test:commit-message` to verify the normalizer manually.
+
 ## Adding Icons
 
 See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
