@@ -108,6 +108,66 @@ npm run deploy       # Build + deploy demo to roc.haplab.com
 
 Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
 
+## Changelog Workflow
+
+Generate a Markdown changelog directly from local git commit subjects:
+
+```bash
+npm run changelog
+```
+
+By default the synthesizer reads the full repository history through `HEAD`. That default is intentional because Roc currently has no release tags or existing changelog automation.
+
+Useful variants:
+
+```bash
+npm run changelog -- --from main
+npm run changelog -- --range main..HEAD
+npm run changelog -- --limit 20 --output CHANGELOG.md
+```
+
+The generator uses local heuristics to group commit subjects into `Features`, `Fixes`, `Documentation`, `Build & Tooling`, `Icons`, and `Other Changes`. Output is deterministic: commits stay in git log order, empty sections are omitted, and each entry includes its short hash plus commit date.
+
+Validate the synthesizer with:
+
+```bash
+npm run check:changelog
+```
+
+That check covers fixed fixture-style assertions and a smoke test against the repository's current history so the output structure stays stable even as commits are added.
+
+## Release Notes Workflow
+
+Draft release notes from the same local git history and grouping heuristics used by the changelog synthesizer:
+
+```bash
+npm run release-notes
+```
+
+The drafter defaults to the full repository history through `HEAD` and includes a source note plus assumptions so the draft can be reviewed before publishing.
+
+Useful variants:
+
+```bash
+npm run release-notes -- --from main
+npm run release-notes -- --range main..HEAD
+npm run release-notes -- --limit 20 --output RELEASE_NOTES.md
+```
+
+Use `--title` when drafting for a named release:
+
+```bash
+npm run release-notes -- --from v0.1.0 --title "Roc 0.2.0 Release Notes"
+```
+
+Validate the drafter with:
+
+```bash
+npm run check:release-notes
+```
+
+That check covers argument parsing, deterministic Markdown, empty ranges, title/source handling, file output, and a temporary git repository integration path.
+
 ## Adding Icons
 
 See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
