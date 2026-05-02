@@ -52,6 +52,10 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "preview": "open demo/index.html",
+    "changelog": "node scripts/generate-changelog.mjs",
+    "check:changelog": "node scripts/check-changelog-synth.mjs",
+    "release-notes": "node scripts/generate-release-notes.mjs",
+    "check:release-notes": "node scripts/check-release-notes.mjs",
     "check:types": "node scripts/check-svelte-types.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
