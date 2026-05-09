@@ -4,6 +4,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import {
+  cleanCommitSubjectSummary,
+  normalizeCommitSummary,
+  parseConventionalSubject,
+} from './normalize-commit-message.mjs';
+
 const DEFAULT_TITLE = 'Changelog';
 
 const SECTION_DESCRIPTIONS = {
@@ -164,22 +170,18 @@ export function readGitCommits(options = {}) {
 }
 
 export function normalizeSubject(subject) {
-  return String(subject || '').replace(/\s+/g, ' ').trim();
+  return normalizeCommitSummary(subject);
 }
 
 export function cleanSubject(subject) {
-  return normalizeSubject(subject)
-    .replace(/^[a-z]+(?:\([^)]+\))?!?:\s*/i, '')
-    .replace(/\s+(?:\((?:td|TD)-[^)]+\)|\[(?:td|TD)-[^\]]+\])$/i, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return cleanCommitSubjectSummary(subject);
 }
 
 export function classifyCommit(subject) {
   const normalized = normalizeSubject(subject);
-  const conventional = normalized.match(/^([a-z]+)(?:\([^)]+\))?!?:\s+/i);
+  const conventional = parseConventionalSubject(normalized);
   if (conventional) {
-    return CONVENTIONAL_SECTIONS.get(conventional[1].toLowerCase()) || 'Other Changes';
+    return CONVENTIONAL_SECTIONS.get(conventional.type) || 'Other Changes';
   }
 
   const lower = normalized.toLowerCase();

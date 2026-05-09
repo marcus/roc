@@ -54,6 +54,8 @@
     "preview": "open demo/index.html",
     "changelog": "node scripts/generate-changelog.mjs",
     "check:changelog": "node scripts/check-changelog-synth.mjs",
+    "normalize:commit": "node scripts/normalize-commit-message.mjs",
+    "check:commit-message": "node scripts/check-commit-message-normalizer.mjs",
     "check:types": "node scripts/check-svelte-types.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
