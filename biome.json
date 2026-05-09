@@ -1,0 +1,40 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+  "files": {
+    "includes": [
+      "biome.json",
+      "package.json",
+      "build.mjs",
+      "scripts/**/*.mjs",
+      "demo/src/**/*.js",
+      "src/icons.json",
+      "!dist",
+      "!node_modules",
+      "!.git",
+      "!.todos",
+      "!.sidecar",
+      "!demo/index.html"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": false
+    }
+  }
+}

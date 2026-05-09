@@ -10171,10 +10171,10 @@ let activeCategory = '';
 let viewMode = 'style';
 
 // ── URL sync ──────────────────────────────────────────────────
-var activeIcon = '';
+let activeIcon = '';
 
 function readURL() {
-  var p = new URLSearchParams(window.location.search);
+  const p = new URLSearchParams(window.location.search);
   if (p.has('q')) searchQuery = p.get('q');
   if (p.has('category')) activeCategory = p.get('category');
   if (p.has('size')) currentView = p.get('size');
@@ -10183,14 +10183,14 @@ function readURL() {
 }
 
 function buildURL() {
-  var p = new URLSearchParams();
+  const p = new URLSearchParams();
   if (searchQuery) p.set('q', searchQuery);
   if (activeCategory) p.set('category', activeCategory);
   if (currentView !== '24') p.set('size', currentView);
   if (viewMode !== 'style') p.set('view', viewMode);
   if (activeIcon) p.set('icon', activeIcon);
-  var qs = p.toString();
-  return window.location.pathname + (qs ? '?' + qs : '');
+  const qs = p.toString();
+  return `${window.location.pathname}${qs ? `?${qs}` : ''}`;
 }
 
 function syncURL() {
@@ -10207,21 +10207,24 @@ function sw(size) {
 function svgWrap(size, innerSvg, style) {
   let content = innerSvg;
   if (STROKED_STYLES.has(style)) {
-    content = content.replace(/stroke-width="[^"]*"/g, 'stroke-width="' + sw(size) + '"');
+    content = content.replace(
+      /stroke-width="[^"]*"/g,
+      `stroke-width="${sw(size)}"`,
+    );
   }
-  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' + content + '</svg>';
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;
 }
 
 let currentView = '24';
 
 function matchesSearch(name, query) {
   if (!query) return true;
-  var q = query.toLowerCase();
-  var m = ICON_META[name];
+  const q = query.toLowerCase();
+  const m = ICON_META[name];
   if (name.includes(q)) return true;
   if (m.label.toLowerCase().includes(q)) return true;
   if (m.description.toLowerCase().includes(q)) return true;
-  return m.tags.some(function(t) { return t.toLowerCase().includes(q); });
+  return m.tags.some((t) => t.toLowerCase().includes(q));
 }
 
 function matchesCategory(name, cat) {
@@ -10230,48 +10233,47 @@ function matchesCategory(name, cat) {
 }
 
 function getFilteredNames() {
-  return ICON_NAMES.filter(function(n) {
-    return matchesSearch(n, searchQuery) && matchesCategory(n, activeCategory);
-  });
+  return ICON_NAMES.filter(
+    (n) => matchesSearch(n, searchQuery) && matchesCategory(n, activeCategory),
+  );
 }
 
 function render() {
-  var content = document.getElementById('content');
-  var isSingle = currentView !== 'all';
-  var sizes = isSingle ? [parseInt(currentView)] : SIZES;
-  var filteredNames = getFilteredNames();
+  const content = document.getElementById('content');
+  const isSingle = currentView !== 'all';
+  const singleSize = isSingle ? parseInt(currentView, 10) : 24;
+  const filteredNames = getFilteredNames();
 
-  var html = '';
+  let html = '';
 
   if (filteredNames.length === 0) {
     html = '<div class="empty-state">No icons match your search</div>';
   } else if (viewMode === 'category') {
     // Group filtered icons by category
-    for (var ci = 0; ci < CATEGORIES.length; ci++) {
-      var cat = CATEGORIES[ci];
-      var catIcons = filteredNames.filter(function(n) { return ICON_META[n].category === cat; });
+    for (const cat of CATEGORIES) {
+      const catIcons = filteredNames.filter(
+        (n) => ICON_META[n].category === cat,
+      );
       if (catIcons.length === 0) continue;
 
       html += '<section class="style-section">';
       html += '<div class="cat-section-header">';
-      html += '<span class="cat-section-label">' + cat + '</span>';
-      html += '<span class="cat-section-count">' + catIcons.length + (catIcons.length === 1 ? ' icon' : ' icons') + '</span>';
+      html += `<span class="cat-section-label">${cat}</span>`;
+      html += `<span class="cat-section-count">${catIcons.length}${catIcons.length === 1 ? ' icon' : ' icons'}</span>`;
       html += '</div>';
 
-      for (var i = 0; i < catIcons.length; i++) {
-        var iconName = catIcons[i];
-        var label = ICON_META[iconName].label;
-        html += '<div class="cat-icon-row" data-icon-name="' + iconName + '">';
-        html += '<span class="cat-icon-name">' + label + '</span>';
+      for (const iconName of catIcons) {
+        const label = ICON_META[iconName].label;
+        html += `<div class="cat-icon-row" data-icon-name="${iconName}">`;
+        html += `<span class="cat-icon-name">${label}</span>`;
         html += '<div class="cat-icon-variants">';
-        for (var si = 0; si < STYLE_ORDER.length; si++) {
-          var styleKey = STYLE_ORDER[si];
-          var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+        for (const styleKey of STYLE_ORDER) {
+          const innerSvg = ICONS[styleKey]?.[iconName];
           if (!innerSvg) continue;
-          var sz = isSingle ? parseInt(currentView) : 24;
+          const size = singleSize;
           html += '<div class="cat-icon-variant">';
-          html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
-          html += '<span class="variant-label">' + STYLE_META[styleKey].label + '</span>';
+          html += `<div class="icon-wrap">${svgWrap(size, innerSvg, styleKey)}</div>`;
+          html += `<span class="variant-label">${STYLE_META[styleKey].label}</span>`;
           html += '</div>';
         }
         html += '</div></div>';
@@ -10280,31 +10282,34 @@ function render() {
     }
   } else {
     // "By style" rendering — vertical wrapping grid
-    var sz = isSingle ? parseInt(currentView) : 24;
-    for (var si = 0; si < STYLE_ORDER.length; si++) {
-      var styleKey = STYLE_ORDER[si];
-      var icons = ICONS[styleKey];
+    const size = singleSize;
+    for (const styleKey of STYLE_ORDER) {
+      const icons = ICONS[styleKey];
       if (!icons) continue;
-      var meta = STYLE_META[styleKey] || { label: styleKey, tag: '', desc: '' };
+      const meta = STYLE_META[styleKey] || {
+        label: styleKey,
+        tag: '',
+        desc: '',
+      };
 
       html += '<section class="style-section">';
       html += '<div class="style-header">';
-      html += '<span class="style-label">' + meta.label + '</span>';
-      html += '<span class="style-tag">' + meta.tag + '</span>';
-      html += '<span class="style-desc">' + meta.desc + '</span>';
+      html += `<span class="style-label">${meta.label}</span>`;
+      html += `<span class="style-tag">${meta.tag}</span>`;
+      html += `<span class="style-desc">${meta.desc}</span>`;
       html += '</div>';
       html += '<div class="icon-grid">';
 
-      for (var i = 0; i < filteredNames.length; i++) {
-        var iconName = filteredNames[i];
-        var innerSvg = icons[iconName];
+      for (const iconName of filteredNames) {
+        const innerSvg = icons[iconName];
         if (!innerSvg) continue;
-        var label = ICON_META[iconName].label;
-        html += '<div class="icon-cell" data-icon-name="' + iconName + '">';
-        html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
-        html += '<span class="icon-name">' + label + '</span>';
-        html += '<button class="copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '" title="Copy SVG">';
-        html += '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+        const label = ICON_META[iconName].label;
+        html += `<div class="icon-cell" data-icon-name="${iconName}">`;
+        html += `<div class="icon-wrap">${svgWrap(size, innerSvg, styleKey)}</div>`;
+        html += `<span class="icon-name">${label}</span>`;
+        html += `<button class="copy-btn" data-icon="${iconName}" data-style="${styleKey}" data-sz="${size}" title="Copy SVG">`;
+        html +=
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
         html += '</button>';
         html += '</div>';
       }
@@ -10317,16 +10322,19 @@ function render() {
 }
 
 function updateFooter(shown) {
-  var el = document.getElementById('footer-count');
-  var countEl = document.getElementById('icon-count');
-  var text = shown < ICON_NAMES.length ? shown + ' of ' + ICON_NAMES.length + ' icons' : ICON_NAMES.length + ' icons';
+  const el = document.getElementById('footer-count');
+  const countEl = document.getElementById('icon-count');
+  const text =
+    shown < ICON_NAMES.length
+      ? `${shown} of ${ICON_NAMES.length} icons`
+      : `${ICON_NAMES.length} icons`;
   if (el) el.textContent = text;
   if (countEl) countEl.textContent = text;
 }
 
 function setView(v) {
   currentView = v;
-  document.querySelectorAll('.size-btn').forEach(function(b) {
+  document.querySelectorAll('.size-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.view === v);
   });
   syncURL();
@@ -10336,12 +10344,14 @@ function setView(v) {
 function setTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-  document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  document
+    .getElementById('btn-light')
+    .classList.toggle('active', t === 'light');
 }
 
 function setCat(cat) {
   activeCategory = cat;
-  document.querySelectorAll('.cat-btn').forEach(function(b) {
+  document.querySelectorAll('.cat-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.cat === cat);
   });
   syncURL();
@@ -10350,17 +10360,17 @@ function setCat(cat) {
 
 function setViewMode(mode) {
   viewMode = mode;
-  document.querySelectorAll('.view-btn').forEach(function(b) {
+  document.querySelectorAll('.view-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.viewMode === mode);
   });
   // Hide category pills when in category view (redundant)
-  var catBar = document.getElementById('category-bar');
+  const catBar = document.getElementById('category-bar');
   if (catBar) {
     catBar.style.display = mode === 'category' ? 'none' : '';
   }
   if (mode === 'category') {
     activeCategory = '';
-    document.querySelectorAll('.cat-btn').forEach(function(b) {
+    document.querySelectorAll('.cat-btn').forEach((b) => {
       b.classList.toggle('active', b.dataset.cat === '');
     });
   }
@@ -10368,53 +10378,56 @@ function setViewMode(mode) {
   render();
 }
 
-function openDetail(iconName) {
-  var m = ICON_META[iconName];
-  var isSingle = currentView !== 'all';
-  var sz = isSingle ? parseInt(currentView) : 24;
-  var copySvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+window.setViewMode = setViewMode;
 
-  var html = '<div class="detail-panel-header">';
+function openDetail(iconName) {
+  const m = ICON_META[iconName];
+  const isSingle = currentView !== 'all';
+  const sz = isSingle ? parseInt(currentView, 10) : 24;
+  const copySvg =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+
+  let html = '<div class="detail-panel-header">';
   html += '<div class="detail-panel-header-left">';
-  html += '<span class="detail-title">' + m.label + '</span>';
-  html += '<span class="detail-filename">' + iconName + '.svg</span>';
+  html += `<span class="detail-title">${m.label}</span>`;
+  html += `<span class="detail-filename">${iconName}.svg</span>`;
   html += '</div>';
-  html += '<button class="detail-close" id="detail-close-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
+  html +=
+    '<button class="detail-close" id="detail-close-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>';
   html += '</div>';
   html += '<div class="detail-panel-body">';
-  html += '<div class="detail-desc">' + m.description + '</div>';
+  html += `<div class="detail-desc">${m.description}</div>`;
   html += '<div class="detail-meta">';
-  html += '<span class="detail-category">' + m.category + '</span>';
+  html += `<span class="detail-category">${m.category}</span>`;
   html += '<div class="detail-tags">';
-  for (var i = 0; i < m.tags.length; i++) {
-    html += '<span class="detail-tag">' + m.tags[i] + '</span>';
+  for (const tag of m.tags) {
+    html += `<span class="detail-tag">${tag}</span>`;
   }
   html += '</div></div>';
   html += '<div class="detail-section-label">Variants</div>';
   html += '<div class="detail-variants">';
-  for (var si = 0; si < STYLE_ORDER.length; si++) {
-    var styleKey = STYLE_ORDER[si];
-    var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+  for (const styleKey of STYLE_ORDER) {
+    const innerSvg = ICONS[styleKey]?.[iconName];
     if (!innerSvg) continue;
     html += '<div class="detail-variant">';
-    html += '<div class="icon-wrap">' + svgWrap(sz, innerSvg, styleKey) + '</div>';
-    html += '<span class="detail-variant-label">' + STYLE_META[styleKey].label + '</span>';
-    html += '<button class="detail-copy-btn" data-icon="' + iconName + '" data-style="' + styleKey + '" data-sz="' + sz + '">' + copySvg + '</button>';
+    html += `<div class="icon-wrap">${svgWrap(sz, innerSvg, styleKey)}</div>`;
+    html += `<span class="detail-variant-label">${STYLE_META[styleKey].label}</span>`;
+    html += `<button class="detail-copy-btn" data-icon="${iconName}" data-style="${styleKey}" data-sz="${sz}">${copySvg}</button>`;
     html += '</div>';
   }
   html += '</div>';
   // Size variations
-  html += '<div class="detail-section-label" style="margin-top:var(--space-5)">Sizes</div>';
+  html +=
+    '<div class="detail-section-label" style="margin-top:var(--space-5)">Sizes</div>';
   html += '<div class="detail-sizes">';
-  var sizeList = [16, 20, 24, 32, 48];
-  var previewStyle = 'outline';
-  var previewSvg = ICONS[previewStyle] && ICONS[previewStyle][iconName];
+  const sizeList = [16, 20, 24, 32, 48];
+  const previewStyle = 'outline';
+  const previewSvg = ICONS[previewStyle]?.[iconName];
   if (previewSvg) {
-    for (var si2 = 0; si2 < sizeList.length; si2++) {
-      var s = sizeList[si2];
+    for (const s of sizeList) {
       html += '<div class="detail-size-item">';
       html += svgWrap(s, previewSvg, previewStyle);
-      html += '<span class="detail-size-label">' + s + '</span>';
+      html += `<span class="detail-size-label">${s}</span>`;
       html += '</div>';
     }
   }
@@ -10436,25 +10449,27 @@ function closeDetail() {
 }
 
 function copyVariant(iconName, styleKey, sz) {
-  var innerSvg = ICONS[styleKey] && ICONS[styleKey][iconName];
+  const innerSvg = ICONS[styleKey]?.[iconName];
   if (!innerSvg) return;
-  var svgString = svgWrap(sz, innerSvg, styleKey);
-  navigator.clipboard.writeText(svgString).then(function() {
-    var toast = document.getElementById('toast');
-    toast.textContent = STYLE_META[styleKey].label + ' SVG copied';
+  const svgString = svgWrap(sz, innerSvg, styleKey);
+  navigator.clipboard.writeText(svgString).then(() => {
+    const toast = document.getElementById('toast');
+    toast.textContent = `${STYLE_META[styleKey].label} SVG copied`;
     toast.classList.add('visible');
     clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(function() { toast.classList.remove('visible'); }, 1500);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, 1500);
   });
 }
 
 // Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-  var inSearch = document.activeElement === document.getElementById('search');
+document.addEventListener('keydown', (e) => {
+  const inSearch = document.activeElement === document.getElementById('search');
 
   if (e.key === 'Escape') {
-    var panel = document.getElementById('detail-panel');
-    if (panel && panel.classList.contains('open')) {
+    const panel = document.getElementById('detail-panel');
+    if (panel?.classList.contains('open')) {
       closeDetail();
       return;
     }
@@ -10481,7 +10496,7 @@ document.addEventListener('keydown', function(e) {
   if (inSearch) return;
 
   if (e.key === 't' || e.key === 'T') {
-    var current = document.documentElement.getAttribute('data-theme');
+    const current = document.documentElement.getAttribute('data-theme');
     setTheme(current === 'dark' ? 'light' : 'dark');
   }
   if (e.key === '1') setView('16');
@@ -10493,19 +10508,27 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Click handler — detail panel, copy buttons
-document.addEventListener('click', function(e) {
+document.addEventListener('click', (e) => {
   // Detail panel copy button
-  var copyBtn = e.target.closest('.detail-copy-btn');
+  const copyBtn = e.target.closest('.detail-copy-btn');
   if (copyBtn) {
-    copyVariant(copyBtn.dataset.icon, copyBtn.dataset.style, parseInt(copyBtn.dataset.sz));
+    copyVariant(
+      copyBtn.dataset.icon,
+      copyBtn.dataset.style,
+      parseInt(copyBtn.dataset.sz, 10),
+    );
     return;
   }
 
   // Grid copy button (hover overlay)
-  var gridCopyBtn = e.target.closest('.copy-btn');
+  const gridCopyBtn = e.target.closest('.copy-btn');
   if (gridCopyBtn) {
     e.stopPropagation();
-    copyVariant(gridCopyBtn.dataset.icon, gridCopyBtn.dataset.style, parseInt(gridCopyBtn.dataset.sz));
+    copyVariant(
+      gridCopyBtn.dataset.icon,
+      gridCopyBtn.dataset.style,
+      parseInt(gridCopyBtn.dataset.sz, 10),
+    );
     return;
   }
 
@@ -10516,7 +10539,7 @@ document.addEventListener('click', function(e) {
   }
 
   // Open detail on icon cell or row click
-  var cell = e.target.closest('[data-icon-name]');
+  const cell = e.target.closest('[data-icon-name]');
   if (cell && !cell.closest('.detail-panel')) {
     openDetail(cell.dataset.iconName);
     return;
@@ -10527,17 +10550,17 @@ document.addEventListener('click', function(e) {
 readURL();
 
 // Apply URL state to UI controls
-document.querySelectorAll('.size-btn').forEach(function(b) {
+document.querySelectorAll('.size-btn').forEach((b) => {
   b.classList.toggle('active', b.dataset.view === currentView);
 });
-document.querySelectorAll('.cat-btn').forEach(function(b) {
+document.querySelectorAll('.cat-btn').forEach((b) => {
   b.classList.toggle('active', b.dataset.cat === activeCategory);
 });
-document.querySelectorAll('.view-btn').forEach(function(b) {
+document.querySelectorAll('.view-btn').forEach((b) => {
   b.classList.toggle('active', b.dataset.viewMode === viewMode);
 });
 if (viewMode === 'category') {
-  var catBar = document.getElementById('category-bar');
+  const catBar = document.getElementById('category-bar');
   if (catBar) catBar.style.display = 'none';
 }
 if (searchQuery) {
@@ -10550,9 +10573,9 @@ if (activeIcon && ICON_META[activeIcon]) {
   history.replaceState(null, '', buildURL());
 }
 
-window.addEventListener('popstate', function() {
-  var p = new URLSearchParams(window.location.search);
-  var icon = p.get('icon') || '';
+window.addEventListener('popstate', () => {
+  const p = new URLSearchParams(window.location.search);
+  const icon = p.get('icon') || '';
   activeIcon = icon;
   if (icon && ICON_META[icon]) {
     openDetail(icon);
@@ -10564,7 +10587,7 @@ window.addEventListener('popstate', function() {
   }
 });
 
-document.getElementById('search').addEventListener('input', function(e) {
+document.getElementById('search').addEventListener('input', (e) => {
   searchQuery = e.target.value;
   syncURL();
   render();
@@ -10579,9 +10602,7 @@ document.getElementById('search').addEventListener('input', function(e) {
  * All effects are CSS-driven and scoped under `.disco-mode` on <html>,
  * so nothing fires until activated. No dependencies on app.js.
  */
-(function () {
-  'use strict';
-
+(() => {
   // ---------------------------------------------------------------------------
   // 1. Inject disco styles into <head>
   // ---------------------------------------------------------------------------
@@ -10778,7 +10799,6 @@ document.getElementById('search').addEventListener('input', function(e) {
     '  opacity: 0;',
     '  transition: opacity 0.6s ease;',
     '}',
-
   ].join('\n');
 
   document.head.appendChild(styleEl);
@@ -10793,46 +10813,50 @@ document.getElementById('search').addEventListener('input', function(e) {
 
   var fadeOutTimer = null;
 
-  document.addEventListener('click', function (e) {
-    var discoBall = e.target.closest('[data-icon-name="disco-ball"]');
-    if (!discoBall) return;
+  document.addEventListener(
+    'click',
+    (e) => {
+      var discoBall = e.target.closest('[data-icon-name="disco-ball"]');
+      if (!discoBall) return;
 
-    // Swallow the click so app.js never sees it (we'll open the panel ourselves)
-    e.stopImmediatePropagation();
-    e.preventDefault();
+      // Swallow the click so app.js never sees it (we'll open the panel ourselves)
+      e.stopImmediatePropagation();
+      e.preventDefault();
 
-    var html = document.documentElement;
+      var html = document.documentElement;
 
-    // If we're currently fading out, cancel and snap off
-    if (fadeOutTimer) {
-      clearTimeout(fadeOutTimer);
-      fadeOutTimer = null;
-      html.classList.remove('disco-mode', 'disco-fade-out');
-      return;
-    }
-
-    var isActive = html.classList.contains('disco-mode');
-
-    if (isActive) {
-      // -- Turn off: fade out, then clean up classes --------------------
-      html.classList.add('disco-fade-out');
-      html.classList.remove('disco-mode');
-
-      fadeOutTimer = setTimeout(function () {
-        html.classList.remove('disco-fade-out');
+      // If we're currently fading out, cancel and snap off
+      if (fadeOutTimer) {
+        clearTimeout(fadeOutTimer);
         fadeOutTimer = null;
-      }, 650);
-    } else {
-      // -- Turn on -----------------------------------------------------
-      html.classList.remove('disco-fade-out');
-      html.classList.add('disco-mode');
-    }
+        html.classList.remove('disco-mode', 'disco-fade-out');
+        return;
+      }
 
-    // Still open the detail panel so users can access the icon
-    if (typeof openDetail === 'function') {
-      openDetail('disco-ball');
-    }
-  }, true); // ← capture phase: fires before app.js bubble-phase listener
+      var isActive = html.classList.contains('disco-mode');
+
+      if (isActive) {
+        // -- Turn off: fade out, then clean up classes --------------------
+        html.classList.add('disco-fade-out');
+        html.classList.remove('disco-mode');
+
+        fadeOutTimer = setTimeout(() => {
+          html.classList.remove('disco-fade-out');
+          fadeOutTimer = null;
+        }, 650);
+      } else {
+        // -- Turn on -----------------------------------------------------
+        html.classList.remove('disco-fade-out');
+        html.classList.add('disco-mode');
+      }
+
+      // Still open the detail panel so users can access the icon
+      if (typeof openDetail === 'function') {
+        openDetail('disco-ball');
+      }
+    },
+    true,
+  ); // ← capture phase: fires before app.js bubble-phase listener
 })();
 
 </script>

@@ -1354,12 +1354,6 @@
       "category": "Objects",
       "tags": ["birthday", "celebration", "party", "dessert", "candle", "bake", "sweet", "event"]
     },
-    "apple": {
-      "label": "Apple",
-      "description": "Apple fruit with stem and leaf for food, health, and education",
-      "category": "Objects",
-      "tags": ["fruit", "food", "health", "nutrition", "education", "teacher", "organic", "nature"]
-    },
     "mountain": {
       "label": "Mountain",
       "description": "Mountain peaks with snow line for nature, outdoors, and adventure",

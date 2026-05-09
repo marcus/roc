@@ -4,15 +4,20 @@ import path from 'node:path';
 import { optimize } from 'svgo';
 
 // ── Constants ────────────────────────────────────────────────────────
-const STYLES   = ['outline', 'solid', 'duotone', 'sharp'];
-const SRC_DIR  = 'src/svg';
+const STYLES = ['outline', 'solid', 'duotone', 'sharp'];
+const SRC_DIR = 'src/svg';
 const DIST_DIR = 'dist';
 
 // ── Argument parsing ─────────────────────────────────────────────────
-const args  = new Set(process.argv.slice(2));
-const flag  = (f) => args.has(f);
+const args = new Set(process.argv.slice(2));
+const flag = (f) => args.has(f);
 const runAll = ![
-  '--svg', '--react', '--svelte', '--sprite', '--demo', '--watch',
+  '--svg',
+  '--react',
+  '--svelte',
+  '--sprite',
+  '--demo',
+  '--watch',
 ].some((f) => args.has(f));
 
 // ── Shared helpers ───────────────────────────────────────────────────
@@ -27,7 +32,7 @@ function readSvgs() {
     if (!fs.existsSync(dir)) continue;
     for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.svg'))) {
       const name = path.basename(file, '.svg');
-      const raw  = fs.readFileSync(path.join(dir, file), 'utf8');
+      const raw = fs.readFileSync(path.join(dir, file), 'utf8');
       icons.push({ style, name, raw });
     }
   }
@@ -45,7 +50,9 @@ function loadOntology() {
   const validCats = new Set(ont.categories || []);
   for (const [name, meta] of Object.entries(ont.icons || {})) {
     if (meta.category && !validCats.has(meta.category)) {
-      console.warn(`  ⚠ icon "${name}" has unknown category "${meta.category}"`);
+      console.warn(
+        `  ⚠ icon "${name}" has unknown category "${meta.category}"`,
+      );
     }
   }
   return ont;
@@ -56,7 +63,7 @@ function toPascalCase(str) {
 }
 
 function getSvgInner(svgString) {
-  const open  = svgString.indexOf('>') + 1;
+  const open = svgString.indexOf('>') + 1;
   const close = svgString.lastIndexOf('</svg>');
   return svgString.slice(open, close).trim();
 }
@@ -64,12 +71,15 @@ function getSvgInner(svgString) {
 // ── Stage 1 — SVGO optimization ─────────────────────────────────────
 function stageSvg() {
   console.log('Stage 1: optimizing SVGs with SVGO...');
-  const icons    = readSvgs();
+  const icons = readSvgs();
   const manifest = [];
 
   const svgoConfig = {
     plugins: [
-      { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+      {
+        name: 'preset-default',
+        params: { overrides: { removeViewBox: false } },
+      },
       'removeDimensions',
     ],
   };
@@ -78,12 +88,14 @@ function stageSvg() {
     try {
       const { data: optimizedSvg } = optimize(raw, svgoConfig);
       const innerSvg = getSvgInner(optimizedSvg);
-      const outDir   = path.join(DIST_DIR, 'svg', style);
+      const outDir = path.join(DIST_DIR, 'svg', style);
       ensureDir(outDir);
       fs.writeFileSync(path.join(outDir, `${name}.svg`), optimizedSvg);
       manifest.push({ style, name, optimizedSvg, innerSvg });
     } catch (err) {
-      console.warn(`  ⚠ skipping ${style}/${name}.svg: ${err.reason || err.message}`);
+      console.warn(
+        `  ⚠ skipping ${style}/${name}.svg: ${err.reason || err.message}`,
+      );
     }
   }
 
@@ -103,7 +115,7 @@ function stageMetadata(manifest, ontology) {
   const metadata = {
     icons: [...byName.entries()]
       .map(([name, styles]) => {
-        const meta = (ontology.icons || {})[name] || {};
+        const meta = ontology.icons?.[name] || {};
         return {
           name,
           label: meta.label || name.charAt(0).toUpperCase() + name.slice(1),
@@ -122,9 +134,11 @@ function stageMetadata(manifest, ontology) {
   ensureDir(DIST_DIR);
   fs.writeFileSync(
     path.join(DIST_DIR, 'metadata.json'),
-    JSON.stringify(metadata, null, 2) + '\n',
+    `${JSON.stringify(metadata, null, 2)}\n`,
   );
-  console.log(`  ✓ metadata.json (${metadata.icons.length} icons, ${metadata.totalCount} variants)`);
+  console.log(
+    `  ✓ metadata.json (${metadata.icons.length} icons, ${metadata.totalCount} variants)`,
+  );
 }
 
 // ── Stage 2 — React component codegen ────────────────────────────────
@@ -141,11 +155,11 @@ function toJsxAttributes(innerSvg, isSolid) {
   }
 
   // Convert remaining kebab-case SVG attributes to camelCase JSX
-  jsx = jsx.replace(/stroke-linecap=/g,  'strokeLinecap=');
+  jsx = jsx.replace(/stroke-linecap=/g, 'strokeLinecap=');
   jsx = jsx.replace(/stroke-linejoin=/g, 'strokeLinejoin=');
   jsx = jsx.replace(/stroke-miterlimit=/g, 'strokeMiterlimit=');
-  jsx = jsx.replace(/fill-rule=/g,       'fillRule=');
-  jsx = jsx.replace(/clip-rule=/g,       'clipRule=');
+  jsx = jsx.replace(/fill-rule=/g, 'fillRule=');
+  jsx = jsx.replace(/clip-rule=/g, 'clipRule=');
 
   return jsx;
 }
@@ -210,15 +224,27 @@ export default ${pascalName};
   for (const [style, entries] of styleEntries) {
     const lines = entries
       .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
-      .map((e) => `export { default as ${e.pascalName} } from './${e.pascalName}.jsx';`);
-    fs.writeFileSync(path.join(reactDir, style, 'index.js'), lines.join('\n') + '\n');
+      .map(
+        (e) =>
+          `export { default as ${e.pascalName} } from './${e.pascalName}.jsx';`,
+      );
+    fs.writeFileSync(
+      path.join(reactDir, style, 'index.js'),
+      `${lines.join('\n')}\n`,
+    );
   }
 
   // Root barrel: dist/react/index.js
   const rootLines = allEntries
     .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
-    .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.jsx';`);
-  fs.writeFileSync(path.join(reactDir, 'index.js'), rootLines.join('\n') + '\n');
+    .map(
+      (e) =>
+        `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.jsx';`,
+    );
+  fs.writeFileSync(
+    path.join(reactDir, 'index.js'),
+    `${rootLines.join('\n')}\n`,
+  );
 
   // TypeScript declarations: dist/react/index.d.ts
   const tsLines = [
@@ -258,7 +284,10 @@ function stageSvelte(manifest) {
     // For stroked styles, replace stroke-width="..." with stroke-width="{sw}"
     let svgInner = innerSvg;
     if (isStroked) {
-      svgInner = svgInner.replace(/stroke-width="[^"]*"/g, 'stroke-width="{sw}"');
+      svgInner = svgInner.replace(
+        /stroke-width="[^"]*"/g,
+        'stroke-width="{sw}"',
+      );
     }
 
     let component;
@@ -299,15 +328,27 @@ function stageSvelte(manifest) {
   for (const [style, entries] of styleEntries) {
     const lines = entries
       .sort((a, b) => a.pascalName.localeCompare(b.pascalName))
-      .map((e) => `export { default as ${e.pascalName} } from './${e.pascalName}.svelte';`);
-    fs.writeFileSync(path.join(svelteDir, style, 'index.js'), lines.join('\n') + '\n');
+      .map(
+        (e) =>
+          `export { default as ${e.pascalName} } from './${e.pascalName}.svelte';`,
+      );
+    fs.writeFileSync(
+      path.join(svelteDir, style, 'index.js'),
+      `${lines.join('\n')}\n`,
+    );
   }
 
   // Root barrel: dist/svelte/index.js
   const rootLines = allEntries
     .sort((a, b) => a.suffixedName.localeCompare(b.suffixedName))
-    .map((e) => `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.svelte';`);
-  fs.writeFileSync(path.join(svelteDir, 'index.js'), rootLines.join('\n') + '\n');
+    .map(
+      (e) =>
+        `export { default as ${e.suffixedName} } from './${e.style}/${e.pascalName}.svelte';`,
+    );
+  fs.writeFileSync(
+    path.join(svelteDir, 'index.js'),
+    `${rootLines.join('\n')}\n`,
+  );
 
   // TypeScript declarations
   const tsHeader = [
@@ -333,7 +374,7 @@ function stageSvelte(manifest) {
       .map((e) => `export declare const ${e.pascalName}: Icon;`);
     fs.writeFileSync(
       path.join(svelteDir, style, 'index.d.ts'),
-      tsHeader + lines.join('\n') + '\n',
+      `${tsHeader + lines.join('\n')}\n`,
     );
   }
 
@@ -343,7 +384,7 @@ function stageSvelte(manifest) {
     .map((e) => `export declare const ${e.suffixedName}: Icon;`);
   fs.writeFileSync(
     path.join(svelteDir, 'index.d.ts'),
-    tsHeader + rootTsLines.join('\n') + '\n',
+    `${tsHeader + rootTsLines.join('\n')}\n`,
   );
 
   console.log(`  ✓ ${manifest.length} Svelte components → ${svelteDir}/`);
@@ -399,20 +440,35 @@ function stageDemo(manifest, ontology) {
 
   // Collect unique icon names (sorted) for rendering
   const iconNames = [...new Set(manifest.map((m) => m.name))].sort();
-  const iconCount = manifest.length;
 
   // Style metadata for headers
   const STYLE_META = {
-    outline: { label: 'Outline', tag: 'Stroke', desc: 'Clean single-weight strokes — default for navigation and toolbars' },
-    solid:   { label: 'Solid',   tag: 'Filled', desc: 'Filled shapes with negative-space details — best for active/selected states' },
-    duotone: { label: 'Duotone', tag: '2-Tone', desc: 'Accent fill layer + foreground stroke — ideal for feature highlights and onboarding' },
-    sharp:   { label: 'Sharp',   tag: 'Geometric', desc: 'Angular cuts, squared joins, no curves — engineered density for compact UI' },
+    outline: {
+      label: 'Outline',
+      tag: 'Stroke',
+      desc: 'Clean single-weight strokes — default for navigation and toolbars',
+    },
+    solid: {
+      label: 'Solid',
+      tag: 'Filled',
+      desc: 'Filled shapes with negative-space details — best for active/selected states',
+    },
+    duotone: {
+      label: 'Duotone',
+      tag: '2-Tone',
+      desc: 'Accent fill layer + foreground stroke — ideal for feature highlights and onboarding',
+    },
+    sharp: {
+      label: 'Sharp',
+      tag: 'Geometric',
+      desc: 'Angular cuts, squared joins, no curves — engineered density for compact UI',
+    },
   };
 
   // Build icon metadata from ontology
   const ICON_META = {};
   for (const name of iconNames) {
-    const meta = (ontology.icons || {})[name] || {};
+    const meta = ontology.icons?.[name] || {};
     ICON_META[name] = {
       label: meta.label || name.charAt(0).toUpperCase() + name.slice(1),
       description: meta.description || '',
@@ -427,7 +483,7 @@ function stageDemo(manifest, ontology) {
   const sunInnerSvg = iconsObj.outline?.sun || '';
 
   // Read external source files
-  const cssContent   = fs.readFileSync('demo/src/styles.css', 'utf8');
+  const cssContent = fs.readFileSync('demo/src/styles.css', 'utf8');
   const appJsContent = fs.readFileSync('demo/src/app.js', 'utf8');
   const discoJsContent = fs.readFileSync('demo/src/disco.js', 'utf8');
 
@@ -524,7 +580,7 @@ ${cssContent}
 <!-- category bar -->
 <div class="category-bar" id="category-bar">
   <button class="cat-btn active" data-cat="" onclick="setCat('')">All</button>
-  ${(ontology.categories || []).map(c => `<button class="cat-btn" data-cat="${c}" onclick="setCat('${c}')">${c}</button>`).join('\n  ')}
+  ${(ontology.categories || []).map((c) => `<button class="cat-btn" data-cat="${c}" onclick="setCat('${c}')">${c}</button>`).join('\n  ')}
 </div>
 
 <!-- count bar -->
@@ -563,7 +619,9 @@ ${discoJsContent}
 
   ensureDir('demo');
   fs.writeFileSync(path.join('demo', 'index.html'), html);
-  console.log(`  ✓ demo/index.html (${iconNames.length} icons × ${STYLES.length} styles)`);
+  console.log(
+    `  ✓ demo/index.html (${iconNames.length} icons × ${STYLES.length} styles)`,
+  );
 }
 
 // ── Watch mode ───────────────────────────────────────────────────────
@@ -604,20 +662,26 @@ function stageWatch() {
 
 // ── Main ─────────────────────────────────────────────────────────────
 function main(rebuild = false) {
-  const needsSvg = runAll || flag('--svg') || flag('--react') || flag('--svelte') || flag('--sprite') || rebuild;
+  const needsSvg =
+    runAll ||
+    flag('--svg') ||
+    flag('--react') ||
+    flag('--svelte') ||
+    flag('--sprite') ||
+    rebuild;
 
   const ontology = loadOntology();
 
   let manifest;
   if (needsSvg) manifest = stageSvg();
 
-  if (runAll || flag('--react'))   stageReact(manifest);
-  if (runAll || flag('--svelte'))  stageSvelte(manifest);
-  if (runAll || flag('--sprite'))  stageSprite(manifest);
+  if (runAll || flag('--react')) stageReact(manifest);
+  if (runAll || flag('--svelte')) stageSvelte(manifest);
+  if (runAll || flag('--sprite')) stageSprite(manifest);
 
   if (manifest) stageMetadata(manifest, ontology);
 
-  if (runAll || flag('--demo'))    stageDemo(manifest, ontology);
+  if (runAll || flag('--demo')) stageDemo(manifest, ontology);
 
   // Cache for demo-only rebuilds in watch mode
   if (manifest) cachedManifest = manifest;

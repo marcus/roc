@@ -65,7 +65,9 @@ export function parseArgs(argv) {
       const raw = expectValue(argv, ++index, token);
       options.limit = Number.parseInt(raw, 10);
       if (!Number.isInteger(options.limit) || options.limit < 1) {
-        throw new Error(`Expected a positive integer for ${token}, received "${raw}".`);
+        throw new Error(
+          `Expected a positive integer for ${token}, received "${raw}".`,
+        );
       }
       continue;
     }
@@ -131,15 +133,18 @@ export function readGitCommits(options = {}) {
     return [];
   }
 
-  return raw.split('\n').filter(Boolean).map((line) => {
-    const [hash, shortHash, subject, date] = line.split('\x1f');
-    return {
-      hash,
-      shortHash,
-      subject: subject.trim(),
-      date,
-    };
-  });
+  return raw
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => {
+      const [hash, shortHash, subject, date] = line.split('\x1f');
+      return {
+        hash,
+        shortHash,
+        subject: subject.trim(),
+        date,
+      };
+    });
 }
 
 export function normalizeSubject(subject) {
@@ -158,16 +163,26 @@ export function classifyCommit(subject) {
   const normalized = normalizeSubject(subject);
   const lower = normalized.toLowerCase();
 
-  if (/^(fix|perf)(\([^)]+\))?!?:\s/.test(lower) || /\b(fix|fixed|fixes|bug|compatibility)\b/.test(lower)) {
+  if (
+    /^(fix|perf)(\([^)]+\))?!?:\s/.test(lower) ||
+    /\b(fix|fixed|fixes|bug|compatibility)\b/.test(lower)
+  ) {
     return 'Fixes';
   }
 
-  if (/^docs(\([^)]+\))?!?:\s/.test(lower) || /\b(readme|docs?|documentation|guide)\b/.test(lower)) {
+  if (
+    /^docs(\([^)]+\))?!?:\s/.test(lower) ||
+    /\b(readme|docs?|documentation|guide)\b/.test(lower)
+  ) {
     return 'Documentation';
   }
 
-  if (/^(build|chore|ci|test|refactor)(\([^)]+\))?!?:\s/.test(lower)
-    || /\b(build|script|pipeline|codegen|types|type declarations|package|exports|automation|watch)\b/.test(lower)) {
+  if (
+    /^(build|chore|ci|test|refactor)(\([^)]+\))?!?:\s/.test(lower) ||
+    /\b(build|script|pipeline|codegen|types|type declarations|package|exports|automation|watch)\b/.test(
+      lower,
+    )
+  ) {
     return 'Build & Tooling';
   }
 
@@ -175,7 +190,11 @@ export function classifyCommit(subject) {
     return 'Features';
   }
 
-  if (/\b(icon|icons|logo|logos|brand|brands|sprite|metadata|category|categories|redesign)\b/.test(lower)) {
+  if (
+    /\b(icon|icons|logo|logos|brand|brands|sprite|metadata|category|categories|redesign)\b/.test(
+      lower,
+    )
+  ) {
     return 'Icons';
   }
 
@@ -193,13 +212,11 @@ export function buildSections(commits) {
     });
   }
 
-  return SECTION_ORDER
-    .map((title) => ({
-      title,
-      description: SECTION_DESCRIPTIONS[title],
-      entries: sections.get(title),
-    }))
-    .filter((section) => section.entries.length > 0);
+  return SECTION_ORDER.map((title) => ({
+    title,
+    description: SECTION_DESCRIPTIONS[title],
+    entries: sections.get(title),
+  })).filter((section) => section.entries.length > 0);
 }
 
 export function formatMarkdown(sections, options = {}) {
@@ -227,7 +244,7 @@ export function formatMarkdown(sections, options = {}) {
     lines.push('');
   }
 
-  return lines.join('\n').trimEnd() + '\n';
+  return `${lines.join('\n').trimEnd()}\n`;
 }
 
 export function generateChangelog(options = {}) {
@@ -276,7 +293,9 @@ function runCli() {
   }
 }
 
-const isMainModule = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const isMainModule =
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isMainModule) {
   runCli();
