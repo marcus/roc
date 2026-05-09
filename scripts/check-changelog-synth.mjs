@@ -53,7 +53,7 @@ function testInvalidArgs() {
 function testSubjectCleanup() {
   assert.equal(cleanSubject('feat:   add README workflow   (td-6cf1f0)'), 'add README workflow');
   assert.equal(cleanSubject('fix(parser)!: repair   date output [TD-abc123]'), 'repair date output');
-  assert.equal(cleanSubject('  Add   icon metadata  '), 'Add icon metadata');
+  assert.equal(cleanSubject('  Add   icon metadata  '), 'add icon metadata');
 }
 
 function testClassificationPrecedence() {

@@ -108,6 +108,30 @@ npm run deploy       # Build + deploy demo to roc.haplab.com
 
 Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
 
+## Commit Message Workflow
+
+Use Conventional Commit-style subjects for new work:
+
+```text
+feat(icons): add message square plus icon
+fix: repair package exports
+docs: refresh README
+```
+
+Normalize a draft subject before committing:
+
+```bash
+npm run normalize:commit -- Add MessageSquarePlus icon.
+```
+
+Check an already-normalized subject:
+
+```bash
+npm run normalize:commit -- --check "feat(icons): add MessageSquarePlus icon"
+```
+
+For a commit message file, use `--write <path>` to rewrite only the subject line. Message bodies and trailers, including `Nightshift-*` trailers, are preserved.
+
 ## Changelog Workflow
 
 Generate a Markdown changelog directly from local git history:
@@ -126,7 +150,7 @@ npm run changelog -- --range main..HEAD
 npm run changelog -- --limit 20 --output CHANGELOG.md
 ```
 
-Each entry includes a cleaned commit summary, short hash, and commit date. Conventional commit prefixes decide the section first, so `feat:` is always `Features` even when the subject mentions README files, docs, scripts, packages, build work, or exports. Fallback keyword heuristics then classify entries into `Features`, `Fixes`, `Documentation`, `Build & Tooling`, `Icons`, and `Other Changes`.
+Each entry includes a cleaned commit summary, short hash, and commit date. The generator reuses the commit-message normalizer for subject cleanup. Conventional commit prefixes decide the section first, so `feat:` is always `Features` even when the subject mentions README files, docs, scripts, packages, build work, or exports. Fallback keyword heuristics then classify entries into `Features`, `Fixes`, `Documentation`, `Build & Tooling`, `Icons`, and `Other Changes`.
 
 Output keeps the `git log` order end-to-end. Instead of regrouping every commit under global headings, the generator starts a new section block whenever the next commit belongs to a different section, and it omits empty sections. Empty ranges render a clear `No commits found` message.
 
