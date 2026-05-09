@@ -1912,6 +1912,12 @@
       "category": "Brand",
       "tags": ["git", "repository", "code", "source", "octocat", "vcs", "version control"]
     },
+    "hacker-news-logo": {
+      "label": "Hacker News",
+      "description": "Hacker News Y-shaped letterform inside a rounded square",
+      "category": "Brand",
+      "tags": ["hacker news", "hn", "ycombinator", "news", "tech", "social", "logo"]
+    },
     "caret-down": {
       "label": "Caret Down",
       "description": "Small downward-pointing triangle for dropdowns and collapsible content",
