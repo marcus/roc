@@ -51,6 +51,10 @@ function testTaskSuffixesAndCleanSummaries() {
     normalizeCommitSubject('Add MessageSquarePlus icon (td-A1B2C3).'),
     'feat(icons): add MessageSquarePlus icon (td-a1b2c3)',
   );
+  assert.equal(
+    normalizeCommitSubject('Fix parser output [TD-abc123]'),
+    'fix: fix parser output (td-abc123)',
+  );
   assert.equal(cleanCommitSubjectSummary('feat(icons): add MessageSquarePlus icon (td-a1b2c3)'), 'add MessageSquarePlus icon');
 }
 

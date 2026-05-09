@@ -158,7 +158,7 @@ export function isRecognizedCommitType(type) {
 }
 
 function splitTaskSuffix(summary) {
-  const match = summary.match(/^(.*?)(?:\s+\((td-[a-z0-9-]+)\))$/i);
+  const match = summary.match(/^(.*?)(?:\s+(?:\((td-[a-z0-9-]+)\)|\[(td-[a-z0-9-]+)\]))$/i);
   if (!match) {
     return {
       summary,
@@ -166,9 +166,10 @@ function splitTaskSuffix(summary) {
     };
   }
 
+  const taskId = match[2] || match[3];
   return {
     summary: match[1].trim(),
-    taskSuffix: ` (${match[2].toLowerCase()})`,
+    taskSuffix: ` (${taskId.toLowerCase()})`,
   };
 }
 
