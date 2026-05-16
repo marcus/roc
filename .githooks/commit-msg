@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+if [ -z "${repo_root}" ]; then
+  echo "commit-msg: unable to determine repo root" >&2
+  exit 1
+fi
+
+node "$repo_root/scripts/normalize-commit-message.mjs" "$1"
