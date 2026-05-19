@@ -7,6 +7,12 @@ import { optimize } from 'svgo';
 const STYLES   = ['outline', 'solid', 'duotone', 'sharp'];
 const SRC_DIR  = 'src/svg';
 const DIST_DIR = 'dist';
+const SVGO_CONFIG = {
+  plugins: [
+    { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+    'removeDimensions',
+  ],
+};
 
 // ── Argument parsing ─────────────────────────────────────────────────
 const args  = new Set(process.argv.slice(2));
@@ -32,6 +38,19 @@ function readSvgs() {
     }
   }
   return icons;
+}
+
+function readSourceManifest() {
+  const manifest = [];
+  for (const { style, name, raw } of readSvgs()) {
+    try {
+      const { data: optimizedSvg } = optimize(raw, SVGO_CONFIG);
+      manifest.push({ style, name, optimizedSvg, innerSvg: getSvgInner(optimizedSvg) });
+    } catch (err) {
+      console.warn(`  ⚠ skipping ${style}/${name}.svg: ${err.reason || err.message}`);
+    }
+  }
+  return manifest;
 }
 
 function loadOntology() {
@@ -67,16 +86,9 @@ function stageSvg() {
   const icons    = readSvgs();
   const manifest = [];
 
-  const svgoConfig = {
-    plugins: [
-      { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
-      'removeDimensions',
-    ],
-  };
-
   for (const { style, name, raw } of icons) {
     try {
-      const { data: optimizedSvg } = optimize(raw, svgoConfig);
+      const { data: optimizedSvg } = optimize(raw, SVGO_CONFIG);
       const innerSvg = getSvgInner(optimizedSvg);
       const outDir   = path.join(DIST_DIR, 'svg', style);
       ensureDir(outDir);
@@ -610,12 +622,13 @@ function main(rebuild = false) {
 
   let manifest;
   if (needsSvg) manifest = stageSvg();
+  if (!manifest && flag('--demo')) manifest = readSourceManifest();
 
   if (runAll || flag('--react'))   stageReact(manifest);
   if (runAll || flag('--svelte'))  stageSvelte(manifest);
   if (runAll || flag('--sprite'))  stageSprite(manifest);
 
-  if (manifest) stageMetadata(manifest, ontology);
+  if (needsSvg && manifest) stageMetadata(manifest, ontology);
 
   if (runAll || flag('--demo'))    stageDemo(manifest, ontology);
 
