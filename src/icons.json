@@ -2190,9 +2190,9 @@
     },
     "rocket-league": {
       "label": "Rocket League",
-      "description": "Side-profile car with rocket booster exhaust trailing behind",
+      "description": "Stylized sports car boosting diagonally towards a soccer ball representing Rocket League",
       "category": "Gaming",
-      "tags": ["rocket league", "car", "rocket", "boost", "soccer", "racing", "esports", "gaming", "vehicle"]
+      "tags": ["rocket league", "car", "rocket", "boost", "soccer", "racing", "esports", "gaming", "vehicle", "ball"]
     },
     "apple": {
       "label": "Apple",
@@ -2838,9 +2838,9 @@
     },
     "dog": {
       "label": "Dog",
-      "description": "Dog head with ears and snout for pets and animals",
+      "description": "Cute front-facing dog head with floppy ears",
       "category": "Nature",
-      "tags": ["animal", "pet", "canine", "puppy", "hound", "bark", "woof"]
+      "tags": ["animal", "pet", "canine", "puppy", "hound", "bark", "woof", "floppy ears", "face"]
     },
     "rabbit": {
       "label": "Rabbit",
@@ -2928,21 +2928,21 @@
     },
     "surfing": {
       "label": "Surfing",
-      "description": "Surfboard with wave line for surfing and ocean sports",
+      "description": "Surfer riding a wave on a surfboard",
       "category": "Sports",
-      "tags": ["surf", "surfboard", "wave", "ocean", "beach", "water sports"]
+      "tags": ["surf", "surfboard", "wave", "ocean", "beach", "water sports", "surfer", "athlete"]
     },
     "skiing": {
       "label": "Skiing",
-      "description": "Crossed skis and poles for skiing and winter sports",
+      "description": "Dynamic skier crouching downhill with skis and poles",
       "category": "Sports",
-      "tags": ["ski", "skis", "snow", "winter", "poles", "downhill"]
+      "tags": ["ski", "skis", "snow", "winter", "poles", "downhill", "skier", "athlete"]
     },
     "snowboarding": {
       "label": "Snowboarding",
-      "description": "Snowboard deck with bindings for snowboarding and mountain sports",
+      "description": "Snowboarder crouched sideways on a snowboard",
       "category": "Sports",
-      "tags": ["snowboard", "snow", "winter", "bindings", "mountain", "board"]
+      "tags": ["snowboard", "snow", "winter", "bindings", "mountain", "board", "snowboarder", "athlete"]
     },
     "football-american": {
       "label": "American Football",

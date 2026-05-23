@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <rect x="9" y="2.5" width="6" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
-  <rect x="2.5" y="17.5" width="5" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
-  <rect x="9.5" y="17.5" width="5" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
-  <rect x="16.5" y="17.5" width="5" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
-  <path d="M12 6.5v4.5M5 11h14M5 11v6.5M12 11v6.5M19 11v6.5" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M6 12h2V7h2M8 12v5h2M14 7h2V4h2M16 7v3h2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="2" y="10" width="4" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="10" y="5" width="4" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="10" y="15" width="4" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="18" y="2" width="4" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <rect x="18" y="8" width="4" height="4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-miterlimit="10"/>
 </svg>
