@@ -108,6 +108,36 @@ npm run deploy       # Build + deploy demo to roc.haplab.com
 
 Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`.
 
+## Changelog Workflow
+
+Generate a Markdown changelog directly from local git commit subjects:
+
+```bash
+npm run changelog
+```
+
+By default the synthesizer reads the full repository history through `HEAD`. That default is intentional because Roc currently has no release tags or existing changelog automation.
+
+Useful variants:
+
+```bash
+npm run changelog -- --from main
+npm run changelog -- --range main..HEAD
+npm run changelog -- --limit 20 --output CHANGELOG.md
+```
+
+Choose either an explicit `--range` or `--from`/`--to` bounds. The CLI rejects mixed usage so invocation stays deterministic.
+
+The generator uses local heuristics to group commit subjects into `Features`, `Fixes`, `Documentation`, `Build & Tooling`, `Icons`, and `Other Changes`. Output is deterministic: commits stay in git log order, empty sections are omitted, and each entry includes its short hash plus commit date.
+
+Validate the synthesizer with:
+
+```bash
+npm run check:changelog
+```
+
+That check covers fixed fixture-style assertions and a smoke test against the repository's current history so the output structure stays stable even as commits are added.
+
 ## Adding Icons
 
 See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
