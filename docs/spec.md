@@ -1,186 +1,207 @@
-# Plan: Icon Library Structure & Build System
+# Roc Build and Documentation Spec
 
-## Context
+This document describes the current repository layout, build pipeline, published package surface, and documentation map for Roc.
 
-The project currently has a single `index.html` demo page containing 5 handcrafted SVG icons (Home, Analytics, Team, Alerts, Settings) in 4 styles (Outline, Solid, Duotone, Sharp) — 20 icon variants total. All icon definitions live as JavaScript functions generating SVG strings at runtime. The goal is to restructure this into a proper icon library that can be consumed in React, Svelte, and Tailwind projects, with a build pipeline and AI-friendly guides for adding new icons.
+## Goals
 
----
+Roc is a source-first icon library:
 
-## Directory Structure
+- SVG files in `src/svg/` are the canonical icon artwork.
+- `src/icons.json` provides human-facing metadata.
+- `build.mjs` derives all published outputs from those two inputs plus the demo source files.
 
-```
-icons/
-├── CLAUDE.md                     # AI guide for adding new icons
-├── package.json                  # Exports map for react/svelte/svg
-├── build.mjs                     # Single build script (Node 22, ESM)
-├── .gitignore
-├── src/
-│   └── svg/                      # Source of truth — one file per icon per style
-│       ├── outline/
-│       │   ├── home.svg
-│       │   ├── chart.svg
-│       │   ├── users.svg
-│       │   ├── bell.svg
-│       │   └── settings.svg
-│       ├── solid/
-│       ├── duotone/
-│       └── sharp/
-├── dist/                         # Build output (gitignored)
-│   ├── svg/                      # SVGO-optimized SVGs (same structure as src)
-│   ├── react/                    # JSX components with forwardRef + size prop
-│   │   ├── index.js              # Barrel: exports all icons with style suffix
-│   │   ├── index.d.ts            # TypeScript declarations
-│   │   ├── outline/
-│   │   │   ├── index.js
-│   │   │   ├── Home.jsx
-│   │   │   └── ...
-│   │   ├── solid/
-│   │   ├── duotone/
-│   │   └── sharp/
-│   ├── svelte/                   # .svelte components with size prop
-│   │   ├── index.js
-│   │   ├── outline/
-│   │   │   ├── index.js
-│   │   │   ├── Home.svelte
-│   │   │   └── ...
-│   │   ├── solid/
-│   │   ├── duotone/
-│   │   └── sharp/
-│   ├── sprite.svg                # SVG sprite (<symbol> per icon) for Tailwind/HTML
-│   └── metadata.json             # Icon manifest (names, styles, tags)
-└── demo/
-    └── index.html                # Auto-generated demo page (current page, rebuilt from source SVGs)
+The repo maintains both consumer docs and contributor docs alongside the implementation so the published package surface and the authoring workflow stay in sync.
+
+## Repository Layout
+
+```text
+roc/
+  CLAUDE.md
+  CONTRIBUTING.md
+  README.md
+  build.mjs
+  docs/
+    api.md
+    spec.md
+  demo/
+    index.html
+    src/
+      app.js
+      disco.js
+      styles.css
+  scripts/
+    check-svelte-types.mjs
+  src/
+    icons.json
+    svg/
+      outline/
+      solid/
+      duotone/
+      sharp/
 ```
 
-Organized **by style, then icon name** — matches how Heroicons works and how the user's demo page already groups things. Import paths read naturally: `@icons/react/outline`.
+Important distinctions:
 
----
+- `src/svg/` and `src/icons.json` are the editable package inputs.
+- `dist/` is generated package output and is gitignored.
+- `demo/index.html` is generated from `demo/src/*` and is committed so the demo site can be deployed directly.
 
-## Implementation Steps
+## Source of Truth
 
-### Step 1: Project scaffolding
+### SVG Sources
 
-Create `package.json`, `.gitignore`, directory structure (`src/svg/{outline,solid,duotone,sharp}/`).
+Each icon exists as one SVG file per style:
 
-- **package.json**: `type: "module"`, `private: true`, exports map for `./react/*`, `./svelte/*`, `./svg/*`, `./sprite`, `./metadata`. Scripts: `build`, `build:svg`, `build:react`, `build:svelte`, `build:sprite`, `build:demo`, `dev`, `preview`. Single devDependency: `svgo`.
-- **.gitignore**: `node_modules/`, `dist/`
+- `src/svg/outline/{name}.svg`
+- `src/svg/solid/{name}.svg`
+- `src/svg/duotone/{name}.svg`
+- `src/svg/sharp/{name}.svg`
 
-### Step 2: Extract source SVGs from index.html
+Filenames are kebab-case. Build output converts them to PascalCase component names where needed.
 
-Parse the existing `index.html` and extract each icon's SVG markup into individual files. There are 20 icons (5 names x 4 styles). Each source SVG:
+### Metadata
 
-- Uses `viewBox="0 0 24 24"`, `fill="none"`, no width/height
-- Stroke-width hardcoded to `1.5` (dynamic sizing handled by components)
-- Uses `currentColor` for theming, `var(--color-duotone-fill)` for duotone backgrounds
+`src/icons.json` defines:
 
-Write a one-time extraction section in `build.mjs` or extract manually (20 files is small enough).
+- library categories
+- per-icon `label`
+- per-icon `description`
+- per-icon `category`
+- per-icon `tags`
 
-### Step 3: Build script (`build.mjs`)
+The metadata file is used by the generated `dist/metadata.json` and the demo page.
 
-A single Node.js ESM script with 6 pipeline stages. No SVGR or framework-specific tooling — just string templating, which is simpler and more controllable for a small icon set.
+### Demo Sources
 
-**CLI interface:**
-```
-node build.mjs              # Full rebuild (all stages)
-node build.mjs --svg        # Stage 1 only
-node build.mjs --react      # Stage 2 only
-node build.mjs --svelte     # Stage 3 only
-node build.mjs --sprite     # Stage 4 only
-node build.mjs --demo       # Stage 6 only
-node build.mjs --watch      # Watch src/svg/ and rebuild on change
-```
+The demo page is assembled from:
 
-**Stage 1 — SVGO optimization**: Read `src/svg/**/*.svg`, optimize with SVGO (strip metadata, clean paths, remove dimensions), write to `dist/svg/`.
+- `demo/src/styles.css`
+- `demo/src/app.js`
+- `demo/src/disco.js`
 
-**Stage 2 — React codegen**: For each optimized SVG, generate a JSX component:
-- `forwardRef` wrapper with `size` prop (default 24) and `className` spread
-- For stroked styles (outline/duotone/sharp): dynamic `strokeWidth` — `sw = strokeWidth ?? (size <= 16 ? 1.75 : 1.5)`
-- SVG attributes converted to camelCase (`stroke-width` → `strokeWidth`, `fill-rule` → `fillRule`, etc.)
-- Per-style `index.js` barrel files + root `index.js` with style-suffixed names (`HomeOutline`, `HomeSolid`)
-- Generated `index.d.ts` with `IconProps` interface
+`build.mjs` injects generated icon data and metadata into the final `demo/index.html`.
 
-**Stage 3 — Svelte codegen**: Similar to React but using Svelte template syntax:
-- `export let size = 24` prop, `{...$$restProps}` spread
-- Reactive `$: sw = ...` for dynamic stroke-width
-- No attribute camelCase conversion needed (Svelte uses standard HTML attributes)
+## Build Pipeline
 
-**Stage 4 — Sprite generation**: Single `dist/sprite.svg` with `<symbol>` per icon, IDs as `{name}-{style}` (e.g., `home-outline`). For Tailwind/HTML usage: `<svg><use href="sprite.svg#home-outline"/></svg>`.
+`build.mjs` is the only build entrypoint. `package.json` exposes it through:
 
-**Stage 5 — Metadata**: `dist/metadata.json` with icon names, styles, counts.
+- `npm run build`
+- `npm run build:svg`
+- `npm run build:react`
+- `npm run build:svelte`
+- `npm run build:sprite`
+- `npm run build:demo`
+- `npm run dev`
 
-**Stage 6 — Demo page**: Regenerate `demo/index.html` from source SVGs, preserving the existing design (dark/light theme, size selector, copy-to-clipboard, keyboard shortcuts).
+`npm install` also runs `prepare`, which invokes the full build locally.
 
-### Step 4: CLAUDE.md — AI icon creation guide
+### Stage 1: SVG Optimization
 
-The key file for "easy to add new icons." Contains:
+Reads every file in `src/svg/{style}/`, optimizes it with SVGO, and writes the result to `dist/svg/{style}/`.
 
-- **Quick start**: "Create 4 SVGs → `npm run build` → verify in demo"
-- **Foundation rules** (all styles): viewBox 0 0 24 24, no width/height, currentColor only, coordinate precision, visual centering
-- **Per-style specifications** with exact attribute requirements and 2 full SVG examples each:
-  - **Outline**: `stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"`, no fills
-  - **Solid**: `fill="currentColor"`, `fill-rule="evenodd"` for cutouts, no strokes (except detail elements)
-  - **Duotone**: background `fill="var(--color-duotone-fill)"` + outline strokes on top
-  - **Sharp**: `stroke-linejoin="miter" stroke-miterlimit="10"`, no round caps, rects instead of circles, straight lines over curves
-- **Step-by-step workflow**: design outline first → derive solid → layer duotone → rebuild as sharp
-- **Naming conventions**: kebab-case filenames, PascalCase components, `{name}-{style}` sprite IDs
-- **Existing icon table** with descriptions
-- **Build commands reference**
+Artifacts produced:
 
-### Step 5: Install, build, verify
+- optimized SVG files
+- a manifest of `{ style, name, optimizedSvg, innerSvg }` records used by later stages
 
-- `npm install` (just svgo)
-- `npm run build` — full pipeline
-- `npm run preview` — open demo in browser
-- Verify: all 20 icons render correctly across styles/sizes, dark/light theme works, React/Svelte components are importable
+### Stage 2: React Code Generation
 
-### Step 6: Git init
+Generates React component files into `dist/react/{style}/`.
 
-Initialize git repo, initial commit.
+Behavior:
 
----
+- converts SVG attribute names to JSX equivalents
+- uses `forwardRef`
+- supports `size` on all icons
+- supports `strokeWidth` on stroked styles
+- generates style-barrel `index.js` files
+- generates `dist/react/index.js` and `dist/react/index.d.ts`
 
-## Consumer Usage
+Current packaging note:
 
-```js
-// React — by style
-import { Home, Chart } from '@marcus/roc/react/outline';
-<Home size={20} className="text-gray-500" />
+- the root React barrel exists in `dist/react/`, but `package.json` only exports `./react/*`, not `./react`
+- documentation uses `@marcus/roc/react/{style}/index.js` for React style barrels because the wildcard export maps style directories, not a dedicated `./react/{style}` file export
 
-// React — all icons with style suffix
-import { HomeOutline, HomeSolid } from '@marcus/roc/react';
+### Stage 3: Svelte Code Generation
 
-// Svelte
-import Home from '@marcus/roc/svelte/outline/Home.svelte';
-<Home size={24} class="icon" />
+Generates Svelte component files into `dist/svelte/{style}/`.
 
-// Tailwind / HTML — sprite
-<svg width="24" height="24" class="text-gray-700">
-  <use href="/sprite.svg#home-outline" />
-</svg>
-```
+Behavior:
 
-Duotone icons require `--color-duotone-fill` CSS custom property defined by the consuming app (e.g., `rgba(94, 106, 210, 0.15)`).
+- uses Svelte 5 runes-style props handling in generated files
+- supports `size` on all icons
+- derives default stroke width for stroked styles from `size`
+- generates style-barrel `index.js` and `index.d.ts` files
+- generates the root `dist/svelte/index.js` and `dist/svelte/index.d.ts`
 
----
+### Stage 4: Sprite Generation
 
-## Files to Create/Modify
+Creates `dist/sprite.svg` with one `<symbol>` per icon variant.
 
-| File | Action |
-|------|--------|
-| `package.json` | Create — exports map, scripts, devDependencies |
-| `.gitignore` | Create — node_modules/, dist/ |
-| `build.mjs` | Create — main build script (~300-400 lines) |
-| `CLAUDE.md` | Create — AI icon creation guide |
-| `src/svg/{style}/{name}.svg` | Create — 20 source SVG files extracted from index.html |
-| `index.html` | Move to `demo/index.html` (rebuilt by build script) |
+Symbol ids use the public naming convention `{name}-{style}`.
 
----
+### Stage 5: Metadata Generation
 
-## Verification
+Creates `dist/metadata.json` from the SVG manifest and `src/icons.json`.
 
-1. `npm run build` completes without errors
-2. `dist/` contains svg/, react/, svelte/, sprite.svg, metadata.json
-3. `demo/index.html` renders all icons correctly (open in browser)
-4. React component smoke test: `node -e "import('./dist/react/outline/Home.jsx')"` loads without error
-5. Sprite: open sprite.svg in browser, symbols render
-6. Add a test icon (e.g., `src/svg/outline/test.svg`), run build, verify it appears in all outputs
+The generated JSON includes:
+
+- `icons`
+- `categories`
+- `totalCount`
+- `styles`
+
+### Stage 6: Demo Generation
+
+Creates `demo/index.html` by combining:
+
+- generated icon data from the manifest
+- generated metadata from `src/icons.json`
+- static assets from `demo/src/*`
+
+`demo/index.html` should be treated as generated output even though it is committed.
+
+## Published Package Surface
+
+`package.json` publishes `dist/` and exports these public surfaces:
+
+- `./react/*`
+- `./svelte`
+- `./svelte/outline`
+- `./svelte/solid`
+- `./svelte/duotone`
+- `./svelte/sharp`
+- `./svelte/*`
+- `./svg/*`
+- `./sprite`
+- `./metadata`
+
+That yields the consumer-facing import patterns documented in [api.md](api.md):
+
+- React style barrel files and per-icon files
+- Svelte root barrel, style barrels, and per-icon files
+- raw optimized SVG files
+- the sprite sheet
+- metadata JSON
+
+## Documentation Map
+
+The repo now separates docs by audience:
+
+| File | Audience | Purpose |
+| --- | --- | --- |
+| `README.md` | package consumers | install, quick start, supported import paths, common usage |
+| `docs/api.md` | package consumers | stable export matrix, props, artifact layout |
+| `CONTRIBUTING.md` | human contributors | setup, add-an-icon workflow, verification, PR guidance |
+| `CLAUDE.md` | icon authors and agents | detailed SVG design rules and naming conventions |
+| `docs/spec.md` | maintainers | architecture, pipeline, and documentation structure |
+
+## Verification Expectations
+
+The repository currently relies on these checks:
+
+- `npm run build` to regenerate package and demo artifacts
+- `npm run check:types` to validate Svelte export resolution from a packed tarball
+- `npm run preview` for manual demo inspection when visuals change
+
+The build writes and overwrites generated files but does not clean `dist/` first. For a fully clean local verification after renames or deletions, remove `dist/` before rebuilding.
