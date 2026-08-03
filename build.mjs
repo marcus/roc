@@ -66,6 +66,7 @@ function stageSvg() {
   console.log('Stage 1: optimizing SVGs with SVGO...');
   const icons    = readSvgs();
   const manifest = [];
+  const failures = [];
 
   const svgoConfig = {
     plugins: [
@@ -83,8 +84,12 @@ function stageSvg() {
       fs.writeFileSync(path.join(outDir, `${name}.svg`), optimizedSvg);
       manifest.push({ style, name, optimizedSvg, innerSvg });
     } catch (err) {
-      console.warn(`  ⚠ skipping ${style}/${name}.svg: ${err.reason || err.message}`);
+      failures.push(`${style}/${name}.svg: ${err.reason || err.message}`);
     }
+  }
+
+  if (failures.length > 0) {
+    throw new Error(`SVG optimization failed:\n  ${failures.join('\n  ')}`);
   }
 
   console.log(`  ✓ ${manifest.length} SVGs optimized → ${DIST_DIR}/svg/`);

@@ -3045,6 +3045,12 @@
       "description": "Thinking face with raised brow and tilted mouth for contemplation",
       "category": "People",
       "tags": ["thinking", "pondering", "emoji", "face", "hmm", "contemplation"]
+    },
+    "theme-system": {
+      "label": "Theme System",
+      "description": "Half sun, half moon disc for follow-system and automatic theme mode",
+      "category": "System",
+      "tags": ["theme", "mode", "system", "auto", "automatic", "light", "dark", "sun", "moon", "appearance"]
     }
   }
 }

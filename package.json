@@ -1,6 +1,6 @@
 {
   "name": "@marcusv/roc",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "files": [
     "dist/"
@@ -53,6 +53,8 @@
     "build:demo": "node build.mjs --demo",
     "dev": "node build.mjs --watch",
     "preview": "open demo/index.html",
+    "release:icons": "node scripts/release-icons.mjs",
+    "test:release": "node --test scripts/release-icons.test.mjs",
     "check:types": "node scripts/check-svelte-types.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"

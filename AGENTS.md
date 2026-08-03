@@ -6,16 +6,18 @@ This guide specifies how to create new SVG icons for the `@marcusv/roc` library.
 
 ## Quick Start
 
-To add a new icon
+To add and release a new icon
 
 1. Create 4 SVG files:
    - `src/svg/outline/{{icon}}.svg`
    - `src/svg/solid/{{icon}}.svg`
    - `src/svg/duotone/{{icon}}.svg`
    - `src/svg/sharp/{{icon}}.svg`
-2. Add an entry to `src/icons.json` with `label`, `description`, `category`, and `tags`
-3. Run `npm run build`
-4. Run `npm run preview` to verify in the demo page
+2. Run `npm run release:icons`
+
+The release command discovers the icon from the SVG folders. It adds missing metadata, validates the source, rebuilds every package format and the demo, verifies the tarball, picks the next npm version, commits and tags the changes, publishes to npm, deploys the public preview, and pushes the commit and tag. An agent does not need to edit generated files or know the current package version.
+
+Use `npm run release:icons -- --help` for the complete option list. Useful safe modes are `--check` (build and verify without releasing) and `--dry-run` (show the plan without writing files).
 
 Each file must follow the style-specific rules below. Design the **outline** variant first, then derive the other three.
 
@@ -242,6 +244,9 @@ Source files are at `src/svg/{style}/{name}.svg`.
 | `npm run build:demo` | Regenerate `demo/index.html` from `demo/src/` + source SVGs |
 | `npm run dev` | Watch mode -- rebuilds on changes to `src/svg/` and `demo/src/` |
 | `npm run preview` | Open `demo/index.html` in the browser |
+| `npm run release:icons` | Discover, validate, build, publish, deploy, and push changed icons |
+| `npm run release:icons -- --check` | Validate and package-check without releasing |
+| `npm run release:icons -- --dry-run` | Show the planned release without writing files |
 
 ---
 
@@ -275,7 +280,7 @@ The HTML skeleton and JS data block remain in `build.mjs` as a template literal 
 
 - **CSS/JS changes**: edit files in `demo/src/`, then run `npm run build:demo`
 - **In watch mode** (`npm run dev`): changes to `demo/src/` auto-rebuild the demo page only (skips SVG optimization)
-- **Adding icons**: add SVGs to `src/svg/{style}/` + entry in `src/icons.json`, then `npm run build`
+- **Adding icons**: add SVGs to `src/svg/{style}/`, then run `npm run release:icons`
 
 ---
 
@@ -289,13 +294,12 @@ When creating multiple icons at once, **always use the sub-agent pattern**:
 4. Each sub-agent receives:
    - The list of icon names it's responsible for
    - The full style specifications from this guide (or a reference to read AGENTS.md)
-   - Instructions to create all 4 variants per icon and add entries to `src/icons.json`
+   - Instructions to create all 4 variants per icon and nothing else
 5. **After all sub-agents complete**, the orchestrator:
-   - Runs `npm run build` to verify everything compiles
-   - Runs `npm run deploy` if requested
+   - Runs `npm run release:icons` once for the whole batch
    - Summarizes what was created
 
-Always commit and push changes after icons are created.
+The release command handles metadata, generated previews, verification, commit, version, npm publication, preview deployment, and git push.
 
 **Example batch groupings:**
 - UI actions: `sign-in`, `sign-out`, `lock`, `unlock`
@@ -317,7 +321,7 @@ Before submitting a new icon, verify:
 - [ ] `npm run build` completes without errors
 - [ ] Icon renders correctly in all 4 styles in the demo page
 - [ ] Filename is kebab-case and descriptive
-- [ ] Ontology entry added to `src/icons.json` with label, description, category, and tags
+- [ ] `npm run release:icons` completes successfully
 
 ---
 
@@ -327,26 +331,26 @@ This library is published as `@marcusv/roc` on the public npm registry. Consumer
 
 ### When to publish
 
-Publish a new version every time you add or change icons — i.e. after the 4 SVG variants land, the `src/icons.json` entry is added, and `npm run build` passes. Don't leave new icons unpublished.
+Publish a new version every time you add or change icons. Once the four SVG variants land, `npm run release:icons` handles the remaining work. Don't leave new icons unpublished.
 
 ### Versioning
 
 Adding icons is backward-compatible, so bump the **patch** version. Reserve `minor`/`major` for changes to existing icon names, exports, or build output.
 
-Prefer patch bumps: consumers pin `@marcusv/roc` with a `^0.1.x` range, so patch releases are picked up automatically on their next install.
+Prefer patch bumps: consumers use a compatible `^0.x` range, so patch releases are picked up automatically on their next install.
 
-### Release steps
+### Release command
 
 ```sh
-npm run build                 # must pass
-npm version patch             # bumps package.json, commits, tags
-NPM_TOKEN=$(grep NPM_TOKEN ~/.secrets | sed 's/.*=//') \
-  npm publish --//registry.npmjs.org/:_authToken=$NPM_TOKEN
-git push --follow-tags        # confirm with Marcus before pushing
+npm run release:icons
 ```
+
+The command reads the current versions from both `package.json` and npm, then bumps from the newer one. If npm is ahead, it checks that no published icons or exports are missing from the checkout before proceeding. It also supports interrupted releases: rerunning the command publishes an unpublished local version or pushes a release that reached npm but not git.
+
+Publishing, preview deployment, and pushing are enabled by default. Use `--no-deploy` or `--no-push` when the task calls for a narrower release. Use `--bump minor` or `--bump major` only for an intentional compatibility change; icon additions default to a patch.
 
 `publishConfig.access` is set to `public`, so the scoped package publishes publicly without extra flags.
 
 ### 2FA caveat
 
-The npm account (`marcusv`) has 2FA enabled. **Automated publishing only works if `NPM_TOKEN` in `~/.secrets` is an _Automation_ token** (Automation tokens bypass 2FA). A classic "Publish" token fails with `EOTP` and requires a human to complete the passkey/OTP prompt — if you hit `EOTP`, ask Marcus to either run the publish himself or swap in an Automation token.
+The npm account (`marcusv`) has 2FA enabled. The command reads `NPM_TOKEN` from the environment or `~/.secrets` and checks it before creating release commits. Automated publishing requires an Automation token. A classic Publish token fails with `EOTP`; if that happens, ask Marcus to run the release or replace the token.

@@ -1,6 +1,6 @@
 # Icon Batch Build Prompt
 
-You are building icons for the `@marcus/roc` icon library. Build exactly the icons listed below. For EACH icon, create all 4 style variants.
+You are building icons for the `@marcusv/roc` icon library. Build exactly the icons listed below. For EACH icon, create all 4 style variants.
 
 ## Your Icons to Build
 
@@ -50,22 +50,9 @@ No `width`/`height`. Always `fill="none"` on root.
 - No `<title>`, `<desc>`, `<defs>`, comments
 - Icons must be visually recognizable and well-crafted at 24x24
 
-## Ontology Update
+## Handoff
 
-After creating SVG files, update `src/icons.json` — add entries for each new icon to the `"icons"` object. Each entry needs: `label`, `description`, `category`, `tags` (array of 4-6 relevant search terms).
-
-Valid categories: Navigation, Data, Communication, People, System, Brand, Media, Files, Commerce, Weather, Devices, Development, Transport, Actions, Objects
-
-Add any new categories to the `"categories"` array if needed.
-
-## Build & Verify
-
-After creating all files, run:
-```
-npm run build
-```
-
-Verify no errors. If build fails, fix and re-run.
+Create only the four SVG source files for each assigned icon. Do not edit `src/icons.json`, generated files, package versions, or git history, and do not run the build. The orchestrating agent will run `npm run release:icons` once after every batch is complete; that command handles metadata, validation, previews, package verification, publication, deployment, and git push.
 
 ## Reference Examples
 

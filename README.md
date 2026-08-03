@@ -7,7 +7,7 @@ A handcrafted SVG icon library with React, Svelte, and sprite outputs. Every ico
 ## Install
 
 ```bash
-npm install @marcus/roc
+npm install @marcusv/roc
 ```
 
 Requires Node.js 22+. The only runtime dependency is `svgo`.
@@ -17,7 +17,7 @@ Requires Node.js 22+. The only runtime dependency is `svgo`.
 ### React
 
 ```jsx
-import { Home, Bell, Search } from '@marcus/roc/react/outline';
+import { Home, Bell, Search } from '@marcusv/roc/react/outline';
 
 function App() {
   return (
@@ -34,10 +34,10 @@ Each style has its own entry point:
 
 ```jsx
 // Single style
-import { Home } from '@marcus/roc/react/outline';
-import { Home } from '@marcus/roc/react/solid';
-import { Home } from '@marcus/roc/react/duotone';
-import { Home } from '@marcus/roc/react/sharp';
+import { Home } from '@marcusv/roc/react/outline';
+import { Home } from '@marcusv/roc/react/solid';
+import { Home } from '@marcusv/roc/react/duotone';
+import { Home } from '@marcusv/roc/react/sharp';
 ```
 
 Stroked icons (outline, duotone, sharp) accept a `strokeWidth` prop. Default stroke width adjusts automatically: `1.75` at 16px, `1.5` at 20px+.
@@ -46,8 +46,8 @@ Stroked icons (outline, duotone, sharp) accept a `strokeWidth` prop. Default str
 
 ```svelte
 <script>
-  import Home from '@marcus/roc/svelte/outline/Home.svelte';
-  import Bell from '@marcus/roc/svelte/solid/Bell.svelte';
+  import Home from '@marcusv/roc/svelte/outline/Home.svelte';
+  import Bell from '@marcusv/roc/svelte/solid/Bell.svelte';
 </script>
 
 <Home size={24} class="icon" />
@@ -73,7 +73,7 @@ Optimized SVGs are available at `dist/svg/{style}/{name}.svg` for direct use in 
 ### Metadata
 
 ```js
-import metadata from '@marcus/roc/metadata';
+import metadata from '@marcusv/roc/metadata';
 // { icons: [...], categories: [...], total: N }
 ```
 
@@ -110,12 +110,12 @@ Individual stages: `npm run build:svg`, `build:react`, `build:svelte`, `build:sp
 
 ## Adding Icons
 
-See [CLAUDE.md](CLAUDE.md) for the complete icon creation guide. The short version:
+See [AGENTS.md](AGENTS.md) for the SVG style guide. The release workflow has two steps:
 
 1. Create 4 SVGs in `src/svg/{outline,solid,duotone,sharp}/icon-name.svg`
-2. Add metadata to `src/icons.json` (label, description, category, tags)
-3. Run `npm run build`
-4. Verify in the demo page with `npm run preview`
+2. Run `npm run release:icons`
+
+That command discovers the changed icon, adds metadata defaults, validates all four variants, rebuilds the package and preview, runs the package checks, chooses the next version, commits, tags, publishes to npm, deploys the public preview, and pushes the release. Run `npm run release:icons -- --help` to see metadata overrides, `--check`, `--dry-run`, and release options.
 
 ## License
 

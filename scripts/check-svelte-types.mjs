@@ -16,6 +16,7 @@ import { execSync } from 'node:child_process';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const STYLES = ['outline', 'solid', 'duotone', 'sharp'];
+const PACKAGE_NAME = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).name;
 
 // ── 1. Pack ──────────────────────────────────────────────────────────
 console.log('1. Packing tarball...');
@@ -60,11 +61,11 @@ fs.writeFileSync(path.join(tmp, 'tsconfig.json'), JSON.stringify({
 const lines = [];
 for (const style of STYLES) {
   const aliases = sampleIcons.map(n => `${n} as ${n}_${style}`).join(', ');
-  lines.push(`import { ${aliases} } from '@marcus/roc/svelte/${style}';`);
+  lines.push(`import { ${aliases} } from '${PACKAGE_NAME}/svelte/${style}';`);
 }
 // Also test root barrel with suffixed names
 const suffixed = sampleIcons.map(n => `${n}Outline`).join(', ');
-lines.push(`import { ${suffixed} } from '@marcus/roc/svelte';`);
+lines.push(`import { ${suffixed} } from '${PACKAGE_NAME}/svelte';`);
 lines.push('');
 // Basic type assertion: each import should be a Svelte Component
 lines.push(`import type { Component } from 'svelte';`);
