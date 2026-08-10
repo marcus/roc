@@ -56,6 +56,8 @@
     "release:icons": "node scripts/release-icons.mjs",
     "test:release": "node --test scripts/release-icons.test.mjs",
     "check:types": "node scripts/check-svelte-types.mjs",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "test:commit-message": "node --test scripts/normalize-commit-message.test.mjs",
     "verify:package": "node scripts/check-svelte-types.mjs",
     "deploy": "npm run build && scp demo/index.html root@haplab.com:/var/www/roc/index.html"
   },
