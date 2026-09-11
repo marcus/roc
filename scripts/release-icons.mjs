@@ -45,7 +45,9 @@ Examples:
   npm run release:icons -- --category Nature --tags bird,flight,animal
   npm run release:icons -- --no-deploy --no-push
 
-Authentication is read from NPM_TOKEN or an NPM_TOKEN entry in ~/.secrets.
+Authentication is read from ROC_NPM_TOKEN first, then NPM_TOKEN, in the environment
+or as an entry in ~/.secrets. The ROC-specific name keeps this release workflow
+separate from unrelated npm automation credentials.
 The default command publishes to npm, deploys the preview, and pushes git.`;
 
 export function parseArgs(argv) {
@@ -367,18 +369,22 @@ function assertPublishedBaseline(packageJson, newestPublished, localNames) {
   }
 }
 
-function readNpmToken() {
-  if (process.env.NPM_TOKEN) return process.env.NPM_TOKEN;
-  const secretsPath = path.join(os.homedir(), '.secrets');
+export function readNpmToken({ env = process.env, homeDir = os.homedir() } = {}) {
+  if (env.ROC_NPM_TOKEN) return env.ROC_NPM_TOKEN;
+  if (env.NPM_TOKEN) return env.NPM_TOKEN;
+  const secretsPath = path.join(homeDir, '.secrets');
   if (!fs.existsSync(secretsPath)) return null;
-  const line = fs.readFileSync(secretsPath, 'utf8').split(/\r?\n/)
-    .find((candidate) => /^\s*(?:export\s+)?NPM_TOKEN\s*=/.test(candidate));
-  if (!line) return null;
-  let value = line.replace(/^\s*(?:export\s+)?NPM_TOKEN\s*=\s*/, '').trim();
-  if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-    value = value.slice(1, -1);
+  const values = {};
+  for (const line of fs.readFileSync(secretsPath, 'utf8').split(/\r?\n/)) {
+    const match = line.match(/^\s*(?:export\s+)?(ROC_NPM_TOKEN|NPM_TOKEN)\s*=\s*(.*?)\s*$/);
+    if (!match) continue;
+    let value = match[2];
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    if (value) values[match[1]] = value;
   }
-  return value || null;
+  return values.ROC_NPM_TOKEN || values.NPM_TOKEN || null;
 }
 
 function withNpmAuth(token, callback) {

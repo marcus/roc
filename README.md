@@ -115,7 +115,7 @@ See [AGENTS.md](AGENTS.md) for the SVG style guide. The release workflow has two
 1. Create 4 SVGs in `src/svg/{outline,solid,duotone,sharp}/icon-name.svg`
 2. Run `npm run release:icons`
 
-That command discovers the changed icon, adds metadata defaults, validates all four variants, rebuilds the package and preview, runs the package checks, chooses the next version, commits, tags, publishes to npm, deploys the public preview, and pushes the release. Run `npm run release:icons -- --help` to see metadata overrides, `--check`, `--dry-run`, and release options.
+That command discovers the changed icon, adds metadata defaults, validates all four variants, rebuilds the package and preview, runs the package checks, chooses the next version, commits, tags, publishes to npm, deploys the public preview, and pushes the release. Authentication uses `ROC_NPM_TOKEN` first, then `NPM_TOKEN`, from the environment or `~/.secrets`. Run `npm run release:icons -- --help` to see metadata overrides, `--check`, `--dry-run`, and release options.
 
 ## License
 

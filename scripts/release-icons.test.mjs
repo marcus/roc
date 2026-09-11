@@ -9,6 +9,7 @@ import {
   bumpVersion,
   defaultMetadata,
   parseArgs,
+  readNpmToken,
   validateIconSet,
   validateInventory,
 } from './release-icons.mjs';
@@ -47,6 +48,22 @@ test('metadata has useful filename-derived defaults', () => {
     category: 'Brand',
     tags: ['hummingbird', 'logo', 'brand', 'icon', 'symbol'],
   });
+});
+
+test('ROC_NPM_TOKEN takes priority over the generic environment token', () => {
+  assert.equal(readNpmToken({ env: { ROC_NPM_TOKEN: 'roc-env', NPM_TOKEN: 'npm-env' }, homeDir: '/missing' }), 'roc-env');
+});
+
+test('secret files prefer ROC_NPM_TOKEN and fall back to NPM_TOKEN', () => {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'roc-token-test-'));
+  try {
+    fs.writeFileSync(path.join(home, '.secrets'), 'NPM_TOKEN="npm-file"\nexport ROC_NPM_TOKEN=roc-file\n');
+    assert.equal(readNpmToken({ env: {}, homeDir: home }), 'roc-file');
+    fs.writeFileSync(path.join(home, '.secrets'), 'NPM_TOKEN="npm-file"\n');
+    assert.equal(readNpmToken({ env: {}, homeDir: home }), 'npm-file');
+  } finally {
+    fs.rmSync(home, { recursive: true, force: true });
+  }
 });
 
 test('inventory validation catches style and metadata drift without enforcing legacy geometry', () => {
