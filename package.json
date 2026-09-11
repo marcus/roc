@@ -1,6 +1,7 @@
 {
   "name": "@marcusv/roc",
   "version": "0.2.0",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist/"
