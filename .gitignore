@@ -4,3 +4,6 @@
 node_modules/
 dist/
 .todos/
+
+# graphify knowledge graph cache (rebuilt by clara-home bin/graphify-refresh)
+graphify-out/
