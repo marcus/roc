@@ -3051,6 +3051,90 @@
       "description": "Half sun, half moon disc for follow-system and automatic theme mode",
       "category": "System",
       "tags": ["theme", "mode", "system", "auto", "automatic", "light", "dark", "sun", "moon", "appearance"]
+    },
+    "claude-logo": {
+      "label": "Claude",
+      "description": "Claude spark: an irregular twelve-ray starburst for Anthropic's Claude and Claude Code",
+      "category": "Brand",
+      "tags": ["claude", "claude code", "anthropic", "ai", "assistant", "coding agent", "logo"]
+    },
+    "codex-logo": {
+      "label": "Codex",
+      "description": "OpenAI Codex cloud blossom with a terminal prompt for the Codex coding agent",
+      "category": "Brand",
+      "tags": ["codex", "openai", "chatgpt", "ai", "coding agent", "terminal", "cli", "logo"]
+    },
+    "grok-logo": {
+      "label": "Grok",
+      "description": "Grok ring with a diagonal slash for xAI's Grok assistant",
+      "category": "Brand",
+      "tags": ["grok", "xai", "x", "ai", "assistant", "coding agent", "logo"]
+    },
+    "opencode-logo": {
+      "label": "OpenCode",
+      "description": "OpenCode tall frame with an inset block for the open-source coding agent",
+      "category": "Brand",
+      "tags": ["opencode", "sst", "ai", "coding agent", "terminal", "open source", "logo"]
+    },
+    "pi-agent-logo": {
+      "label": "Pi Agent",
+      "description": "Pi coding agent pixel mark: a blocky P and a bar on a four-by-four grid",
+      "category": "Brand",
+      "tags": ["pi", "pi agent", "coding agent", "earendil", "terminal", "pixel", "logo"]
+    },
+    "cursor-logo": {
+      "label": "Cursor",
+      "description": "Cursor faceted cube for the AI code editor and Cursor Agent",
+      "category": "Brand",
+      "tags": ["cursor", "anysphere", "editor", "ide", "ai", "coding agent", "logo"]
+    },
+    "github-copilot-logo": {
+      "label": "GitHub Copilot",
+      "description": "GitHub Copilot pilot face with goggles for the AI pair programmer",
+      "category": "Brand",
+      "tags": ["copilot", "github", "ai", "pair programmer", "coding agent", "cli", "logo"]
+    },
+    "antigravity-logo": {
+      "label": "Antigravity",
+      "description": "Google Antigravity arch for the agentic development platform",
+      "category": "Brand",
+      "tags": ["antigravity", "google", "ai", "ide", "coding agent", "logo"]
+    },
+    "amp-logo": {
+      "label": "Amp",
+      "description": "Amp stacked arrow chevrons for the Amp coding agent",
+      "category": "Brand",
+      "tags": ["amp", "ampcode", "sourcegraph", "ai", "coding agent", "logo"]
+    },
+    "kimi-logo": {
+      "label": "Kimi",
+      "description": "Kimi K with a dot for Moonshot AI's Kimi assistant and Kimi Code",
+      "category": "Brand",
+      "tags": ["kimi", "moonshot", "ai", "assistant", "coding agent", "logo"]
+    },
+    "qwen-logo": {
+      "label": "Qwen",
+      "description": "Qwen hexagonal knot for Alibaba's Qwen models and Qwen Code",
+      "category": "Brand",
+      "tags": ["qwen", "alibaba", "tongyi", "ai", "coding agent", "logo"]
+    },
+    "devin-logo": {
+      "label": "Devin",
+      "description": "Devin cluster of hexagons for Cognition's AI software engineer",
+      "category": "Brand",
+      "tags": ["devin", "cognition", "ai", "software engineer", "coding agent", "logo"]
+    },
+    "kiro-logo": {
+      "label": "Kiro",
+      "description": "Kiro ghost with two eyes for the AWS agentic IDE and Kiro CLI",
+      "category": "Brand",
+      "tags": ["kiro", "aws", "amazon", "ai", "ide", "coding agent", "logo"]
+    },
+    "cline-logo": {
+      "label": "Cline",
+      "description": "Cline robot head with an antenna and two eye slots for the open-source coding agent",
+      "category": "Brand",
+      "tags": ["cline", "ai", "robot", "coding agent", "vscode", "logo"]
     }
   }
 }

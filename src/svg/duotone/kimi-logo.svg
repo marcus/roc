@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M20.15 2.37A1.85 1.85 0 1 1 20.15 6.07H18.51A0.22 0.22 0 0 1 18.3 5.86V4.22C18.3 3.2 19.13 2.37 20.15 2.37ZM9.77 13.15L16.75 6.22C16.89 6.09 16.81 5.83 16.64 5.83H12.88A0.16 0.16 0 0 0 12.77 5.88L5.24 13.34C5.12 13.46 4.95 13.36 4.95 13.17V6.05C4.95 5.93 4.87 5.83 4.77 5.83H2.18C2.08 5.83 2 5.93 2 6.05V21.41C2 21.53 2.08 21.63 2.18 21.63H4.77C4.87 21.63 4.95 21.53 4.95 21.41V18.28C4.95 18.21 4.97 18.15 5.02 18.11L7.35 15.79A0.15 0.15 0 0 1 7.55 15.77L13.79 20.36A7.39 7.39 0 0 0 17.12 21.6C17.22 21.61 17.31 21.51 17.31 21.38V18.43C17.31 18.32 17.24 18.23 17.15 18.21A4.84 4.84 0 0 1 15.2 17.44L9.79 13.52C9.68 13.45 9.67 13.25 9.77 13.15Z" fill="var(--color-duotone-fill)"/>
+  <path d="M3.48 6.58V20.88" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.3 6.6L3.48 17.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7.24 13.61L14.4 18.8C15.08 19.3 15.8 19.75 16.56 19.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20.15 3.12A1.1 1.1 0 1 1 20.15 5.32H19.05V4.22A1.1 1.1 0 0 1 20.15 3.12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
