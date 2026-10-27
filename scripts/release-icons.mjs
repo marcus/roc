@@ -184,8 +184,9 @@ function sourceNames(root = SVG_ROOT) {
   return byStyle;
 }
 
-function changedPaths() {
-  const tracked = run('git', ['diff', '--name-only', 'HEAD'], { capture: true });
+/** Uncommitted paths; with `since`, also those committed after that revision. */
+function changedPaths(since = 'HEAD') {
+  const tracked = run('git', ['diff', '--name-only', since], { capture: true });
   const untracked = run('git', ['ls-files', '--others', '--exclude-standard'], { capture: true });
   return [...new Set(`${tracked}\n${untracked}`.split('\n').map((item) => item.trim()).filter(Boolean))];
 }
@@ -443,7 +444,9 @@ async function main() {
 
   const packageJson = readJson(PACKAGE_PATH);
   const pathsBeforeBuild = changedPaths();
-  const iconNames = changedIconNames(pathsBeforeBuild);
+  // Icons count from the last release tag, so one committed before releasing is still released.
+  const tag = run('git', ['describe', '--tags', '--abbrev=0', '--match', 'v*'], { capture: true, allowFailure: true });
+  const iconNames = changedIconNames(changedPaths(tag || 'HEAD'));
   const ontology = readJson(ONTOLOGY_PATH);
   const allSources = sourceNames();
   const completeNames = [...new Set([...allSources.values()].flatMap((set) => [...set]))].sort();
