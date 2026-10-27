@@ -3135,6 +3135,12 @@
       "description": "Cline robot head with an antenna and two eye slots for the open-source coding agent",
       "category": "Brand",
       "tags": ["cline", "ai", "robot", "coding agent", "vscode", "logo"]
+    },
+    "upscale": {
+      "label": "Upscale",
+      "description": "Upscale icon",
+      "category": "Objects",
+      "tags": ["upscale", "objects", "icon", "symbol"]
     }
   }
 }
