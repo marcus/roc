@@ -10,6 +10,7 @@ import {
   defaultMetadata,
   parseArgs,
   readNpmToken,
+  withNpmAuth,
   validateIconSet,
   validateInventory,
 } from './release-icons.mjs';
@@ -64,6 +65,15 @@ test('secret files prefer ROC_NPM_TOKEN and fall back to NPM_TOKEN', () => {
   } finally {
     fs.rmSync(home, { recursive: true, force: true });
   }
+});
+
+test('npm auth overrides the userconfig npm run exports, in both spellings', () => {
+  withNpmAuth('token-value', (env) => {
+    assert.equal(env.NPM_CONFIG_USERCONFIG, env.npm_config_userconfig);
+    assert.equal(fs.readFileSync(env.npm_config_userconfig, 'utf8'), '//registry.npmjs.org/:_authToken=token-value\n');
+    const merged = { ...{ npm_config_userconfig: '/home/.npmrc' }, ...env };
+    assert.equal(merged.npm_config_userconfig, env.NPM_CONFIG_USERCONFIG);
+  });
 });
 
 test('inventory validation catches style and metadata drift without enforcing legacy geometry', () => {

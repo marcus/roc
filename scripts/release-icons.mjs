@@ -387,12 +387,14 @@ export function readNpmToken({ env = process.env, homeDir = os.homedir() } = {})
   return values.ROC_NPM_TOKEN || values.NPM_TOKEN || null;
 }
 
-function withNpmAuth(token, callback) {
+export function withNpmAuth(token, callback) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'roc-npm-'));
   const npmrc = path.join(directory, '.npmrc');
   fs.writeFileSync(npmrc, `//registry.npmjs.org/:_authToken=${token}\n`, { mode: 0o600 });
   try {
-    return callback({ NPM_CONFIG_USERCONFIG: npmrc });
+    // Under `npm run`, npm exports npm_config_userconfig=~/.npmrc, which beats the
+    // uppercase name, so set both or publish silently uses ~/.npmrc's token.
+    return callback({ NPM_CONFIG_USERCONFIG: npmrc, npm_config_userconfig: npmrc });
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
