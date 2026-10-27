@@ -366,7 +366,7 @@
     },
     "chat": {
       "label": "Chat",
-      "description": "Two overlapping speech bubbles for conversations and messaging",
+      "description": "Two speech bubbles, one behind the other, for conversations and messaging",
       "category": "Communication",
       "tags": ["conversation", "dialogue", "discuss", "talk", "messaging", "bubbles", "communication"]
     },
@@ -462,9 +462,9 @@
     },
     "music": {
       "label": "Music",
-      "description": "Single eighth note for music, audio, and song content",
+      "description": "Pair of beamed eighth notes for music, audio, and song content",
       "category": "Media",
-      "tags": ["note", "eighth", "song", "audio", "sound", "melody", "tune", "track"]
+      "tags": ["note", "notes", "eighth", "beamed", "song", "audio", "sound", "melody", "tune", "track"]
     },
     "headphones": {
       "label": "Headphones",
@@ -504,9 +504,9 @@
     },
     "film": {
       "label": "Film",
-      "description": "Film strip with sprocket holes for video, cinema, and movie content",
+      "description": "Clapperboard with striped slate for video, cinema, and movie content",
       "category": "Media",
-      "tags": ["filmstrip", "movie", "cinema", "reel", "strip", "sprocket", "video", "footage"]
+      "tags": ["clapperboard", "clapper", "slate", "movie", "cinema", "filmstrip", "video", "footage"]
     },
     "aperture": {
       "label": "Aperture",
@@ -1512,7 +1512,7 @@
     },
     "library": {
       "label": "Library",
-      "description": "Classical building with columns and pediment for libraries and institutions",
+      "description": "Classical building with pediment, three columns, and base for libraries and institutions",
       "category": "Objects",
       "tags": ["building", "columns", "institution", "books", "reading", "knowledge"]
     },
