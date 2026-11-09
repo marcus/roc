@@ -322,6 +322,16 @@ export function bumpVersion(version, bump) {
   return `${major}.${minor}.${patch + 1}`;
 }
 
+/** Whether a just-published version shows up on the registry, allowing it a minute to appear. */
+function awaitPublished(packageName, version, tries = 12) {
+  for (let i = 0; i < tries; i++) {
+    const result = spawnSync('npm', ['view', `${packageName}@${version}`, 'version', '--prefer-online'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    if (result.status === 0 && result.stdout.trim() === version) return true;
+    spawnSync('sleep', ['5']);
+  }
+  return false;
+}
+
 function publishedVersions(packageName) {
   const result = spawnSync('npm', ['view', packageName, 'versions', '--json'], {
     cwd: ROOT,
@@ -549,6 +559,10 @@ async function main() {
     if (!token) throw new Error('No npm automation token found. Set NPM_TOKEN or add NPM_TOKEN=… to ~/.secrets.');
     step(`Publishing ${packageJson.name}@${releaseVersion}`);
     withNpmAuth(token, (env) => run('npm', ['publish', '--access', 'public'], { env }));
+    // npm stages a publish from a token that skips 2FA and exits cleanly, so check the version really went live.
+    if (!awaitPublished(packageJson.name, releaseVersion)) {
+      throw new Error(`npm accepted ${packageJson.name}@${releaseVersion} but has not made it public: it is staged, waiting for 2FA approval. Approve it on npmjs.com (or \`npm stage approve <id> --otp …\`), then rerun npm run release:icons to finish deploying and pushing.`);
+    }
   } else {
     console.log(`\n  ✓ ${packageJson.name}@${releaseVersion} is already published`);
   }
