@@ -3141,6 +3141,12 @@
       "description": "Upscale icon",
       "category": "Objects",
       "tags": ["upscale", "objects", "icon", "symbol"]
+    },
+    "compose": {
+      "label": "Compose",
+      "description": "Compose icon",
+      "category": "Objects",
+      "tags": ["compose", "objects", "icon", "symbol"]
     }
   }
 }
